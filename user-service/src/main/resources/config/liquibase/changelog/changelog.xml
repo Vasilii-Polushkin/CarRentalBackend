@@ -1,14 +1,61 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="Vasya (generated)" id="1743189813312-1">
-        <createSequence incrementBy="50" sequenceName="user_seq" startValue="1"/>
-    </changeSet>
-    <changeSet author="Vasya (generated)" id="1743189813312-2">
-        <createTable tableName="user">
-            <column autoIncrement="true" name="id" type="BIGINT">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="userPK"/>
+    <changeSet author="Vasya (generated)" id="1743703384399-1">
+        <createTable tableName="oauth2provider">
+            <column name="provider_user_id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="oauth2providerPK"/>
             </column>
-            <column name="username" type="VARCHAR(255)"/>
+            <column name="provider" type="VARCHAR(255)"/>
+            <column name="user_id" type="UUID"/>
         </createTable>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-2">
+        <createTable tableName="refresh_token">
+            <column name="value" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="refresh_tokenPK"/>
+            </column>
+            <column name="user_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-3">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roles" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-4">
+        <createTable tableName="users">
+            <column defaultValueComputed="gen_random_uuid()" name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="usersPK"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="provider" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-5">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USERSEMAIL_COL" tableName="users"/>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-6">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="oauth2provider" constraintName="FK7dygohf697f5f1sai00bhnyhv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-7">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="user_roles" constraintName="FKhfh9dx7w3ubf1co1vdev94g3f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-8">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="refresh_token" constraintName="FKjtx87i0jvq2svedphegvdwcuy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-9">
+        <dropTable tableName="user"/>
+    </changeSet>
+    <changeSet author="Vasya (generated)" id="1743703384399-10">
+        <dropSequence sequenceName="user_seq"/>
     </changeSet>
 </databaseChangeLog>
