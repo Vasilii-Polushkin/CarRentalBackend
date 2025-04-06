@@ -21,7 +21,8 @@ public class UsersController {
     private final UsersService usersService;
 
     @GetMapping("{id}")
-    public UserDto getUserById(@PathVariable UUID id) {
+    @PreAuthorize("hasRole('ADMIN')")
+    public UserDto getUserById(@PathVariable("id") UUID id) {
         return userMapper.toDto(usersService.getUserById(id));
     }
 }

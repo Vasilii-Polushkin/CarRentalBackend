@@ -8,6 +8,7 @@ import org.example.userservice.common.util.EnvUtil;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -80,6 +81,12 @@ public class GlobalExceptionHandler {
                         + " should be of type "
                         + Objects.requireNonNull(ex.getRequiredType()).getSimpleName()
         ), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleTypeMismatch(AuthorizationDeniedException ex) {
+        return new ResponseEntity<>(new
+                ErrorResponse("Access denied"), HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(Exception.class)
