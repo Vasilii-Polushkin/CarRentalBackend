@@ -1,7 +1,7 @@
 package org.example.userservice.api.mappers;
 
 import org.example.userservice.api.dtos.LoginModelDto;
-import org.example.userservice.domain.models.LoginModel;
+import org.example.userservice.domain.models.requests.LoginModel;
 import org.springframework.stereotype.Component;
 
 @Component

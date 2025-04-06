@@ -1,6 +1,7 @@
 package org.example.userservice.api.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.dtos.JwtModelDto;
 import org.example.userservice.api.dtos.LoginModelDto;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("account")
+@RequestMapping("auth")
 @RequiredArgsConstructor
 @Tag(name = "Auth")
 public class AuthController {
@@ -24,30 +25,24 @@ public class AuthController {
     private final AuthService authService;
     private final LoginModelMapper loginMapper;
     private final RegisterModelMapper registerMapper;
-    private final CurrentUserService currentUserService;
 
     @PostMapping("login")
-    public JwtModelDto login(@RequestBody LoginModelDto request) {
+    public JwtModelDto login(@Valid @RequestBody LoginModelDto request) {
         return authService.login(loginMapper.toDomain(request));
     }
 
+    @PostMapping("revoke")
+    public void revoke(@Valid @RequestBody TokenRefreshModelDto request) {
+        authService.revoke(request.getValue());
+    }
+
     @PostMapping("register")
-    public JwtModelDto register(@RequestBody RegisterModelDto request) {
+    public JwtModelDto register(@Valid @RequestBody RegisterModelDto request) {
         return authService.register(registerMapper.toDomain(request));
     }
 
     @PostMapping("refresh")
-    public JwtModelDto refreshAndRotate(@RequestBody TokenRefreshModelDto request) {
+    public JwtModelDto refreshAndRotate(@Valid @RequestBody TokenRefreshModelDto request) {
         return authService.refreshAndRotate(request.getValue());
-    }
-
-    @GetMapping("test")
-    public String test() {
-        return "Hi";
-    }
-
-    @GetMapping("test/roles")
-    public List<Role> testRoles() {
-        return currentUserService.getRoles().stream().toList();
     }
 }

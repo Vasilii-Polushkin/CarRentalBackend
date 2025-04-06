@@ -2,7 +2,7 @@ package org.example.userservice.infrastructure.security.services;
 
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
-import org.example.userservice.domain.models.User;
+import org.example.userservice.domain.models.entities.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

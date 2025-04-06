@@ -1,7 +1,7 @@
 package org.example.userservice.api.mappers;
 
 import org.example.userservice.api.dtos.RegisterModelDto;
-import org.example.userservice.domain.models.RegisterModel;
+import org.example.userservice.domain.models.requests.RegisterModel;
 import org.springframework.stereotype.Component;
 
 @Component

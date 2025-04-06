@@ -22,7 +22,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
 
@@ -38,9 +38,8 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/account/login",
-                                "/account/register" ,
-                                "/account/test",
+                                "/auth/login",
+                                "/auth/register" ,
                                 "/swagger-ui/**",
                                 "/swagger-resources/*",
                                 "/v3/api-docs/**",

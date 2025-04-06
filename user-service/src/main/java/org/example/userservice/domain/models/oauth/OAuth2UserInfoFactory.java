@@ -7,6 +7,7 @@ public class OAuth2UserInfoFactory {
         if(registrationId.equalsIgnoreCase("google")) {
             return new GoogleOAuth2UserInfo(attributes);
         } else {
+            //todo throw custom exception
             throw new IllegalArgumentException("Login with " + registrationId + " is not supported");
         }
     }

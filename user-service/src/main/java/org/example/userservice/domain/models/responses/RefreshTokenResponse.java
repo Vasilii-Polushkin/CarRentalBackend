@@ -1,19 +1,14 @@
-package org.example.userservice.api.dtos;
+package org.example.userservice.domain.models.responses;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class JwtModelDto {
-    @NotNull
-    @NotBlank
-    String accessToken;
-
+@Data
+public class RefreshTokenResponse {
     @NotNull
     @NotBlank
     private String refreshToken;

@@ -2,7 +2,7 @@ package org.example.userservice.infrastructure.security.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.example.userservice.domain.models.User;
+import org.example.userservice.domain.models.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,12 +16,14 @@ import java.util.stream.Collectors;
 public class CarRentalUserDetails implements UserDetails {
     private UUID id;
     private String email;
+    private String name;
     private String password;
     private Collection<GrantedAuthority> authorities;
 
     public CarRentalUserDetails(User user) {
         id = user.getId();
         email = user.getEmail();
+        name = user.getName();
         password = user.getPassword();
         authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.name()))

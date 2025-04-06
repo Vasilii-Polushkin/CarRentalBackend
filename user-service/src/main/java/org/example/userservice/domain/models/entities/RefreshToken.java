@@ -1,4 +1,4 @@
-package org.example.userservice.domain.models;
+package org.example.userservice.domain.models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
 import java.util.UUID;
 
 @Entity
@@ -24,5 +23,8 @@ public class RefreshToken {
     private String value;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
+    @Column(name = "user_id", insertable=false, updatable=false)
+    private UUID userId;
 }

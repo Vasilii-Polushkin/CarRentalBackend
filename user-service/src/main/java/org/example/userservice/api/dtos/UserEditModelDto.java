@@ -9,12 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtModelDto {
+public class UserEditModelDto {
     @NotNull
     @NotBlank
-    String accessToken;
-
-    @NotNull
-    @NotBlank
-    private String refreshToken;
+    private String name;
 }

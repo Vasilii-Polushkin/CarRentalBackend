@@ -16,6 +16,8 @@ import java.util.*;
 @Service
 public class JwtAccessTokenService {
     private static final String CLAIM_KEY_ROLES = "roles";
+    private static final String CLAIM_KEY_ID = "id";
+    private static final String CLAIM_KEY_NAME = "name";
 
     private final JwtTokenService jwtUtil;
     private final SecretKey jwtAccessSecret;
@@ -34,11 +36,18 @@ public class JwtAccessTokenService {
         this.rolesMapper = rolesMapper;
     }
 
-    //todo был лист
     public Set<Role> extractRoles(String token) {
         return rolesMapper.toRolesFromStrings(
                 jwtUtil.<List<String>>extractClaim(token, jwtAccessSecret, CLAIM_KEY_ROLES)
         );
+    }
+
+    public UUID extractId(String token) {
+        return UUID.fromString(jwtUtil.extractClaim(token, jwtAccessSecret, CLAIM_KEY_ID));
+    }
+
+    public String extractName(String token) {
+        return jwtUtil.extractClaim(token, jwtAccessSecret, CLAIM_KEY_NAME);
     }
 
     public String generateToken(CarRentalUserDetails userDetails) {
@@ -46,6 +55,8 @@ public class JwtAccessTokenService {
 
         List<String> roles = rolesMapper.toStrings(userDetails.getAuthorities());
         claims.put(CLAIM_KEY_ROLES, roles);
+        claims.put(CLAIM_KEY_ID, userDetails.getId());
+        claims.put(CLAIM_KEY_NAME, userDetails.getName());
 
         return jwtUtil.generateToken(userDetails, jwtExpirationInMs, jwtAccessSecret, claims);
     }

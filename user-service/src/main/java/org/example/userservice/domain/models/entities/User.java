@@ -1,6 +1,9 @@
-package org.example.userservice.domain.models;
+package org.example.userservice.domain.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,28 +27,24 @@ public class User {
     @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false)
+    @NotNull
+    @NotBlank
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotNull
+    @NotBlank
     private String email;
 
+    @NotNull
+    @Size(min = 6, max = 255)
     private String password;
 
     @Enumerated(EnumType.STRING)
     private AuthProvider provider;
 
-    //private String providerId;
-
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
     private Set<Role> roles = new HashSet<>();
-
-    public User(String name, String email, String password, AuthProvider provider) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.provider = provider;
-    }
 }

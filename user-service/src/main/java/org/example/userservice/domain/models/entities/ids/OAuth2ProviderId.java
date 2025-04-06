@@ -1,4 +1,4 @@
-package org.example.userservice.domain.models;
+package org.example.userservice.domain.models.entities.ids;
 
 import lombok.Data;
 

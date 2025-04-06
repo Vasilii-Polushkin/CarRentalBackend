@@ -1,20 +1,31 @@
 package org.example.userservice.api.dtos;
 
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.userservice.domain.enums.Role;
+
+import java.util.Set;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtModelDto {
+public class UserDto {
     @NotNull
     @NotBlank
-    String accessToken;
+    private UUID id;
 
     @NotNull
     @NotBlank
-    private String refreshToken;
+    private String name;
+
+    @NotNull
+    @NotBlank
+    private String email;
+
+    private Set<Role> roles;
 }
