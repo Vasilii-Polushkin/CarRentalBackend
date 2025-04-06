@@ -52,10 +52,4 @@
     <changeSet author="Vasya (generated)" id="1743703384399-8">
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="refresh_token" constraintName="FKjtx87i0jvq2svedphegvdwcuy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="users" validate="true"/>
     </changeSet>
-    <changeSet author="Vasya (generated)" id="1743703384399-9">
-        <dropTable tableName="user"/>
-    </changeSet>
-    <changeSet author="Vasya (generated)" id="1743703384399-10">
-        <dropSequence sequenceName="user_seq"/>
-    </changeSet>
 </databaseChangeLog>

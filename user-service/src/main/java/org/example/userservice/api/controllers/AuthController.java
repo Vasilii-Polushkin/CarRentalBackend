@@ -3,32 +3,51 @@ package org.example.userservice.api.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.dtos.JwtModelDto;
-import org.example.userservice.domain.models.LoginRequestModel;
-import org.example.userservice.domain.models.RefreshTokenResponse;
-import org.example.userservice.service.AuthService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.userservice.api.dtos.LoginModelDto;
+import org.example.userservice.api.dtos.RegisterModelDto;
+import org.example.userservice.api.dtos.TokenRefreshModelDto;
+import org.example.userservice.domain.enums.Role;
+import org.example.userservice.api.mappers.LoginModelMapper;
+import org.example.userservice.api.mappers.RegisterModelMapper;
+import org.example.userservice.infrastructure.services.AuthService;
+import org.example.userservice.infrastructure.services.CurrentUserService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@RequestMapping("api/auth")
+@RequestMapping("account")
 @RequiredArgsConstructor
 @Tag(name = "Auth")
 public class AuthController {
 
     private final AuthService authService;
+    private final LoginModelMapper loginMapper;
+    private final RegisterModelMapper registerMapper;
+    private final CurrentUserService currentUserService;
 
     @PostMapping("login")
-    public ResponseEntity<JwtModelDto> login(@RequestBody LoginRequestModel authRequest) {
-        final JwtModelDto token = authService.login(authRequest);
-        return ResponseEntity.ok(token);
+    public JwtModelDto login(@RequestBody LoginModelDto request) {
+        return authService.login(loginMapper.toDomain(request));
+    }
+
+    @PostMapping("register")
+    public JwtModelDto register(@RequestBody RegisterModelDto request) {
+        return authService.register(registerMapper.toDomain(request));
     }
 
     @PostMapping("refresh")
-    public ResponseEntity<JwtModelDto> refreshAndRotate(@RequestBody RefreshTokenResponse request) {
-        final JwtModelDto token = authService.refreshAndRotate(request.getRefreshToken());
-        return ResponseEntity.ok(token);
+    public JwtModelDto refreshAndRotate(@RequestBody TokenRefreshModelDto request) {
+        return authService.refreshAndRotate(request.getValue());
+    }
+
+    @GetMapping("test")
+    public String test() {
+        return "Hi";
+    }
+
+    @GetMapping("test/roles")
+    public List<Role> testRoles() {
+        return currentUserService.getRoles().stream().toList();
     }
 }

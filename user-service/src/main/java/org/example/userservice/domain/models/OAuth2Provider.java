@@ -1,17 +1,21 @@
 package org.example.userservice.domain.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+
+import java.util.UUID;
 
 @Entity
 @Data
+@IdClass(OAuth2ProviderId.class)
 public class OAuth2Provider {
-    private String provider;
-
     @Id
     private String providerUserId;
+
+    @Id
+    @NotBlank
+    private String provider;
 
     @ManyToOne
     private User user;

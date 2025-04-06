@@ -1,13 +1,4 @@
-package org.example.userservice.services;
-
-import org.example.userservice.data.repositories.UserRepository;
-import org.example.userservice.domain.models.User;
-import org.example.userservice.domain.enums.Role;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+package org.example.userservice.infrastructure.services;
 
 /*
 @Service

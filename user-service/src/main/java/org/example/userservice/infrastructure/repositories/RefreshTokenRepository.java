@@ -1,4 +1,4 @@
-package org.example.userservice.data.repositories;
+package org.example.userservice.infrastructure.repositories;
 
 import lombok.NonNull;
 import org.example.userservice.domain.models.RefreshToken;

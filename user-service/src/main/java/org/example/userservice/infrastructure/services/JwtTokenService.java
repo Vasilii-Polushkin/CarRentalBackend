@@ -1,10 +1,10 @@
-package org.example.userservice.services;
+package org.example.userservice.infrastructure.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.domain.models.CarRentalUserDetails;
+import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -15,6 +15,7 @@ import java.util.function.Function;
 @Slf4j
 @Service
 public class JwtTokenService {
+
     public String generateToken(
             CarRentalUserDetails userDetails,
             long jwtExpirationInMs,
@@ -38,16 +39,21 @@ public class JwtTokenService {
     }
 
     public String extractEmail(String token, SecretKey secretKey) {
-        return extractClaim(token, Claims::getSubject, secretKey);
+        return extractClaim(token, secretKey, Claims::getSubject);
     }
 
     public Date extractExpiration(String token, SecretKey secretKey) {
-        return extractClaim(token, Claims::getExpiration, secretKey);
+        return extractClaim(token, secretKey, Claims::getExpiration);
     }
 
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver, SecretKey secretKey) {
+    public <T> T extractClaim(String token, SecretKey secretKey, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token, secretKey);
         return claimsResolver.apply(claims);
+    }
+
+    public <T> T extractClaim(String token, SecretKey secretKey, String key) {
+        final Claims claims = extractAllClaims(token, secretKey);
+        return (T) claims.get(key);
     }
 
     private Claims extractAllClaims(String token, SecretKey secretKey) {
@@ -58,7 +64,7 @@ public class JwtTokenService {
                 .getPayload();
     }
 
-    public boolean validateToken(String authToken, SecretKey secretKey) {
+    public boolean isTokenValid(String authToken, SecretKey secretKey) {
         try {
             Jwts.parser()
                     .verifyWith(secretKey)

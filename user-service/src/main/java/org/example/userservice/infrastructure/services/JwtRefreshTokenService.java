@@ -1,9 +1,9 @@
-package org.example.userservice.services;
+package org.example.userservice.infrastructure.services;
 
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.domain.models.CarRentalUserDetails;
+import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,17 +17,17 @@ public class JwtRefreshTokenService {
 
     private final JwtTokenService jwtUtil;
     private final SecretKey jwtRefreshSecret;
+    private final long jwtExpirationInMs;
 
     public JwtRefreshTokenService(
             JwtTokenService jwtUtil,
-            @Value("${app.jwt.refresh.secret}") String jwtRefreshSecret
+            @Value("${app.jwt.refresh.secret}") String jwtRefreshSecret,
+            @Value("${app.jwt.refresh.expiration-in-ms}")long jwtExpirationInMs
     ) {
         this.jwtUtil = jwtUtil;
         this.jwtRefreshSecret = Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtRefreshSecret));
+        this.jwtExpirationInMs = jwtExpirationInMs;
     }
-
-    @Value("${app.jwt.refresh.expiration-in-ms}")
-    private long jwtExpirationInMs;
 
     public String generateToken(CarRentalUserDetails userDetails) {
         return jwtUtil.generateToken(userDetails, jwtExpirationInMs, jwtRefreshSecret, new HashMap<>());
@@ -46,6 +46,6 @@ public class JwtRefreshTokenService {
     }
 
     public boolean validateToken(String authToken) {
-        return jwtUtil.validateToken(authToken, jwtRefreshSecret);
+        return jwtUtil.isTokenValid(authToken, jwtRefreshSecret);
     }
 }

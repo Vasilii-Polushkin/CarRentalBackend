@@ -1,4 +1,4 @@
-package org.example.userservice.data.repositories;
+package org.example.userservice.infrastructure.repositories;
 
 import org.example.userservice.domain.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
