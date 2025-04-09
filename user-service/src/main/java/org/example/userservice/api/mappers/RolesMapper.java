@@ -46,6 +46,12 @@ public class RolesMapper {
                 .collect(Collectors.toList());
     }
 
+    public List<String> rolesToStrings(Collection<Role> role) {
+        return role.stream()
+                .map(Enum::toString)
+                .collect(Collectors.toList());
+    }
+
     public List<SimpleGrantedAuthority> toAuthoritiesFromStrings(Collection<String> roles) {
         return roles.stream()
                 .map(this::toAuthorityFromString)

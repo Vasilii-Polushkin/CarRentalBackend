@@ -8,10 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.userservice.domain.enums.AuthProvider;
 import org.example.userservice.domain.enums.Role;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -36,12 +36,11 @@ public class User {
     @NotBlank
     private String email;
 
-    @NotNull
     @Size(min = 6, max = 255)
     private String password;
 
-    @Enumerated(EnumType.STRING)
-    private AuthProvider provider;
+    @OneToMany(mappedBy = "user")
+    private List<OAuth2Provider> providers;
 
     @Enumerated(EnumType.STRING)
     @ElementCollection(fetch = FetchType.EAGER)

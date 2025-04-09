@@ -34,6 +34,24 @@ public class JwtTokenService {
                 .compact();
     }
 
+    public String generateToken(
+            String email,
+            long jwtExpirationInMs,
+            SecretKey secretKey,
+            Map<String, Object> claims
+    ) {
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+
+        return Jwts.builder()
+                .claims(claims)
+                .subject(email)
+                .issuedAt(now)
+                .expiration(expiryDate)
+                .signWith(secretKey, Jwts.SIG.HS512)
+                .compact();
+    }
+
     public Boolean isTokenExpired(String token, SecretKey secretKey) {
         return extractExpiration(token, secretKey).before(new Date());
     }

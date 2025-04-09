@@ -7,8 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.dtos.JwtModelDto;
 import org.example.userservice.domain.models.entities.RefreshToken;
 import org.example.userservice.domain.models.entities.User;
-import org.example.userservice.domain.models.requests.LoginModel;
-import org.example.userservice.domain.models.requests.RegisterModel;
+import org.example.userservice.domain.models.requests.LoginRequestModel;
+import org.example.userservice.domain.models.requests.RegisterRequestModel;
 import org.example.userservice.infrastructure.repositories.RefreshTokenRepository;
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.example.userservice.domain.enums.Role;
@@ -19,8 +19,8 @@ import org.springframework.validation.annotation.Validated;
 
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
 
+//todo JwtModelDto to domain model
 @Service
 @Validated
 @RequiredArgsConstructor
@@ -32,7 +32,7 @@ public class AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final CurrentUserService currentUserService;
 
-    public JwtModelDto login(@Valid @NonNull LoginModel authRequest) {
+    public JwtModelDto login(@Valid @NonNull LoginRequestModel authRequest) {
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User with email " + authRequest.getEmail() + " not found"));
 
@@ -51,7 +51,7 @@ public class AuthService {
         refreshTokenRepository.delete(savedRefreshToken);
     }
 
-    public JwtModelDto register(@Valid @NonNull RegisterModel authRequest) {
+    public JwtModelDto register(@Valid @NonNull RegisterRequestModel authRequest) {
         if (userRepository.existsByEmail(authRequest.getEmail())){
             throw new AuthException("Email already in use");
         }
@@ -84,7 +84,7 @@ public class AuthService {
         return new JwtModelDto(newAccessTokenValue, newRefreshTokenValue);
     }
 
-    private JwtModelDto createAndSaveJwtToken(User user) {
+    public JwtModelDto createAndSaveJwtToken(User user) {
         String accessToken = accessTokenService.generateToken(new CarRentalUserDetails(user));
         String refreshToken = refreshTokenService.generateToken(new CarRentalUserDetails(user));
 

@@ -1,6 +1,7 @@
 package org.example.userservice.api.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.dtos.UserDto;
@@ -21,7 +22,7 @@ public class UsersController {
     private final UsersService usersService;
 
     @GetMapping("{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @RolesAllowed("USER")
     public UserDto getUserById(@PathVariable("id") UUID id) {
         return userMapper.toDto(usersService.getUserById(id));
     }

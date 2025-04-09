@@ -4,6 +4,7 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.io.Decoders;
 import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.domain.enums.Role;
+import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
 import org.example.userservice.api.mappers.RolesMapper;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,6 +60,17 @@ public class JwtAccessTokenService {
         claims.put(CLAIM_KEY_NAME, userDetails.getName());
 
         return jwtUtil.generateToken(userDetails, jwtExpirationInMs, jwtAccessSecret, claims);
+    }
+
+    public String generateToken(User user) {
+        var claims = new HashMap<String, Object>();
+
+        List<String> roles = rolesMapper.rolesToStrings(user.getRoles());
+        claims.put(CLAIM_KEY_ROLES, roles);
+        claims.put(CLAIM_KEY_ID, user.getId());
+        claims.put(CLAIM_KEY_NAME, user.getName());
+
+        return jwtUtil.generateToken(user.getEmail(), jwtExpirationInMs, jwtAccessSecret, claims);
     }
 
     private Boolean isTokenExpired(String token) {

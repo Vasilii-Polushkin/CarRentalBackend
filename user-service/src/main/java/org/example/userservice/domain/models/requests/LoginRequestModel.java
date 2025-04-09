@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class LoginModel {
+public class LoginRequestModel {
     @NotNull
     @Email
     String email;

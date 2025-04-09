@@ -1,4 +1,4 @@
-package org.example.userservice.domain.models.oauth;
+package org.example.userservice.infrastructure.security.oauth;
 
 public interface OAuth2UserInfo {
     String getId();

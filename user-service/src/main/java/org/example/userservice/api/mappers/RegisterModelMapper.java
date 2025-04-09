@@ -1,19 +1,19 @@
 package org.example.userservice.api.mappers;
 
 import org.example.userservice.api.dtos.RegisterModelDto;
-import org.example.userservice.domain.models.requests.RegisterModel;
+import org.example.userservice.domain.models.requests.RegisterRequestModel;
 import org.springframework.stereotype.Component;
 
 @Component
 public class RegisterModelMapper {
-    public RegisterModel toDomain(RegisterModelDto model) {
-        return new RegisterModel(
+    public RegisterRequestModel toDomain(RegisterModelDto model) {
+        return new RegisterRequestModel(
                 model.getName(),
                 model.getEmail(),
                 model.getPassword()
         );
     }
-    public RegisterModelDto toDto(RegisterModel model) {
+    public RegisterModelDto toDto(RegisterRequestModel model) {
         return new RegisterModelDto(
                 model.getName(),
                 model.getEmail(),

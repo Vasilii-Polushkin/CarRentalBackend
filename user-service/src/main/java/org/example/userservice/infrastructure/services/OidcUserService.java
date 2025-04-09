@@ -1,47 +1,74 @@
 package org.example.userservice.infrastructure.services;
 
-/*
+import lombok.RequiredArgsConstructor;
+import org.example.userservice.api.mappers.RolesMapper;
+import org.example.userservice.domain.models.entities.OAuth2Provider;
+import org.example.userservice.domain.models.entities.User;
+import org.example.userservice.domain.models.entities.ids.OAuth2ProviderId;
+import org.example.userservice.infrastructure.exceptions.AuthException;
+import org.example.userservice.infrastructure.repositories.OAuth2ProviderRepository;
+import org.example.userservice.infrastructure.security.models.CarRentalOauth2User;
+import org.example.userservice.infrastructure.security.oauth.OAuth2UserInfo;
+import org.example.userservice.infrastructure.security.oauth.OAuth2UserInfoFactory;
+import org.example.userservice.infrastructure.repositories.UserRepository;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
 @Service
-public class OidcUserService implements OAuth2UserService<OidcUserRequest, OidcUser> {
+@RequiredArgsConstructor
+public class OidcUserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
-
-    public OidcUserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final RolesMapper rolesMapper;
+    private final OAuth2ProviderRepository oAuth2ProviderRepository;
 
     @Override
-    public OidcUser loadUser(OidcUserRequest request) {
-        OidcUser oidcUser = new DefaultOidcUser(
-                List.of(new OidcUserAuthority(request.getIdToken())),
-                request.getIdToken()
+    public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+        OAuth2User oauth2User = super.loadUser(userRequest);
+
+        String providerId = userRequest.getClientRegistration().getRegistrationId();
+
+        return getOrCreateUser(providerId, oauth2User);
+    }
+
+    private CarRentalOauth2User getOrCreateUser(String providerId, OAuth2User oauth2User) {
+        OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(
+                providerId,
+                oauth2User.getAttributes()
         );
 
-        saveOrUpdateUser(oidcUser);
+        Optional<OAuth2Provider> optionalProvider = oAuth2ProviderRepository.findById(
+                new OAuth2ProviderId(userInfo.getId(), providerId)
+        );
 
-        return oidcUser;
-    }
+        if (optionalProvider.isPresent()) {
+            User user = optionalProvider.get().getUser();
+            return new CarRentalOauth2User(user, oauth2User.getAttributes(), rolesMapper);
+        }
 
-    private void saveOrUpdateUser(OidcUser oidcUser) {
-        userRepository.findById(UUID.fromString(oidcUser.getSubject()))
-                .ifPresentOrElse(
-                        user -> updateExistingUser(user, oidcUser),
-                        () -> createNewUser(oidcUser)
-                );
-    }
+        OAuth2Provider userProviderEntity = new OAuth2Provider();
 
-    private void createNewUser(OidcUser oidcUser) {
+        userProviderEntity.setProvider(providerId);
+        userProviderEntity.setProviderUserId(userInfo.getId());
+
+        if (userRepository.existsByEmail(userInfo.getEmail())) {
+            throw new AuthException("Email address already in use");
+        }
+
         User user = new User();
-        user.setId(UUID.fromString(oidcUser.getSubject()));
-        user.setEmail(oidcUser.getEmail());
-        user.setName(oidcUser.getFullName());
-        user.setRoles(Set.of(Role.USER));
-
+        user.setEmail(userInfo.getEmail());
+        user.setName(userInfo.getName());
         userRepository.save(user);
-    }
 
-    private void updateExistingUser(User user, OidcUser oidcUser) {
-        user.setEmail(oidcUser.getEmail());
-        userRepository.save(user);
+        userProviderEntity.setUser(user);
+
+        oAuth2ProviderRepository.save(userProviderEntity);
+
+        return new CarRentalOauth2User(user, oauth2User.getAttributes(), rolesMapper);
     }
-}*/
+}

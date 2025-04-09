@@ -22,7 +22,7 @@ public class CurrentUserController {
 
     @GetMapping()
     public UserDto getUser() {
-        return userMapper.toDto(currentUserService.getUserCommonData());
+        return userMapper.toDto(currentUserService.getUser());
     }
 
     @PutMapping("edit")
