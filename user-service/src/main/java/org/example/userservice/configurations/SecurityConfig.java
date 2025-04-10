@@ -1,28 +1,27 @@
 package org.example.userservice.configurations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.example.userservice.api.dtos.JwtModelDto;
-import org.example.userservice.api.dtos.TokenRefreshModelDto;
 import org.example.userservice.common.exceptions.ErrorResponse;
 import org.example.userservice.infrastructure.security.filters.JwtFilter;
 import lombok.RequiredArgsConstructor;
-import org.example.userservice.infrastructure.security.models.CarRentalOauth2User;
-import org.example.userservice.infrastructure.security.services.CustomUserDetailsService;
+import org.example.userservice.infrastructure.security.oauth.CustomOauth2User;
 import org.example.userservice.infrastructure.services.AuthService;
-import org.example.userservice.infrastructure.services.JwtAccessTokenService;
-import org.example.userservice.infrastructure.services.OidcUserService;
+import org.example.userservice.infrastructure.security.oauth.OAuth2UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.http.MediaType;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -32,6 +31,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.io.IOException;
 import java.util.List;
 
 @Configuration
@@ -42,7 +42,7 @@ public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
     private final AuthService authService;
-    private final OidcUserService oidcUserService;
+    private final OAuth2UserService oidcUserService;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -72,7 +72,10 @@ public class SecurityConfig {
                         .failureHandler(jwtAuthenticationFailureHandler())
                 )
                 .exceptionHandling(exceptions -> exceptions
-                        .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
+                        .authenticationEntryPoint(
+                                oauth2AuthenticationEntryPoint()
+                        )
+                );
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
@@ -80,31 +83,27 @@ public class SecurityConfig {
     }
 
     @Bean
+    public AuthenticationEntryPoint oauth2AuthenticationEntryPoint() {
+        return (request, response, authException) -> {
+            WriteAuthErrorToHttpResponse(response, new ErrorResponse(authException.getMessage()));
+        };
+    }
+
+    @Bean
     public AuthenticationSuccessHandler jwtAuthenticationSuccessHandler(AuthService authService) {
         return (request, response, authentication) -> {
             OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
-            CarRentalOauth2User principal = (CarRentalOauth2User) oauthToken.getPrincipal();
-
+            CustomOauth2User principal = (CustomOauth2User) oauthToken.getPrincipal();
             JwtModelDto jwt = authService.createAndSaveJwtToken(principal.getUser());
-            ObjectMapper mapper = new ObjectMapper();
-            String jwtJson = mapper.writeValueAsString(jwt);
 
-            response.setContentType("application/json");
-            response.getWriter().write(jwtJson);
+            WriteObjectToHttpResponse(response, jwt);
         };
     }
 
     @Bean
     public AuthenticationFailureHandler jwtAuthenticationFailureHandler() {
         return (request, response, exception) -> {
-            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-
-            ErrorResponse errorResponse = new ErrorResponse("OAuth2 authentication failed");
-            ObjectMapper mapper = new ObjectMapper();
-            String errorResponseJson = mapper.writeValueAsString(errorResponse);
-
-            response.setContentType("application/json");
-            response.getWriter().write(errorResponseJson);
+            WriteAuthErrorToHttpResponse(response, new ErrorResponse("OAuth2 authentication failed"));
         };
     }
 
@@ -125,5 +124,15 @@ public class SecurityConfig {
     @Bean
     public GrantedAuthorityDefaults grantedAuthorityDefaults() {
         return new GrantedAuthorityDefaults("");
+    }
+
+    private static void WriteAuthErrorToHttpResponse(HttpServletResponse response, ErrorResponse errorResponse) throws IOException {
+        response.setStatus(HttpStatus.UNAUTHORIZED.value());
+        WriteObjectToHttpResponse(response, errorResponse);
+    }
+
+    private static void WriteObjectToHttpResponse(HttpServletResponse response, Object object) throws IOException {
+        response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+        response.getWriter().write(new ObjectMapper().writeValueAsString(object));
     }
 }

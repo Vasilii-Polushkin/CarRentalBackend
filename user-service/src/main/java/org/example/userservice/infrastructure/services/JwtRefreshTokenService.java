@@ -3,7 +3,7 @@ package org.example.userservice.infrastructure.services;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
+import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

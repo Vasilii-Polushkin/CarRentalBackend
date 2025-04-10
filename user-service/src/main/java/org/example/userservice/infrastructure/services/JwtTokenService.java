@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
+import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;

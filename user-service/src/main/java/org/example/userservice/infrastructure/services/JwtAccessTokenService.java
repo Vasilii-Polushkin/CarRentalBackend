@@ -5,7 +5,7 @@ import io.jsonwebtoken.io.Decoders;
 import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.domain.enums.Role;
 import org.example.userservice.domain.models.entities.User;
-import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
+import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
 import org.example.userservice.api.mappers.RolesMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

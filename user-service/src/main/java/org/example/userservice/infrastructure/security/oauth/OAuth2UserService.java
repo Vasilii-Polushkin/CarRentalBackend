@@ -1,4 +1,4 @@
-package org.example.userservice.infrastructure.services;
+package org.example.userservice.infrastructure.security.oauth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.mappers.RolesMapper;
@@ -7,10 +7,9 @@ import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.entities.ids.OAuth2ProviderId;
 import org.example.userservice.infrastructure.exceptions.AuthException;
 import org.example.userservice.infrastructure.repositories.OAuth2ProviderRepository;
-import org.example.userservice.infrastructure.security.models.CarRentalOauth2User;
-import org.example.userservice.infrastructure.security.oauth.OAuth2UserInfo;
-import org.example.userservice.infrastructure.security.oauth.OAuth2UserInfoFactory;
 import org.example.userservice.infrastructure.repositories.UserRepository;
+import org.example.userservice.infrastructure.security.oauth.user_info.OAuth2UserInfo;
+import org.example.userservice.infrastructure.security.oauth.user_info.OAuth2UserInfoFactory;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
@@ -21,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class OidcUserService extends DefaultOAuth2UserService {
+public class OAuth2UserService extends DefaultOAuth2UserService {
 
     private final UserRepository userRepository;
     private final RolesMapper rolesMapper;
@@ -36,7 +35,7 @@ public class OidcUserService extends DefaultOAuth2UserService {
         return getOrCreateUser(providerId, oauth2User);
     }
 
-    private CarRentalOauth2User getOrCreateUser(String providerId, OAuth2User oauth2User) {
+    private CustomOauth2User getOrCreateUser(String providerId, OAuth2User oauth2User) {
         OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(
                 providerId,
                 oauth2User.getAttributes()
@@ -48,7 +47,7 @@ public class OidcUserService extends DefaultOAuth2UserService {
 
         if (optionalProvider.isPresent()) {
             User user = optionalProvider.get().getUser();
-            return new CarRentalOauth2User(user, oauth2User.getAttributes(), rolesMapper);
+            return new CustomOauth2User(user, oauth2User.getAttributes(), rolesMapper);
         }
 
         OAuth2Provider userProviderEntity = new OAuth2Provider();
@@ -69,6 +68,6 @@ public class OidcUserService extends DefaultOAuth2UserService {
 
         oAuth2ProviderRepository.save(userProviderEntity);
 
-        return new CarRentalOauth2User(user, oauth2User.getAttributes(), rolesMapper);
+        return new CustomOauth2User(user, oauth2User.getAttributes(), rolesMapper);
     }
 }

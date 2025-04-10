@@ -1,4 +1,6 @@
-package org.example.userservice.infrastructure.security.oauth;
+package org.example.userservice.infrastructure.security.oauth.user_info.providers_impl;
+
+import org.example.userservice.infrastructure.security.oauth.user_info.OAuth2UserInfo;
 
 import java.util.Map;
 

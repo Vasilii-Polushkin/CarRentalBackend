@@ -13,7 +13,7 @@ import org.example.userservice.infrastructure.repositories.RefreshTokenRepositor
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.example.userservice.domain.enums.Role;
 import org.example.userservice.infrastructure.exceptions.AuthException;
-import org.example.userservice.infrastructure.security.models.CarRentalUserDetails;
+import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 

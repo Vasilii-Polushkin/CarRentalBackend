@@ -1,4 +1,4 @@
-package org.example.userservice.infrastructure.security.models;
+package org.example.userservice.infrastructure.security.user_details;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
