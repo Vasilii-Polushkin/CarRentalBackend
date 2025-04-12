@@ -9,6 +9,7 @@ import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.LoginRequestModel;
 import org.example.userservice.domain.models.requests.RegisterRequestModel;
 import org.example.userservice.domain.models.responses.JwtModel;
+import org.example.userservice.domain.services.AuthService;
 import org.example.userservice.infrastructure.repositories.RefreshTokenRepository;
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.example.userservice.domain.enums.Role;
@@ -22,13 +23,14 @@ import java.util.Set;
 @Service
 @Validated
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
     private final JwtAccessTokenUtil accessTokenUtil;
     private final JwtRefreshTokenUtil refreshTokenUtil;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    @Override
     public JwtModel login(@Valid @NonNull LoginRequestModel authRequest) {
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User with email " + authRequest.getEmail() + " not found"));
@@ -40,6 +42,7 @@ public class AuthService {
         return createAndSaveJwtToken(user);
     }
 
+    @Override
     public void revoke(@NonNull String refreshTokenValue) {
         final RefreshToken savedRefreshToken = refreshTokenRepository
                 .findByValue(refreshTokenValue)
@@ -48,6 +51,7 @@ public class AuthService {
         refreshTokenRepository.delete(savedRefreshToken);
     }
 
+    @Override
     public JwtModel register(@Valid @NonNull RegisterRequestModel authRequest) {
         if (userRepository.existsByEmail(authRequest.getEmail())){
             throw new AuthException("Email already in use");
@@ -67,6 +71,7 @@ public class AuthService {
         return createAndSaveJwtToken(user);
     }
 
+    @Override
     public JwtModel refreshAndRotate(@Valid @NonNull String refreshTokenValue) {
         final RefreshToken savedRefreshToken = refreshTokenRepository
                 .findByValue(refreshTokenValue)
@@ -88,7 +93,6 @@ public class AuthService {
         String refreshToken = refreshTokenUtil.generateToken(user);
 
         RefreshToken refreshTokenModel = new RefreshToken();
-
         refreshTokenModel.setValue(refreshToken);
         refreshTokenModel.setUser(user);
 

@@ -6,8 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.dtos.UserDto;
 import org.example.userservice.api.mappers.UserMapper;
-import org.example.userservice.infrastructure.services.CurrentUserService;
-import org.example.userservice.infrastructure.services.UsersService;
+import org.example.userservice.domain.services.UsersService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

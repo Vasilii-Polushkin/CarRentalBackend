@@ -5,7 +5,7 @@ import org.example.userservice.domain.enums.Role;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.UserEditRequestModel;
 import org.example.userservice.infrastructure.repositories.UserRepository;
-import org.example.userservice.infrastructure.services.UsersService;
+import org.example.userservice.infrastructure.services.UsersServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +21,13 @@ import static org.mockito.Mockito.*;
 import static org.assertj.core.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UserServiceTests {
+public class UsersServiceImplTests {
 
     @Mock
     private UserRepository userRepository;
 
     @InjectMocks
-    private UsersService userService;
+    private UsersServiceImpl userService;
 
     private UUID testId;
     private User testUser;

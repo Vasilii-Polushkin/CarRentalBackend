@@ -1,8 +1,6 @@
 package org.example.userservice.api.controllers;
 
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -12,15 +10,12 @@ import org.example.userservice.api.dtos.LoginModelDto;
 import org.example.userservice.api.dtos.RegisterModelDto;
 import org.example.userservice.api.dtos.TokenRefreshModelDto;
 import org.example.userservice.api.mappers.JwtModelMapper;
-import org.example.userservice.domain.enums.Role;
 import org.example.userservice.api.mappers.LoginModelMapper;
 import org.example.userservice.api.mappers.RegisterModelMapper;
-import org.example.userservice.infrastructure.services.AuthService;
-import org.example.userservice.infrastructure.services.CurrentUserService;
+import org.example.userservice.domain.services.AuthService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.util.List;
 
 @RestController
 @RequestMapping("auth")

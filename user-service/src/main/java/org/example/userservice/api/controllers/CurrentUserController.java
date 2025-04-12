@@ -6,8 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.dtos.*;
 import org.example.userservice.api.mappers.UserEditModelMapper;
 import org.example.userservice.api.mappers.UserMapper;
-import org.example.userservice.infrastructure.services.CurrentUserService;
-import org.example.userservice.infrastructure.services.UsersService;
+import org.example.userservice.domain.services.CurrentUserService;
+import org.example.userservice.domain.services.UsersService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
