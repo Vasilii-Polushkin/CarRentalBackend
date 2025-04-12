@@ -2,6 +2,7 @@ package org.example.userservice.infrastructure.security.oauth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.mappers.RolesMapper;
+import org.example.userservice.domain.enums.Role;
 import org.example.userservice.domain.models.entities.OAuth2Provider;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.entities.ids.OAuth2ProviderId;
@@ -17,6 +18,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -29,9 +31,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauth2User = super.loadUser(userRequest);
-
         String providerId = userRequest.getClientRegistration().getRegistrationId();
-
         return getOrCreateUser(providerId, oauth2User);
     }
 
@@ -50,22 +50,27 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
             return new CustomOauth2User(user, oauth2User.getAttributes(), rolesMapper);
         }
 
-        OAuth2Provider userProviderEntity = new OAuth2Provider();
-
-        userProviderEntity.setProvider(providerId);
-        userProviderEntity.setProviderUserId(userInfo.getId());
-
         if (userRepository.existsByEmail(userInfo.getEmail())) {
             throw new AuthException("Email address already in use");
         }
 
-        User user = new User();
-        user.setEmail(userInfo.getEmail());
-        user.setName(userInfo.getName());
+        OAuth2Provider userProviderEntity = OAuth2Provider
+                .builder()
+                .provider(providerId)
+                .providerUserId(userInfo.getId())
+                .build();
+
+        User user = User
+                .builder()
+                .email(userInfo.getEmail())
+                .name(userInfo.getName())
+                .roles(Set.of(Role.USER))
+                .isActive(true)
+                .build();
+
         userRepository.save(user);
 
         userProviderEntity.setUser(user);
-
         oAuth2ProviderRepository.save(userProviderEntity);
 
         return new CustomOauth2User(user, oauth2User.getAttributes(), rolesMapper);

@@ -39,6 +39,8 @@ public class User {
     @Size(min = 6, max = 255)
     private String password;
 
+    private boolean isActive = true;
+
     @OneToMany(mappedBy = "user")
     private List<OAuth2Provider> providers;
 

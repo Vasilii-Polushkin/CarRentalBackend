@@ -11,6 +11,7 @@ import org.example.userservice.api.dtos.JwtModelDto;
 import org.example.userservice.api.dtos.LoginModelDto;
 import org.example.userservice.api.dtos.RegisterModelDto;
 import org.example.userservice.api.dtos.TokenRefreshModelDto;
+import org.example.userservice.api.mappers.JwtModelMapper;
 import org.example.userservice.domain.enums.Role;
 import org.example.userservice.api.mappers.LoginModelMapper;
 import org.example.userservice.api.mappers.RegisterModelMapper;
@@ -30,10 +31,13 @@ public class AuthController {
     private final AuthService authService;
     private final LoginModelMapper loginMapper;
     private final RegisterModelMapper registerMapper;
+    private final JwtModelMapper jwtModelMapper;
 
     @PostMapping("login")
     public JwtModelDto login(@Valid @RequestBody LoginModelDto request) {
-        return authService.login(loginMapper.toDomain(request));
+        return jwtModelMapper.toDto(
+                authService.login(loginMapper.toDomain(request))
+        );
     }
 
     @GetMapping("/oauth2/authorization/{providerId}")
@@ -51,11 +55,15 @@ public class AuthController {
 
     @PostMapping("register")
     public JwtModelDto register(@Valid @RequestBody RegisterModelDto request) {
-        return authService.register(registerMapper.toDomain(request));
+        return jwtModelMapper.toDto(
+                authService.register(registerMapper.toDomain(request))
+        );
     }
 
     @PostMapping("refresh")
     public JwtModelDto refreshAndRotate(@Valid @RequestBody TokenRefreshModelDto request) {
-        return authService.refreshAndRotate(request.getValue());
+        return jwtModelMapper.toDto(
+                authService.refreshAndRotate(request.getValue())
+        );
     }
 }

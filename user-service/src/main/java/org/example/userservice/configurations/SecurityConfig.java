@@ -3,12 +3,15 @@ package org.example.userservice.configurations;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.userservice.api.dtos.JwtModelDto;
+import org.example.userservice.api.mappers.JwtModelMapper;
 import org.example.userservice.common.exceptions.ErrorResponse;
+import org.example.userservice.domain.models.responses.JwtModel;
 import org.example.userservice.infrastructure.security.filters.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.infrastructure.security.oauth.CustomOauth2User;
 import org.example.userservice.infrastructure.services.AuthService;
 import org.example.userservice.infrastructure.security.oauth.OAuth2UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -43,6 +46,7 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
     private final AuthService authService;
     private final OAuth2UserService oidcUserService;
+    private final JwtModelMapper jwtModelMapper;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -68,7 +72,7 @@ public class SecurityConfig {
                         .userInfoEndpoint(userInfo -> userInfo
                                 .userService(oidcUserService)
                         )
-                        .successHandler(jwtAuthenticationSuccessHandler(authService))
+                        .successHandler(jwtAuthenticationSuccessHandler(authService, jwtModelMapper))
                         .failureHandler(jwtAuthenticationFailureHandler())
                 )
                 .exceptionHandling(exceptions -> exceptions
@@ -90,13 +94,13 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationSuccessHandler jwtAuthenticationSuccessHandler(AuthService authService) {
+    public AuthenticationSuccessHandler jwtAuthenticationSuccessHandler(AuthService authService, JwtModelMapper jwtModelMapper) {
         return (request, response, authentication) -> {
             OAuth2AuthenticationToken oauthToken = (OAuth2AuthenticationToken) authentication;
             CustomOauth2User principal = (CustomOauth2User) oauthToken.getPrincipal();
-            JwtModelDto jwt = authService.createAndSaveJwtToken(principal.getUser());
+            JwtModel jwt = authService.createAndSaveJwtToken(principal.getUser());
 
-            WriteObjectToHttpResponse(response, jwt);
+            WriteObjectToHttpResponse(response, jwtModelMapper.toDto(jwt));
         };
     }
 

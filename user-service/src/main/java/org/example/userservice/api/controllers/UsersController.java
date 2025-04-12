@@ -22,8 +22,14 @@ public class UsersController {
     private final UsersService usersService;
 
     @GetMapping("{id}")
-    @RolesAllowed("USER")
+    @RolesAllowed("ADMIN")
     public UserDto getUserById(@PathVariable("id") UUID id) {
         return userMapper.toDto(usersService.getUserById(id));
+    }
+
+    @DeleteMapping("{id}")
+    @RolesAllowed("ADMIN")
+    public void deleteUserById(@PathVariable("id") UUID id) {
+        usersService.deleteUserById(id);
     }
 }

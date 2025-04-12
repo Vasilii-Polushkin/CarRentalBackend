@@ -15,7 +15,7 @@ import java.util.UUID;
 public class CurrentUserService {
 
     private final UserRepository userRepository;
-    private final JwtAccessTokenService accessTokenService;
+    private final JwtAccessTokenUtil accessTokenUtil;
 
     public User getUser() {
         return userRepository
@@ -24,15 +24,11 @@ public class CurrentUserService {
     }
 
     public String getEmail() {
-        return accessTokenService.extractEmail(getToken());
-    }
-
-    public String getName() {
-        return accessTokenService.extractName(getToken());
+        return accessTokenUtil.extractEmail(getToken());
     }
 
     public UUID getId() {
-        return accessTokenService.extractId(getToken());
+        return accessTokenUtil.extractId(getToken());
     }
 
     private String getToken(){

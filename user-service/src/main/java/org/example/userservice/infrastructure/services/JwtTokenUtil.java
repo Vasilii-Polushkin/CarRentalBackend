@@ -3,8 +3,8 @@ package org.example.userservice.infrastructure.services;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -14,39 +14,20 @@ import java.util.function.Function;
 
 @Slf4j
 @Service
-public class JwtTokenService {
-
+public class JwtTokenUtil {
     public String generateToken(
-            CarRentalUserDetails userDetails,
+            @NonNull String email,
             long jwtExpirationInMs,
-            SecretKey secretKey,
-            Map<String, Object> claims
+            @NonNull SecretKey secretKey,
+            @NonNull Map<String, Object> claims
     ) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
-
-        return Jwts.builder()
-                .claims(claims)
-                .subject(userDetails.getEmail())
-                .issuedAt(now)
-                .expiration(expiryDate)
-                .signWith(secretKey, Jwts.SIG.HS512)
-                .compact();
-    }
-
-    public String generateToken(
-            String email,
-            long jwtExpirationInMs,
-            SecretKey secretKey,
-            Map<String, Object> claims
-    ) {
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
+        Date nowDate = new Date();
+        Date expiryDate = new Date(nowDate.getTime() + jwtExpirationInMs);
 
         return Jwts.builder()
                 .claims(claims)
                 .subject(email)
-                .issuedAt(now)
+                .issuedAt(nowDate)
                 .expiration(expiryDate)
                 .signWith(secretKey, Jwts.SIG.HS512)
                 .compact();
@@ -82,16 +63,15 @@ public class JwtTokenService {
                 .getPayload();
     }
 
-    public boolean isTokenValid(String authToken, SecretKey secretKey) {
+    public String getValidationErrorMessageOrNull(String token, SecretKey secretKey){
         try {
             Jwts.parser()
                     .verifyWith(secretKey)
                     .build()
-                    .parseSignedClaims(authToken);
-            return true;
+                    .parseSignedClaims(token);
+            return null;
         } catch (JwtException | IllegalArgumentException ex) {
-            log.error(ex.getMessage());
+            return ex.getMessage();
         }
-        return false;
     }
 }

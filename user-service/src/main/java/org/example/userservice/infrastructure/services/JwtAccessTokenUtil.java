@@ -5,7 +5,6 @@ import io.jsonwebtoken.io.Decoders;
 import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.domain.enums.Role;
 import org.example.userservice.domain.models.entities.User;
-import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
 import org.example.userservice.api.mappers.RolesMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,18 +14,18 @@ import java.util.*;
 
 @Slf4j
 @Service
-public class JwtAccessTokenService {
+public class JwtAccessTokenUtil {
     private static final String CLAIM_KEY_ROLES = "roles";
     private static final String CLAIM_KEY_ID = "id";
     private static final String CLAIM_KEY_NAME = "name";
 
-    private final JwtTokenService jwtUtil;
+    private final JwtTokenUtil jwtUtil;
     private final SecretKey jwtAccessSecret;
     private final long jwtExpirationInMs;
     private final RolesMapper rolesMapper;
 
-    public JwtAccessTokenService(
-            JwtTokenService jwtUtil,
+    public JwtAccessTokenUtil(
+            JwtTokenUtil jwtUtil,
             @Value("${app.jwt.access.secret}") String jwtAccessSecret,
             @Value("${app.jwt.access.expiration-in-ms}") long jwtExpirationInMs,
             RolesMapper rolesMapper
@@ -49,17 +48,6 @@ public class JwtAccessTokenService {
 
     public String extractName(String token) {
         return jwtUtil.extractClaim(token, jwtAccessSecret, CLAIM_KEY_NAME);
-    }
-
-    public String generateToken(CarRentalUserDetails userDetails) {
-        var claims = new HashMap<String, Object>();
-
-        List<String> roles = rolesMapper.toStrings(userDetails.getAuthorities());
-        claims.put(CLAIM_KEY_ROLES, roles);
-        claims.put(CLAIM_KEY_ID, userDetails.getId());
-        claims.put(CLAIM_KEY_NAME, userDetails.getName());
-
-        return jwtUtil.generateToken(userDetails, jwtExpirationInMs, jwtAccessSecret, claims);
     }
 
     public String generateToken(User user) {
@@ -85,7 +73,7 @@ public class JwtAccessTokenService {
         return jwtUtil.extractExpiration(token, jwtAccessSecret);
     }
 
-    public boolean validateToken(String authToken) {
-        return jwtUtil.isTokenValid(authToken, jwtAccessSecret);
+    public String getValidationErrorMessageOrNull(String authToken) {
+        return jwtUtil.getValidationErrorMessageOrNull(authToken, jwtAccessSecret);
     }
 }

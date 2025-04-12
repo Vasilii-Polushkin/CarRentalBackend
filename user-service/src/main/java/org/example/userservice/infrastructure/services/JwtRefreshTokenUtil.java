@@ -3,7 +3,7 @@ package org.example.userservice.infrastructure.services;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.infrastructure.security.user_details.CarRentalUserDetails;
+import org.example.userservice.domain.models.entities.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -13,14 +13,14 @@ import java.util.HashMap;
 
 @Slf4j
 @Service
-public class JwtRefreshTokenService {
+public class JwtRefreshTokenUtil {
 
-    private final JwtTokenService jwtUtil;
+    private final JwtTokenUtil jwtUtil;
     private final SecretKey jwtRefreshSecret;
     private final long jwtExpirationInMs;
 
-    public JwtRefreshTokenService(
-            JwtTokenService jwtUtil,
+    public JwtRefreshTokenUtil(
+            JwtTokenUtil jwtUtil,
             @Value("${app.jwt.refresh.secret}") String jwtRefreshSecret,
             @Value("${app.jwt.refresh.expiration-in-ms}")long jwtExpirationInMs
     ) {
@@ -29,11 +29,11 @@ public class JwtRefreshTokenService {
         this.jwtExpirationInMs = jwtExpirationInMs;
     }
 
-    public String generateToken(CarRentalUserDetails userDetails) {
-        return jwtUtil.generateToken(userDetails, jwtExpirationInMs, jwtRefreshSecret, new HashMap<>());
+    public String generateToken(User user) {
+        return jwtUtil.generateToken(user.getEmail(), jwtExpirationInMs, jwtRefreshSecret, new HashMap<>());
     }
 
-    private Boolean isTokenExpired(String token) {
+    private boolean isTokenExpired(String token) {
         return jwtUtil.isTokenExpired(token, jwtRefreshSecret);
     }
 
@@ -45,7 +45,7 @@ public class JwtRefreshTokenService {
         return jwtUtil.extractExpiration(token, jwtRefreshSecret);
     }
 
-    public boolean validateToken(String authToken) {
-        return jwtUtil.isTokenValid(authToken, jwtRefreshSecret);
+    public String getValidationErrorMessageOrNull(String authToken) {
+        return jwtUtil.getValidationErrorMessageOrNull(authToken, jwtRefreshSecret);
     }
 }

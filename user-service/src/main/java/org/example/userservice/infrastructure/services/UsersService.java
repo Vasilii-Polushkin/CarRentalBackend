@@ -1,32 +1,47 @@
 package org.example.userservice.infrastructure.services;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.UserEditRequestModel;
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.UUID;
 
 @Service
+@Validated
 @RequiredArgsConstructor
 public class UsersService {
     private final UserRepository userRepository;
 
-    public User getUserById(UUID id) {
+    public User getUserById(@NonNull UUID id) {
         return userRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id " + id));
     }
 
-    public void editUserById(UUID id, UserEditRequestModel userEditModel) {
+    public User editUserById(@NonNull UUID id, @Valid @NonNull UserEditRequestModel userEditModel) {
         User user = userRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("User not found with id " + id));
 
         user.setName(userEditModel.getName());
 
-        userRepository.save(user);
+        return userRepository.save(user);
+    }
+
+    public User deleteUserById(@NonNull UUID id) {
+        User user = userRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with id " + id));
+
+        user.setActive(false);
+
+        return userRepository.save(user);
     }
 }

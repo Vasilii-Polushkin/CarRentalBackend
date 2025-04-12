@@ -27,5 +27,7 @@ public class UserDto {
     @NotBlank
     private String email;
 
+    private boolean isActive;
+
     private Set<Role> roles;
 }

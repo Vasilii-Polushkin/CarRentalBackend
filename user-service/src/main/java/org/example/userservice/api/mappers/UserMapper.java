@@ -11,6 +11,7 @@ public class UserMapper {
                 model.getId(),
                 model.getName(),
                 model.getEmail(),
+                model.isActive(),
                 model.getRoles()
         );
     }

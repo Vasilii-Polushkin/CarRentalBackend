@@ -18,6 +18,7 @@ public class CarRentalUserDetails implements UserDetails {
     private String email;
     private String name;
     private String password;
+    private boolean isActive;
     private Collection<GrantedAuthority> authorities;
 
     public CarRentalUserDetails(User user) {
@@ -28,6 +29,7 @@ public class CarRentalUserDetails implements UserDetails {
         authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.name()))
                 .collect(Collectors.toList());
+        isActive = user.isActive();
     }
 
     @Override
@@ -62,6 +64,6 @@ public class CarRentalUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isActive;
     }
 }
