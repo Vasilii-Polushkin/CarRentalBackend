@@ -29,6 +29,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtAccessTokenUtil accessTokenUtil;
     private final JwtRefreshTokenUtil refreshTokenUtil;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final JwtRefreshTokenUtil jwtRefreshTokenUtil;
 
     @Override
     public JwtModel login(@Valid @NonNull LoginRequestModel authRequest) {
@@ -83,6 +84,7 @@ public class AuthServiceImpl implements AuthService {
         String newRefreshTokenValue = refreshTokenUtil.generateToken(user);
 
         savedRefreshToken.setValue(newRefreshTokenValue);
+        savedRefreshToken.setExtractedExpiryDate(jwtRefreshTokenUtil.extractExpiration(newRefreshTokenValue));
         refreshTokenRepository.save(savedRefreshToken);
 
         return new JwtModel(newAccessTokenValue, newRefreshTokenValue);
@@ -92,9 +94,11 @@ public class AuthServiceImpl implements AuthService {
         String accessToken = accessTokenUtil.generateToken(user);
         String refreshToken = refreshTokenUtil.generateToken(user);
 
-        RefreshToken refreshTokenModel = new RefreshToken();
-        refreshTokenModel.setValue(refreshToken);
-        refreshTokenModel.setUser(user);
+        RefreshToken refreshTokenModel = RefreshToken.builder()
+                .user(user)
+                .value(refreshToken)
+                .extractedExpiryDate(jwtRefreshTokenUtil.extractExpiration(refreshToken))
+                .build();
 
         refreshTokenRepository.save(refreshTokenModel);
 

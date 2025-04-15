@@ -33,7 +33,7 @@ public class JwtRefreshTokenUtil {
         return jwtUtil.generateToken(user.getEmail(), jwtExpirationInMs, jwtRefreshSecret, new HashMap<>());
     }
 
-    private boolean isTokenExpired(String token) {
+    public boolean isTokenExpired(String token) {
         return jwtUtil.isTokenExpired(token, jwtRefreshSecret);
     }
 

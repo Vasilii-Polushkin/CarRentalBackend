@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.UUID;
 
 @Entity
@@ -23,6 +25,9 @@ public class RefreshToken {
     @NotBlank
     @NotNull
     private String value;
+
+    @NotNull
+    private Date extractedExpiryDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
