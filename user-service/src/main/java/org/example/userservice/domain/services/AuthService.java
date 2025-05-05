@@ -8,6 +8,8 @@ import org.example.userservice.domain.models.requests.RegisterRequestModel;
 import org.example.userservice.domain.models.responses.JwtModel;
 
 public interface AuthService {
+    boolean isTokenValid(@NonNull String tokenValue);
+
     JwtModel login(@Valid @NonNull LoginRequestModel authRequest);
 
     void revoke(@NonNull String refreshTokenValue);

@@ -30,6 +30,12 @@ public class AuthServiceImpl implements AuthService {
     private final JwtRefreshTokenUtil refreshTokenUtil;
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtRefreshTokenUtil jwtRefreshTokenUtil;
+    private final JwtAccessTokenUtil jwtAccessTokenUtil;
+
+    @Override
+    public boolean isTokenValid(@NonNull String tokenValue) {
+        return jwtAccessTokenUtil.isTokenValid(tokenValue);
+    }
 
     @Override
     public JwtModel login(@Valid @NonNull LoginRequestModel authRequest) {

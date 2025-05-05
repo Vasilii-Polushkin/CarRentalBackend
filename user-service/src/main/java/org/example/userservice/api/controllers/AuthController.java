@@ -5,10 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.example.userservice.api.dtos.JwtModelDto;
-import org.example.userservice.api.dtos.LoginModelDto;
-import org.example.userservice.api.dtos.RegisterModelDto;
-import org.example.userservice.api.dtos.TokenRefreshModelDto;
+import org.example.userservice.api.dtos.*;
 import org.example.userservice.api.mappers.JwtModelMapper;
 import org.example.userservice.api.mappers.LoginModelMapper;
 import org.example.userservice.api.mappers.RegisterModelMapper;
@@ -16,6 +13,7 @@ import org.example.userservice.domain.services.AuthService;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("auth")
@@ -34,6 +32,15 @@ public class AuthController {
                 authService.login(loginMapper.toDomain(request))
         );
     }
+
+    /*
+    @PostMapping("token/{value}/validate")
+    public TokenValidationResponseDto isTokenValid(@PathVariable("value") String tokenValue) {
+        return new TokenValidationResponseDto(authService.isTokenValid(tokenValue));
+    }*/
+
+    @GetMapping("validate")
+    public void isTokenValid() {}
 
     @GetMapping("/oauth2/authorization/{providerId}")
     public void initiateOAuth2Login(

@@ -76,4 +76,8 @@ public class JwtAccessTokenUtil {
     public String getValidationErrorMessageOrNull(String authToken) {
         return jwtUtil.getValidationErrorMessageOrNull(authToken, jwtAccessSecret);
     }
+
+    public boolean isTokenValid(String authToken) {
+        return jwtUtil.getValidationErrorMessageOrNull(authToken, jwtAccessSecret) == null;
+    }
 }
