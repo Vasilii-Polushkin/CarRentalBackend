@@ -1,7 +1,7 @@
 package org.example.userservice.unit.infrastructure.services;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 import org.example.userservice.domain.models.entities.RefreshToken;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.LoginRequestModel;
@@ -13,14 +13,12 @@ import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.example.userservice.infrastructure.services.AuthServiceImpl;
 import org.example.userservice.infrastructure.services.JwtAccessTokenUtil;
 import org.example.userservice.infrastructure.services.JwtRefreshTokenUtil;
-import org.example.userservice.infrastructure.services.UsersServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.verification.VerificationMode;
 
 import java.util.Optional;
 import java.util.Set;

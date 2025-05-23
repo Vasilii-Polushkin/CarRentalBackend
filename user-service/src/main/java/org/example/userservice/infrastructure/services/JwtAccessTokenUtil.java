@@ -3,7 +3,7 @@ package org.example.userservice.infrastructure.services;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.io.Decoders;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.api.mappers.RolesMapper;
 import org.springframework.beans.factory.annotation.Value;

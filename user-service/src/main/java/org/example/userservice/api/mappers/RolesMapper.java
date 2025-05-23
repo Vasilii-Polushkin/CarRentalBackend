@@ -1,6 +1,6 @@
 package org.example.userservice.api.mappers;
 
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;

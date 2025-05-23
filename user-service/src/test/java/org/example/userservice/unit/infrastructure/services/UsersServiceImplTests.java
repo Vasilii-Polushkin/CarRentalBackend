@@ -1,7 +1,7 @@
 package org.example.userservice.unit.infrastructure.services;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.UserEditRequestModel;
 import org.example.userservice.infrastructure.repositories.UserRepository;

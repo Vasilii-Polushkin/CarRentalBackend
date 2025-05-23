@@ -2,7 +2,7 @@ package org.example.userservice.infrastructure.security.oauth;
 
 import lombok.RequiredArgsConstructor;
 import org.example.userservice.api.mappers.RolesMapper;
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 import org.example.userservice.domain.models.entities.OAuth2Provider;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.entities.ids.OAuth2ProviderId;

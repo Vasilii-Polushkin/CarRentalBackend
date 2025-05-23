@@ -1,12 +1,11 @@
-package org.example.userservice.api.dtos;
+package org.example.dtos;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 
 import java.util.Set;
 import java.util.UUID;

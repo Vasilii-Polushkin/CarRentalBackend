@@ -17,13 +17,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity(jsr250Enabled=true)
 @RequiredArgsConstructor
 public class SecurityConfig {
+    private final SecurityHeadersPropagationFilter securityHeadersPropagationFilter;
+    private final SetSecurityContextFromHeadersFilter setSecurityContextFromHeadersFilter;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
-                // TODO инжектить
-                .addFilterBefore(new SetSecurityContextFromHeadersFilter(), UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new SecurityHeadersPropagationFilter());
+                .addFilterBefore(setSecurityContextFromHeadersFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilter(securityHeadersPropagationFilter);
 
         return http.build();
     }

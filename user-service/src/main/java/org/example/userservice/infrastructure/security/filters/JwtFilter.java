@@ -8,7 +8,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.api.mappers.RolesMapper;
-import org.example.userservice.domain.enums.Role;
+import org.example.enums.Role;
 import org.example.userservice.infrastructure.services.JwtAccessTokenUtil;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

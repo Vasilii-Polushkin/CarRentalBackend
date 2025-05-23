@@ -1,4 +1,4 @@
-package org.example.carservice.domain.models;
+package org.example.carservice.domain.models.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -33,6 +34,11 @@ public class Car {
 
     @NotNull
     private boolean isOnRental;
+
+    @NotNull
+    private LocalDate creationDate;
+
+    private LocalDate modificationDate;
 
     @NotNull
     @NotBlank

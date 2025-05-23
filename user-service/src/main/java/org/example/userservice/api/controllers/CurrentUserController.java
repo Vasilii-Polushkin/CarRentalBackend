@@ -3,6 +3,7 @@ package org.example.userservice.api.controllers;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.example.dtos.UserDto;
 import org.example.userservice.api.dtos.*;
 import org.example.userservice.api.mappers.UserEditModelMapper;
 import org.example.userservice.api.mappers.UserMapper;
