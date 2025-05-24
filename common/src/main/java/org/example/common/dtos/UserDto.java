@@ -1,11 +1,11 @@
-package org.example.dtos;
+package org.example.common.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.enums.Role;
+import org.example.common.enums.Role;
 
 import java.util.Set;
 import java.util.UUID;

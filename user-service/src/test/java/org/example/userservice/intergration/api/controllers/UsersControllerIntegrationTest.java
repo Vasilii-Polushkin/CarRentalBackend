@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.*;
-import org.example.enums.Role;
+import org.example.common.enums.Role;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.junit.jupiter.api.Test;

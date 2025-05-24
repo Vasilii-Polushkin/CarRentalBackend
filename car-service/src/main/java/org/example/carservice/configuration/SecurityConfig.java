@@ -25,7 +25,7 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(setSecurityContextFromHeadersFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilter(securityHeadersPropagationFilter);
+                .addFilterAfter(securityHeadersPropagationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

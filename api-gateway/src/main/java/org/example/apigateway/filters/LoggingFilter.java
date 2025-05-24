@@ -1,7 +1,7 @@
 package org.example.apigateway.filters;
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.headers.CustomHeaders;
+import org.example.common.headers.CustomHeaders;
 import org.slf4j.MDC;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;

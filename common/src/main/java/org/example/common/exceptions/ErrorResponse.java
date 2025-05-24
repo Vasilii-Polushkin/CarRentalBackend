@@ -1,4 +1,4 @@
-package org.example.userservice.common.exceptions;
+package org.example.common.exceptions;
 
 import lombok.Data;
 

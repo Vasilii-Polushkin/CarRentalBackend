@@ -1,0 +1,337 @@
+2025-04-29 05:29:47.500 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 4984 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-04-29 05:29:47.502 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-04-29 05:29:47.933 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
+2025-04-29 05:29:49.220 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:29:49.430 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-04-29 05:29:49.431 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-04-29 05:29:49.432 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-04-29 05:29:49.432 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-04-29 05:29:50.562 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:29:50.711 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-04-29 05:29:51.724 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:29:52.737 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:29:52.768 [main] ERROR o.s.c.g.route.CachingRouteLocator [, , ] - Refresh routes error !!!
+java.lang.IllegalArgumentException: Unable to find GatewayFilterFactory with name LoggingFilter
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.loadGatewayFilters(RouteDefinitionRouteLocator.java:145)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Assembly trace from producer [reactor.core.publisher.FluxMapFuseable] :
+	reactor.core.publisher.Flux.map(Flux.java:6631)
+	org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getRoutes(RouteDefinitionRouteLocator.java:110)
+Error has been observed at the following site(s):
+	*________________Flux.map ⇢ at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getRoutes(RouteDefinitionRouteLocator.java:110)
+	|_               Flux.map ⇢ at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getRoutes(RouteDefinitionRouteLocator.java:122)
+	*__Flux.flatMapSequential ⇢ at org.springframework.cloud.gateway.route.CompositeRouteLocator.getRoutes(CompositeRouteLocator.java:36)
+	|_              Flux.sort ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.fetch(CachingRouteLocator.java:63)
+	|_              Flux.sort ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.fetch(CachingRouteLocator.java:63)
+	|_              Flux.sort ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.fetch(CachingRouteLocator.java:63)
+	|_           Flux.collect ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.onApplicationEvent(CachingRouteLocator.java:97)
+Original Stack Trace:
+		at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.loadGatewayFilters(RouteDefinitionRouteLocator.java:145)
+		at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getFilters(RouteDefinitionRouteLocator.java:192)
+		at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.convertToRoute(RouteDefinitionRouteLocator.java:132)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:113)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.tryEmitScalar(FluxFlatMap.java:492)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:424)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.drain(FluxMergeSequential.java:439)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.innerNext(FluxMergeSequential.java:304)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialInner.onNext(FluxMergeSequential.java:578)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.tryOnNext(FluxFilterFuseable.java:148)
+		at reactor.core.publisher.FluxIterable$IterableSubscriptionConditional.slowPath(FluxIterable.java:664)
+		at reactor.core.publisher.FluxIterable$IterableSubscriptionConditional.request(FluxIterable.java:623)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.request(FluxFilterFuseable.java:191)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialInner.onSubscribe(FluxMergeSequential.java:571)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.onSubscribe(FluxFilterFuseable.java:87)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:179)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8891)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8891)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
+		at reactor.core.publisher.Mono.subscribeWith(Mono.java:4641)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4542)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4478)
+		at reactor.core.publisher.Mono.subscribe(Mono.java:4450)
+		at org.springframework.cloud.gateway.route.CachingRouteLocator.onApplicationEvent(CachingRouteLocator.java:98)
+		at org.springframework.cloud.gateway.route.CachingRouteLocator.onApplicationEvent(CachingRouteLocator.java:42)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+		at org.springframework.cloud.gateway.route.RouteRefreshListener.reset(RouteRefreshListener.java:78)
+		at org.springframework.cloud.gateway.route.RouteRefreshListener.onApplicationEvent(RouteRefreshListener.java:55)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+		at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:1009)
+		at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:630)
+		at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+		at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+		at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+		at org.example.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:10)
+2025-04-29 05:29:52.774 [main] WARN  o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext [, , ] - Exception encountered during context initialization - cancelling refresh attempt: java.lang.IllegalArgumentException: Unable to find GatewayFilterFactory with name LoggingFilter
+2025-04-29 05:29:52.778 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [, , ] - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-04-29 05:29:52.788 [main] ERROR o.s.boot.SpringApplication [, , ] - Application run failed
+java.lang.IllegalArgumentException: Unable to find GatewayFilterFactory with name LoggingFilter
+	at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.loadGatewayFilters(RouteDefinitionRouteLocator.java:145)
+	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
+Assembly trace from producer [reactor.core.publisher.FluxMapFuseable] :
+	reactor.core.publisher.Flux.map(Flux.java:6631)
+	org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getRoutes(RouteDefinitionRouteLocator.java:110)
+Error has been observed at the following site(s):
+	*________________Flux.map ⇢ at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getRoutes(RouteDefinitionRouteLocator.java:110)
+	|_               Flux.map ⇢ at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getRoutes(RouteDefinitionRouteLocator.java:122)
+	*__Flux.flatMapSequential ⇢ at org.springframework.cloud.gateway.route.CompositeRouteLocator.getRoutes(CompositeRouteLocator.java:36)
+	|_              Flux.sort ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.fetch(CachingRouteLocator.java:63)
+	|_              Flux.sort ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.fetch(CachingRouteLocator.java:63)
+	|_              Flux.sort ⇢ at org.springframework.cloud.gateway.route.CachingRouteLocator.fetch(CachingRouteLocator.java:63)
+	*______Flux.dematerialize ⇢ at reactor.cache.CacheFlux.lambda$null$1(CacheFlux.java:112)
+	*______________Flux.defer ⇢ at reactor.cache.CacheFlux.lambda$lookup$2(CacheFlux.java:104)
+Original Stack Trace:
+		at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.loadGatewayFilters(RouteDefinitionRouteLocator.java:145)
+		at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.getFilters(RouteDefinitionRouteLocator.java:192)
+		at org.springframework.cloud.gateway.route.RouteDefinitionRouteLocator.convertToRoute(RouteDefinitionRouteLocator.java:132)
+		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:113)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.tryEmitScalar(FluxFlatMap.java:492)
+		at reactor.core.publisher.FluxFlatMap$FlatMapMain.onNext(FluxFlatMap.java:424)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.drain(FluxMergeSequential.java:439)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.innerNext(FluxMergeSequential.java:304)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialInner.onNext(FluxMergeSequential.java:578)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.tryOnNext(FluxFilterFuseable.java:148)
+		at reactor.core.publisher.FluxIterable$IterableSubscriptionConditional.slowPath(FluxIterable.java:664)
+		at reactor.core.publisher.FluxIterable$IterableSubscriptionConditional.request(FluxIterable.java:623)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.request(FluxFilterFuseable.java:191)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialInner.onSubscribe(FluxMergeSequential.java:571)
+		at reactor.core.publisher.FluxFilterFuseable$FilterFuseableSubscriber.onSubscribe(FluxFilterFuseable.java:87)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:179)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8891)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8891)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onNext(FluxMergeSequential.java:237)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.slowPath(FluxIterable.java:335)
+		at reactor.core.publisher.FluxIterable$IterableSubscription.request(FluxIterable.java:294)
+		at reactor.core.publisher.FluxMergeSequential$MergeSequentialMain.onSubscribe(FluxMergeSequential.java:198)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
+		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
+		at reactor.core.publisher.InternalFluxOperator.subscribe(InternalFluxOperator.java:68)
+		at reactor.core.publisher.FluxDefer.subscribe(FluxDefer.java:54)
+		at reactor.core.publisher.Flux.subscribe(Flux.java:8891)
+		at reactor.core.publisher.Flux.blockLast(Flux.java:2816)
+		at org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter.lambda$onApplicationEvent$3(WeightCalculatorWebFilter.java:156)
+		at org.springframework.beans.factory.support.DefaultListableBeanFactory$DependencyObjectProvider.ifAvailable(DefaultListableBeanFactory.java:2436)
+		at org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter.onApplicationEvent(WeightCalculatorWebFilter.java:156)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+		at org.springframework.cloud.gateway.route.RouteRefreshListener.reset(RouteRefreshListener.java:78)
+		at org.springframework.cloud.gateway.route.RouteRefreshListener.onApplicationEvent(RouteRefreshListener.java:55)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+		at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:1009)
+		at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:630)
+		at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+		at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+		at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+		at org.example.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:10)
+	Suppressed: java.lang.Exception: #block terminated with an error
+		at reactor.core.publisher.BlockingSingleSubscriber.blockingGet(BlockingSingleSubscriber.java:104)
+		at reactor.core.publisher.Flux.blockLast(Flux.java:2817)
+		at org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter.lambda$onApplicationEvent$3(WeightCalculatorWebFilter.java:156)
+		at org.springframework.beans.factory.support.DefaultListableBeanFactory$DependencyObjectProvider.ifAvailable(DefaultListableBeanFactory.java:2436)
+		at org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter.onApplicationEvent(WeightCalculatorWebFilter.java:156)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+		at org.springframework.cloud.gateway.route.RouteRefreshListener.reset(RouteRefreshListener.java:78)
+		at org.springframework.cloud.gateway.route.RouteRefreshListener.onApplicationEvent(RouteRefreshListener.java:55)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+		at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:454)
+		at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:387)
+		at org.springframework.context.support.AbstractApplicationContext.finishRefresh(AbstractApplicationContext.java:1009)
+		at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:630)
+		at org.springframework.boot.web.reactive.context.ReactiveWebServerApplicationContext.refresh(ReactiveWebServerApplicationContext.java:66)
+		at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:752)
+		at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:439)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:318)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361)
+		at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350)
+		at org.example.apigateway.ApiGatewayApplication.main(ApiGatewayApplication.java:10)
+2025-04-29 05:40:39.156 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 10564 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-04-29 05:40:39.158 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-04-29 05:40:39.584 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
+2025-04-29 05:40:40.886 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-04-29 05:40:41.078 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-04-29 05:40:41.079 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-04-29 05:40:41.079 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-04-29 05:40:41.079 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-04-29 05:40:41.079 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-04-29 05:40:42.211 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:40:42.352 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-04-29 05:40:43.366 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:40:44.384 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:40:44.424 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.643 seconds (process running for 7.385)
+2025-04-29 05:41:42.723 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [, , ] - Incoming request: GET /api/user-service/account, Headers: [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImZlYjYxYmUwLTRhYWYtNDM4Yy1hMWY2LWI3YmQ2Y2ZkYjgxYSIsInN1YiI6InN0cmluQGciLCJpYXQiOjE3NDU4NzgwMjIsImV4cCI6MTc0NTg4MTYyMn0.zlkhFMTMcNAkA6TOtpkPAekYHnInCsZ1N5tON5isAHLBRDbGwW_M67NjJVgJeuVo3T_EnMANkfBl4WrL-k438Q", User-Agent:"PostmanRuntime/7.43.3", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"a0ab8785-3b3e-4997-b8d6-f1d2d847f642", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
+2025-04-29 05:41:42.837 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [, /api/user-service/account, GET] - Request completed successfully
+2025-04-29 05:56:22.816 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29 05:56:22.818 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-04-29 05:56:27.770 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 16912 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-04-29 05:56:27.771 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-04-29 05:56:28.235 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
+2025-04-29 05:56:29.566 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-04-29 05:56:29.744 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-04-29 05:56:30.885 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:56:31.034 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-04-29 05:56:32.045 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:56:33.048 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:56:33.085 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.69 seconds (process running for 7.4)
+2025-04-29 05:56:39.118 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [, , ] - Incoming request: GET /api/user-service/account, Headers: [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImZlYjYxYmUwLTRhYWYtNDM4Yy1hMWY2LWI3YmQ2Y2ZkYjgxYSIsInN1YiI6InN0cmluQGciLCJpYXQiOjE3NDU4NzgwMjIsImV4cCI6MTc0NTg4MTYyMn0.zlkhFMTMcNAkA6TOtpkPAekYHnInCsZ1N5tON5isAHLBRDbGwW_M67NjJVgJeuVo3T_EnMANkfBl4WrL-k438Q", User-Agent:"PostmanRuntime/7.43.3", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"c34b2ecc-884c-48a6-8e63-e553552a0c0e", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
+2025-04-29 05:56:39.304 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [ca389def-34ac-4aec-a6f4-d105aa02f5ae, /api/user-service/account, GET] - Request completed successfully
+2025-04-29 05:59:03.721 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29 05:59:03.724 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-04-29 05:59:09.985 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 14108 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-04-29 05:59:09.986 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-04-29 05:59:10.410 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
+2025-04-29 05:59:11.700 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:59:11.902 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-04-29 05:59:11.902 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-04-29 05:59:11.902 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-04-29 05:59:11.902 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-04-29 05:59:11.902 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-04-29 05:59:11.902 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-04-29 05:59:11.903 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-04-29 05:59:13.029 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:59:13.183 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-04-29 05:59:14.200 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:59:15.209 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 05:59:15.244 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.648 seconds (process running for 7.287)
+2025-04-29 05:59:25.459 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [, , ] - Incoming request: GET /api/user-service/account, Headers: [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImZlYjYxYmUwLTRhYWYtNDM4Yy1hMWY2LWI3YmQ2Y2ZkYjgxYSIsInN1YiI6InN0cmluQGciLCJpYXQiOjE3NDU4NzgwMjIsImV4cCI6MTc0NTg4MTYyMn0.zlkhFMTMcNAkA6TOtpkPAekYHnInCsZ1N5tON5isAHLBRDbGwW_M67NjJVgJeuVo3T_EnMANkfBl4WrL-k438Q", User-Agent:"PostmanRuntime/7.43.3", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"f41f2577-2ef2-46bc-a654-99b652660608", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
+2025-04-29 05:59:25.666 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [8b6b07dc-8f98-4164-818a-a1d1d8a86c55, /api/user-service/account, GET] - Request completed successfully
+2025-04-29 06:02:42.551 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29 06:02:42.553 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-04-29 06:02:48.611 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 11968 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-04-29 06:02:48.612 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-04-29 06:02:49.040 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
+2025-04-29 06:02:50.342 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-04-29 06:02:50.528 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-04-29 06:02:51.664 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:02:51.828 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-04-29 06:02:52.832 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:02:53.840 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:02:53.874 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.629 seconds (process running for 7.276)
+2025-04-29 06:02:54.555 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [, , ] - Incoming request: GET /api/user-service/account, Headers: [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImZlYjYxYmUwLTRhYWYtNDM4Yy1hMWY2LWI3YmQ2Y2ZkYjgxYSIsInN1YiI6InN0cmluQGciLCJpYXQiOjE3NDU4NzgwMjIsImV4cCI6MTc0NTg4MTYyMn0.zlkhFMTMcNAkA6TOtpkPAekYHnInCsZ1N5tON5isAHLBRDbGwW_M67NjJVgJeuVo3T_EnMANkfBl4WrL-k438Q", User-Agent:"PostmanRuntime/7.43.3", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"7c80ee6e-73f1-44f8-8775-c90e15f07121", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
+2025-04-29 06:02:54.686 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [9b4cc977-9c41-42e6-933a-303e61c974ef, /api/user-service/account, GET] - Request completed successfully
+2025-04-29 06:45:28.604 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-04-29 06:45:28.607 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-04-29 06:45:34.556 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 10928 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-04-29 06:45:34.558 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-04-29 06:45:34.977 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
+2025-04-29 06:45:36.259 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:45:36.451 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-04-29 06:45:36.452 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-04-29 06:45:37.587 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:45:37.737 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-04-29 06:45:38.746 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:45:39.761 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-04-29 06:45:39.795 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.624 seconds (process running for 7.234)
+2025-04-29 06:45:44.482 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [2b7cdf6b-de12-487a-83dc-6e5d055e596c, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImZlYjYxYmUwLTRhYWYtNDM4Yy1hMWY2LWI3YmQ2Y2ZkYjgxYSIsInN1YiI6InN0cmluQGciLCJpYXQiOjE3NDU4NzgwMjIsImV4cCI6MTc0NTg4MTYyMn0.zlkhFMTMcNAkA6TOtpkPAekYHnInCsZ1N5tON5isAHLBRDbGwW_M67NjJVgJeuVo3T_EnMANkfBl4WrL-k438Q", User-Agent:"PostmanRuntime/7.43.3", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"87a10d50-29ff-4b50-95d0-68a65e8539e7", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
+2025-04-29 06:45:44.583 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [2b7cdf6b-de12-487a-83dc-6e5d055e596c, /api/user-service/account, GET] - Request completed successfully

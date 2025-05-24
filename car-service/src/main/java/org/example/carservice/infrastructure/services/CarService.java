@@ -9,8 +9,6 @@ import org.example.carservice.domain.models.entities.Car;
 import org.example.carservice.domain.models.requests.CarCreateRequestModel;
 import org.example.carservice.domain.models.requests.CarEditRequestModel;
 import org.example.carservice.infrastructure.repositories.CarRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -51,7 +49,7 @@ public class CarService {
 
     public List<Car> getAllAvailableToRentalCars() {
         return carRepository
-                .findAllByOnRentalIsFalse();
+                .findAllByIsOnRentalIsFalse();
     }
 
     public Car editCarById(@NonNull UUID id, @Valid @NonNull CarEditRequestModel carEditModel) {

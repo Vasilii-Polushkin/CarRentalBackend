@@ -1,0 +1,21 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Vasya (generated)" id="1748096813828-1">
+        <createTable tableName="cars">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="carsPK"/>
+            </column>
+            <column name="creation_date" type="date"/>
+            <column name="creator_id" type="UUID"/>
+            <column name="creator_name" type="VARCHAR(255)"/>
+            <column name="is_on_rental" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_on_repair" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="modification_date" type="date"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

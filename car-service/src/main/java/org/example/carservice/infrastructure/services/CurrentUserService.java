@@ -1,7 +1,7 @@
 package org.example.carservice.infrastructure.services;
 
 import lombok.RequiredArgsConstructor;
-import org.example.feign.UserServiceClient;
+import org.example.common.feign.UserServiceClient;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package org.example.feign;
+package org.example.common.feign;
 
-import org.example.dtos.UserDto;
+import org.example.common.dtos.UserDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -1,6 +1,6 @@
 package org.example.userservice.api.mappers;
 
-import org.example.dtos.UserDto;
+import org.example.common.dtos.UserDto;
 import org.example.userservice.domain.models.entities.User;
 import org.springframework.stereotype.Component;
 

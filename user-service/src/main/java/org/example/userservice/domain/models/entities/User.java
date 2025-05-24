@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.enums.Role;
+import org.example.common.enums.Role;
 
 import java.util.HashSet;
 import java.util.List;

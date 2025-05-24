@@ -1,4 +1,4 @@
-package org.example.enums;
+package org.example.common.enums;
 
 public enum Role {
     USER,

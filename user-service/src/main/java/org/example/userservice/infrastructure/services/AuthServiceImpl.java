@@ -12,7 +12,7 @@ import org.example.userservice.domain.models.responses.JwtModel;
 import org.example.userservice.domain.services.AuthService;
 import org.example.userservice.infrastructure.repositories.RefreshTokenRepository;
 import org.example.userservice.infrastructure.repositories.UserRepository;
-import org.example.enums.Role;
+import org.example.common.enums.Role;
 import org.example.userservice.infrastructure.exceptions.AuthException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

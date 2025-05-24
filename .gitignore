@@ -41,3 +41,4 @@ build/
 **/env.properties
 **/env-*.properties
 **/env-*.yml
+**/liquibase.properties

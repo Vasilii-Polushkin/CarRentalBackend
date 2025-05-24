@@ -1,15 +1,13 @@
-package org.example.userservice.common.exceptions;
+package org.example.common.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import org.example.common.exceptions.status_code_exceptions.*;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.userservice.common.exceptions.status_code_exceptions.*;
-import org.example.userservice.common.util.EnvUtil;
-import org.springframework.core.env.Environment;
+import org.example.common.util.EnvUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authorization.AuthorizationDeniedException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

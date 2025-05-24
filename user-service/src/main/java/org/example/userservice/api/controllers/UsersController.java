@@ -2,7 +2,7 @@ package org.example.userservice.api.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.example.dtos.UserDto;
+import org.example.common.dtos.UserDto;
 import org.example.userservice.api.mappers.UserMapper;
 import org.example.userservice.domain.services.UsersService;
 import org.springframework.data.repository.query.Param;

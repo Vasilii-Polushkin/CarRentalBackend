@@ -1,4 +1,4 @@
-package org.example.headers;
+package org.example.common.headers;
 
 public class CustomHeaders {
     public static final String CORRELATION_ID_HEADER = "X-Correlation-ID";

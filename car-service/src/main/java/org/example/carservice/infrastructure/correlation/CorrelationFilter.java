@@ -3,7 +3,7 @@ package org.example.carservice.infrastructure.correlation;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.example.headers.CustomHeaders;
+import org.example.common.headers.CustomHeaders;
 import org.slf4j.MDC;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
