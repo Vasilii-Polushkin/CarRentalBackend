@@ -7,9 +7,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.common.headers.CustomHeaders;
 import org.example.userservice.api.mappers.RolesMapper;
 import org.example.common.enums.Role;
 import org.example.userservice.infrastructure.services.JwtAccessTokenUtil;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,9 +29,6 @@ import java.util.stream.Collectors;
 @Component
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-    private static final String ROLES_HEADER = "X-User-Roles";
-    private static final String ID_HEADER = "X-User-Id";
-    private static final String AUTHORIZATION_HEADER = "Authorization";
     private static final String BEARER_PREFIX = "Bearer ";
     private final RolesMapper rolesMapper;
     private final JwtAccessTokenUtil accessTokenService;
@@ -68,12 +67,12 @@ public class JwtFilter extends OncePerRequestFilter {
                 .map(Enum::name)
                 .collect(Collectors.joining(","));
 
-        response.addHeader(ROLES_HEADER, rolesString);
-        response.addHeader(ID_HEADER, id.toString());
+        response.addHeader(CustomHeaders.USER_ROLES_HEADER, rolesString);
+        response.addHeader(CustomHeaders.USER_ID_HEADER, id.toString());
     }
 
     private String getTokenFromRequestOrNull(HttpServletRequest request) {
-        final String authorizationHeader = request.getHeader(AUTHORIZATION_HEADER);
+        final String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (StringUtils.hasText(authorizationHeader) && authorizationHeader.startsWith(BEARER_PREFIX)) {
             return authorizationHeader.substring(BEARER_PREFIX.length());
         }

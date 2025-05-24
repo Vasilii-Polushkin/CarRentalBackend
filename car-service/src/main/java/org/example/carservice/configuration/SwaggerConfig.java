@@ -19,6 +19,11 @@ public class SwaggerConfig {
                         .title("Car service API")
                         .version("1.0"))
                 .components(new Components()
+                        .addSecuritySchemes("JWT", new SecurityScheme()
+                                .name("JWT")
+                                .type(SecurityScheme.Type.HTTP)
+                                .scheme("bearer")
+                                .bearerFormat("JWT"))
                         .addSecuritySchemes("user-id-header",
                                 new SecurityScheme()
                                         .type(SecurityScheme.Type.APIKEY)
@@ -32,6 +37,7 @@ public class SwaggerConfig {
                                         .name(CustomHeaders.USER_ROLES_HEADER)
                         )
                 )
+                .addSecurityItem(new SecurityRequirement().addList("JWT"))
                 .addSecurityItem(new SecurityRequirement().addList("user-id-header"))
                 .addSecurityItem(new SecurityRequirement().addList("user-role-header"));
     }

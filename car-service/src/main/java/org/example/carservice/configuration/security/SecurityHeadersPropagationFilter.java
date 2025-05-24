@@ -6,8 +6,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import org.example.common.headers.CustomHeaders;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.web.header.Header;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.function.ServerRequest;
 
 import java.io.IOException;
 
@@ -17,9 +20,13 @@ public class SecurityHeadersPropagationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain chain) throws ServletException, IOException {
+        String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         String rolesHeader = request.getHeader(CustomHeaders.USER_ROLES_HEADER);
         String idHeader = request.getHeader(CustomHeaders.USER_ID_HEADER);
 
+        if (authHeader != null) {
+            response.addHeader(HttpHeaders.AUTHORIZATION, authHeader);
+        }
         if (rolesHeader != null) {
             response.addHeader(CustomHeaders.USER_ROLES_HEADER, rolesHeader);
         }

@@ -1,7 +1,8 @@
 package org.example.carservice.infrastructure.services;
 
 import lombok.RequiredArgsConstructor;
-import org.example.common.feign.UserServiceClient;
+import org.example.common.exceptions.status_code_exceptions.UnauthorizedException;
+import org.example.common.feign.clients.UserServiceClient;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,12 @@ public class CurrentUserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication.getPrincipal() instanceof String id) {
-            return UUID.fromString(id);
+            try {
+                return UUID.fromString(id);
+            }
+            catch (Exception e) {
+                throw new UnauthorizedException("Invalid user id");
+            }
         }
 
         throw new IllegalStateException("Invalid authentication type");

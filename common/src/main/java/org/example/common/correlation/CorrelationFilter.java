@@ -1,16 +1,15 @@
-package org.example.userservice.infrastructure.correlation;
+package org.example.common.correlation;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.common.headers.CustomHeaders;
-import org.springframework.core.Ordered;
-import org.springframework.stereotype.Component;
 import org.slf4j.MDC;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-
-import org.springframework.core.annotation.Order;
 import java.util.UUID;
 
 @Component
