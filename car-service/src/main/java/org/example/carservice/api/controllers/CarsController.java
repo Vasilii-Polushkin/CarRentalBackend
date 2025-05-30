@@ -1,15 +1,15 @@
 package org.example.carservice.api.controllers;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.annotation.security.RolesAllowed;
 import lombok.RequiredArgsConstructor;
-import org.example.carservice.api.dtos.CarCreateModelDto;
-import org.example.carservice.api.dtos.CarDto;
-import org.example.carservice.api.dtos.CarEditModelDto;
+import org.example.common.dtos.CarCreateModelDto;
+import org.example.common.dtos.CarDto;
+import org.example.common.dtos.CarEditModelDto;
 import org.example.carservice.api.mappers.CarCreteModelMapper;
 import org.example.carservice.api.mappers.CarEditModelMapper;
 import org.example.carservice.api.mappers.CarMapper;
 import org.example.carservice.infrastructure.services.CarService;
+import org.example.common.enums.CarStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +33,11 @@ public class CarsController {
     @GetMapping("{id}")
     public CarDto getCarById(@PathVariable("id") UUID id) {
         return carMapper.toDto(carService.getCarById(id));
+    }
+
+    @GetMapping("{available/{id}")
+    public boolean isCarAvailableById(@PathVariable("id") UUID id) {
+        return carService.isCarAvailable(id);
     }
 
     @GetMapping("")
@@ -64,12 +69,22 @@ public class CarsController {
     }
 
     @PutMapping("{id}/onRepair/{isOnRepair}")
-    public CarDto setCarRepairStatus(
+    public CarDto changeCarRepairStatus(
             @PathVariable("id") UUID id,
             @PathVariable("isOnRepair") boolean isOnRepair
     ) {
         return carMapper.toDto(
                 carService.changeCarRepairStatusById(id, isOnRepair)
+        );
+    }
+
+    @PutMapping("{id}/status/{status}")
+    public CarDto changeCarStatus(
+            @PathVariable("id") UUID id,
+            @PathVariable("status") CarStatus status
+    ) {
+        return carMapper.toDto(
+                carService.changeCarStatusById(id, status)
         );
     }
 }

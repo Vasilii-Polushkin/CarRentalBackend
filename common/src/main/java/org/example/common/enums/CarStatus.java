@@ -1,9 +1,9 @@
 package org.example.common.enums;
 
-public enum BookingStatus {
+public enum CarStatus {
+    AVAILABLE,
     PENDING,
     BOOKED,
     RENTED,
-    COMPLETED,
-    CANCELLED
+    UNDER_REPAIR,
 }

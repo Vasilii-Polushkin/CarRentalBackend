@@ -1,6 +1,6 @@
 package org.example.carservice.api.mappers;
 
-import org.example.carservice.api.dtos.CarDto;
+import org.example.common.dtos.CarDto;
 import org.example.carservice.domain.models.entities.Car;
 import org.springframework.stereotype.Component;
 

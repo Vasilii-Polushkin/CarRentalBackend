@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.common.enums.CarStatus;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -30,10 +31,7 @@ public class Car {
     private String model;
 
     @NotNull
-    private boolean isOnRepair;
-
-    @NotNull
-    private boolean isOnRental;
+    private CarStatus status;
 
     @NotNull
     private LocalDate creationDate;

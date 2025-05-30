@@ -1,4 +1,4 @@
-package org.example.carservice.api.dtos;
+package org.example.common.dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,10 +15,4 @@ public class CarEditModelDto {
     @NotNull
     @NotBlank
     private String model;
-
-    @NotNull
-    private boolean isOnRepair;
-
-    @NotNull
-    private boolean isOnRental;
 }

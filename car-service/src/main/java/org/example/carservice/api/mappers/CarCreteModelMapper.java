@@ -1,9 +1,7 @@
 package org.example.carservice.api.mappers;
 
-import org.example.carservice.api.dtos.CarCreateModelDto;
-import org.example.carservice.api.dtos.CarEditModelDto;
+import org.example.common.dtos.CarCreateModelDto;
 import org.example.carservice.domain.models.requests.CarCreateRequestModel;
-import org.example.carservice.domain.models.requests.CarEditRequestModel;
 import org.springframework.stereotype.Component;
 
 @Component

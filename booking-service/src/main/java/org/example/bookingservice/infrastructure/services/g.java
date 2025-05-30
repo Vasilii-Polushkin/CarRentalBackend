@@ -8,8 +8,10 @@ import org.example.bookingservice.api.dtos.BookingDto;
 import org.example.bookingservice.api.mappers.BookingCreateModelMapper;
 import org.example.bookingservice.api.mappers.BookingMapper;
 import org.example.common.enums.BookingStatus;
+import org.example.common.enums.CarStatus;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.exceptions.status_code_exceptions.BadRequestException;
+import org.example.common.feign.clients.CarServiceClient;
 import org.springframework.kafka.core.*;
 import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.bookingservice.domain.models.requests.BookingCreateRequestModel;
@@ -39,6 +41,8 @@ public class BookingService {
 
     @Transactional
     public Booking createBooking(@Valid BookingCreateRequestModel request) {
+
+        // todo check other bookings + repair status
         if (!carServiceClient.isCarAvailable(request.getCarId())) {
             throw new BadRequestException("Car is not available");
         }
@@ -52,7 +56,7 @@ public class BookingService {
                 .status(BookingStatus.PENDING)
                 .build();
 
-        carServiceClient.updateCarStatus(request.getCarId(), "BOOKED");
+        carServiceClient.changeCarStatus(request.getCarId(), CarStatus.PENDING);
 
         sendBookingStatusEvent(booking, "BOOKING_CREATED");
 
@@ -62,12 +66,12 @@ public class BookingService {
     @Transactional
     public void processPayment(@NotNull UUID bookingId, @Valid PaymentResponse paymentResponse) {
         Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new BookingNotFoundException());
+                .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + bookingId));
 
         if (paymentResponse.isSuccess()) {
-            booking.setStatus(BookingStatus.RENTED);
+            booking.setStatus(BookingStatus.BOOKED);
             booking.setPaymentId(paymentResponse.getPaymentId());
-            carServiceClient.updateCarStatus(booking.getCarId(), "RENTED");
+            carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.BOOKED);
             sendBookingStatusEvent(booking, "BOOKING_CONFIRMED");
         } else {
             cancelBooking(bookingId);
@@ -75,7 +79,7 @@ public class BookingService {
     }
 
     @Scheduled(fixedRate = 30 * 60 * 1000)
-    public void cancelExpiredBookings() {
+    private void cancelExpiredBookings() {
         List<Booking> pending = bookingRepository
                 .findByStatusAndCreatedAtBefore(
                         BookingStatus.PENDING,
@@ -83,7 +87,7 @@ public class BookingService {
 
         pending.forEach(booking -> {
             booking.setStatus(BookingStatus.CANCELLED);
-            carServiceClient.updateCarStatus(booking.getCarId(), "AVAILABLE");
+            carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.AVAILABLE);
             sendBookingStatusEvent(booking, "BOOKING_CANCELLED");
         });
     }

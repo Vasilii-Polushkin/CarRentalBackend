@@ -13,10 +13,4 @@ public class CarEditRequestModel {
     @NotNull
     @NotBlank
     private String model;
-
-    @NotNull
-    private boolean isOnRepair;
-
-    @NotNull
-    private boolean isOnRental;
 }

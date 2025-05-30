@@ -9,6 +9,7 @@ import org.example.carservice.domain.models.entities.Car;
 import org.example.carservice.domain.models.requests.CarCreateRequestModel;
 import org.example.carservice.domain.models.requests.CarEditRequestModel;
 import org.example.carservice.infrastructure.repositories.CarRepository;
+import org.example.common.enums.CarStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -23,14 +24,13 @@ public class CarService {
     private final CarRepository carRepository;
     private final CurrentUserService currentUserService;
 
-    public Car createCar(CarCreateRequestModel carCreateModel) {
+    public Car createCar(@Valid CarCreateRequestModel carCreateModel) {
         Car car = Car.builder()
                 .model(carCreateModel.getModel())
                 .creationDate(LocalDate.now())
                 .creatorId(currentUserService.getUserId())
                 .creatorName(currentUserService.getUserName())
-                .isOnRental(false)
-                .isOnRepair(false)
+                .status(CarStatus.AVAILABLE)
                 .build();
 
         return carRepository.save(car);
@@ -49,7 +49,15 @@ public class CarService {
 
     public List<Car> getAllAvailableToRentalCars() {
         return carRepository
-                .findAllByIsOnRentalIsFalse();
+                .findAllByIsOnRentalIsFalseAndIsOnRepairIsFalse();
+    }
+
+    public boolean isCarAvailable(@NonNull UUID id) {
+        Car car = carRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
+
+        return car.getStatus() == CarStatus.AVAILABLE;
     }
 
     public Car editCarById(@NonNull UUID id, @Valid @NonNull CarEditRequestModel carEditModel) {
@@ -58,8 +66,6 @@ public class CarService {
                 .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
 
         car.setModificationDate(LocalDate.now());
-        car.setOnRepair(carEditModel.isOnRepair());
-        car.setOnRental(carEditModel.isOnRental());
         car.setModel(carEditModel.getModel());
 
         return carRepository.save(car);
@@ -70,7 +76,17 @@ public class CarService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
 
-        car.setOnRepair(isOnRepair);
+        car.setStatus(isOnRepair ? CarStatus.UNDER_REPAIR : CarStatus.AVAILABLE);
+
+        return carRepository.save(car);
+    }
+
+    public Car changeCarStatusById(@NonNull UUID id, @NonNull CarStatus status) {
+        Car car = carRepository
+                .findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
+
+        car.setStatus(status);
 
         return carRepository.save(car);
     }
