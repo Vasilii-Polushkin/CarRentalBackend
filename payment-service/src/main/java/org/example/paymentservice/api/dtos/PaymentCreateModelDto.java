@@ -1,32 +1,25 @@
-package org.example.common.events;
+package org.example.paymentservice.api.dtos;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.example.common.enums.BookingStatus;
 
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookingStatusEvent {
+public class PaymentCreateModelDto {
     @NotNull
     private UUID bookingId;
 
     @NotNull
-    private UUID carId;
+    private UUID payerId;
 
     @NotNull
-    private UUID userId;
-
-    @NotNull
-    private BookingStatus status;
-
-    @NotNull
-    private LocalDateTime timestamp;
+    private BigDecimal amount;
 }

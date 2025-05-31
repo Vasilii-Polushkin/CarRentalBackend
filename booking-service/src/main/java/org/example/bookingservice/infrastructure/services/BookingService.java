@@ -4,9 +4,6 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.example.bookingservice.api.dtos.BookingDto;
-import org.example.bookingservice.api.mappers.BookingCreateModelMapper;
-import org.example.bookingservice.api.mappers.BookingMapper;
 import org.example.common.enums.BookingStatus;
 import org.example.common.enums.CarStatus;
 import org.example.common.events.BookingStatusEvent;
@@ -27,11 +24,9 @@ import java.util.*;
 @Validated
 @RequiredArgsConstructor
 public class BookingService {
-    private final BookingMapper bookingMapper;
-    private final BookingCreateModelMapper bookingCreateModelMapper;
     private final BookingRepository bookingRepository;
     private final CarServiceClient carServiceClient;
-    private final PaymentServiceClient paymentServiceClient;
+    //private final PaymentServiceClient paymentServiceClient;
     private final KafkaTemplate<String, BookingStatusEvent> kafkaTemplate;
 
     public Booking getBookingById(@NotNull UUID id) {
@@ -58,24 +53,20 @@ public class BookingService {
 
         carServiceClient.changeCarStatus(request.getCarId(), CarStatus.PENDING);
 
-        sendBookingStatusEvent(booking, "BOOKING_CREATED");
+        sendBookingStatusEvent(booking);
 
         return bookingRepository.save(booking);
     }
 
     @Transactional
-    public void processPayment(@NotNull UUID bookingId, @Valid PaymentResponse paymentResponse) {
+    public void processPayment(@NotNull UUID bookingId, @NotNull UUID paymentId) {
         Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + bookingId));
 
-        if (paymentResponse.isSuccess()) {
-            booking.setStatus(BookingStatus.BOOKED);
-            booking.setPaymentId(paymentResponse.getPaymentId());
-            carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.BOOKED);
-            sendBookingStatusEvent(booking, "BOOKING_CONFIRMED");
-        } else {
-            cancelBooking(bookingId);
-        }
+        booking.setStatus(BookingStatus.BOOKED);
+        booking.setPaymentId(paymentId);
+        carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.BOOKED);
+        sendBookingStatusEvent(booking);
     }
 
     @Scheduled(fixedRate = 30 * 60 * 1000)
@@ -88,17 +79,16 @@ public class BookingService {
         pending.forEach(booking -> {
             booking.setStatus(BookingStatus.CANCELLED);
             carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.AVAILABLE);
-            sendBookingStatusEvent(booking, "BOOKING_CANCELLED");
+            sendBookingStatusEvent(booking);
         });
     }
 
-    private void sendBookingStatusEvent(@Valid Booking booking, String eventType) {
+    private void sendBookingStatusEvent(@Valid Booking booking) {
         BookingStatusEvent event = BookingStatusEvent.builder()
                 .bookingId(booking.getId())
                 .carId(booking.getCarId())
                 .userId(booking.getUserId())
                 .status(booking.getStatus())
-                .eventType(eventType)
                 .timestamp(LocalDateTime.now())
                 .build();
         kafkaTemplate.send("booking-status-topic", event);
