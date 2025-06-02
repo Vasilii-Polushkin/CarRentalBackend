@@ -9,6 +9,7 @@ import org.example.common.enums.CarStatus;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.exceptions.status_code_exceptions.BadRequestException;
 import org.example.common.feign.clients.CarServiceClient;
+import org.example.common.feign.clients.PaymentServiceClient;
 import org.springframework.kafka.core.*;
 import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.bookingservice.domain.models.requests.BookingCreateRequestModel;
@@ -26,7 +27,6 @@ import java.util.*;
 public class BookingService {
     private final BookingRepository bookingRepository;
     private final CarServiceClient carServiceClient;
-    //private final PaymentServiceClient paymentServiceClient;
     private final KafkaTemplate<String, BookingStatusEvent> kafkaTemplate;
 
     public Booking getBookingById(@NotNull UUID id) {
@@ -36,8 +36,6 @@ public class BookingService {
 
     @Transactional
     public Booking createBooking(@Valid BookingCreateRequestModel request) {
-
-        // todo check other bookings + repair status
         if (!carServiceClient.isCarAvailable(request.getCarId())) {
             throw new BadRequestException("Car is not available");
         }
@@ -45,40 +43,43 @@ public class BookingService {
         Booking booking = Booking.builder()
                 .carId(request.getCarId())
                 .userId(request.getUserId())
-                .startDate(request.getStartDate())
+                .startDate(LocalDateTime.now())
                 .endDate(request.getEndDate())
                 .createdAt(LocalDateTime.now())
-                .status(BookingStatus.PENDING)
+                .status(BookingStatus.BOOKED)
                 .build();
 
-        carServiceClient.changeCarStatus(request.getCarId(), CarStatus.PENDING);
+        carServiceClient.changeCarStatus(request.getCarId(), CarStatus.BOOKED);
 
         sendBookingStatusEvent(booking);
 
         return bookingRepository.save(booking);
     }
 
-    @Transactional
-    public void processPayment(@NotNull UUID bookingId, @NotNull UUID paymentId) {
-        Booking booking = bookingRepository.findById(bookingId)
-                .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + bookingId));
-
-        booking.setStatus(BookingStatus.BOOKED);
-        booking.setPaymentId(paymentId);
-        carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.BOOKED);
-        sendBookingStatusEvent(booking);
-    }
-
     @Scheduled(fixedRate = 30 * 60 * 1000)
     private void cancelExpiredBookings() {
         List<Booking> pending = bookingRepository
                 .findByStatusAndCreatedAtBefore(
-                        BookingStatus.PENDING,
+                        BookingStatus.BOOKED,
                         LocalDateTime.now().minusMinutes(30));
 
         pending.forEach(booking -> {
             booking.setStatus(BookingStatus.CANCELLED);
-            carServiceClient.changeCarStatus(booking.getCarId(), CarStatus.AVAILABLE);
+            sendBookingStatusEvent(booking);
+        });
+    }
+
+    //todo might be done better probably
+    @Scheduled(fixedRate = 30 * 60 * 1000)
+    private void completeExpiredRentals() {
+        List<Booking> bookings = bookingRepository
+                .findByStatusAndEndDateBefore(
+                        BookingStatus.RENTED,
+                        LocalDateTime.now()
+                );
+
+        bookings.forEach(booking -> {
+            booking.setStatus(BookingStatus.COMPLETED);
             sendBookingStatusEvent(booking);
         });
     }

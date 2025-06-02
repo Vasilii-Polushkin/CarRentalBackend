@@ -11,4 +11,5 @@ import java.util.UUID;
 
 public interface BookingRepository extends JpaRepository<Booking, UUID> {
     List<Booking> findByStatusAndCreatedAtBefore(BookingStatus bookingStatus, LocalDateTime localDateTime);
+    List<Booking> findByStatusAndEndDateBefore(BookingStatus bookingStatus, LocalDateTime localDateTime);
 }

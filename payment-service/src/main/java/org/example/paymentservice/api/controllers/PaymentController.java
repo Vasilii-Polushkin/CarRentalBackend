@@ -35,6 +35,7 @@ public class PaymentController {
         );
     }
 
+    /*
     @GetMapping
     public List<PaymentDto> getAllPayments() {
         return paymentService.findAll()
@@ -44,7 +45,7 @@ public class PaymentController {
     @GetMapping("/{id}")
     public PaymentDto getPaymentById(@PathVariable UUID id) {
         return paymentMapper.toDto(paymentService.findById(id));
-    }
+    }*/
 
     @GetMapping("/pending")
     public List<PaymentDto> getPendingPayments() {

@@ -1,14 +1,21 @@
 package org.example.paymentservice.infrastructure.services;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.Transient;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.common.enums.PaymentStatus;
+import org.example.common.events.BookingStatusEvent;
+import org.example.common.events.PaymentEvent;
 import org.example.common.exceptions.status_code_exceptions.BadRequestException;
 import org.example.paymentservice.domain.models.entities.Payment;
 import org.example.paymentservice.domain.models.requests.PaymentRequestCreateModel;
+import org.example.paymentservice.infrastructure.kafka.producers.PaymentEventProducer;
 import org.example.paymentservice.infrastructure.repositories.PaymentRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +23,11 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class PaymentService {
     private final PaymentRepository paymentRepository;
+    private final PaymentEventProducer paymentEventProducer;
+
+    public List<Payment> findByStatus(PaymentStatus status) {
+        return paymentRepository.findByStatus(status);
+    }
 
     public Payment createPayment(PaymentRequestCreateModel model) {
         Payment payment = Payment.builder()
@@ -35,21 +47,41 @@ public class PaymentService {
         if (payment.getStatus() == PaymentStatus.PAID){
             throw new BadRequestException("Cannot cancel paid payment");
         }
+        if (payment.getStatus() == PaymentStatus.CANCELED){
+            throw new BadRequestException("Payment is already cancelled");
+        }
 
         payment.setStatus(PaymentStatus.CANCELED);
         return paymentRepository.save(payment);
     }
 
-    public Payment findById(UUID id) {
-        return paymentRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + id));
+    @Transactional
+    public Payment performPayment(UUID paymentId) {
+        Payment payment = paymentRepository.findById(paymentId)
+                .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + paymentId));
+
+        if (payment.getStatus() == PaymentStatus.PAID){
+            throw new BadRequestException("Payment is already paid");
+        }
+        if (payment.getStatus() == PaymentStatus.CANCELED){
+            throw new BadRequestException("Cannot pay for cancelled payment");
+        }
+
+        //actual payment logic
+
+        payment.setStatus(PaymentStatus.PAID);
+        sendPaymentEvent(payment);
+
+        return paymentRepository.save(payment);
     }
 
-    public List<Payment> findAll() {
-        return paymentRepository.findAll();
-    }
-
-    public List<Payment> findByStatus(PaymentStatus status) {
-        return paymentRepository.findByStatus(status);
+    private void sendPaymentEvent(@Valid Payment payment) {
+        PaymentEvent event = PaymentEvent.builder()
+                .bookingId(payment.getBookingId())
+                .userId(payment.getCreatorId())
+                .status(payment.getStatus())
+                .timestamp(LocalDateTime.now())
+                .build();
+        paymentEventProducer.sendEvent(event);
     }
 }
