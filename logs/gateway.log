@@ -1,403 +1,102 @@
-2025-05-05 06:31:33.331 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 7408 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 06:31:33.333 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 06:31:33.756 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 06:31:35.042 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:31:35.242 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 06:31:35.242 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 06:31:35.242 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 06:31:35.242 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 06:31:35.242 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 06:31:35.243 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 06:31:36.380 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:31:36.528 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 06:31:37.538 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:31:38.550 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:31:38.583 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.583 seconds (process running for 7.035)
-2025-05-05 06:32:53.468 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [2f777b06-5a2a-478e-b4a9-d41d3639c385, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"0cd27662-51c4-4003-adfe-87d953ac1517", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 06:32:53.475 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [2f777b06-5a2a-478e-b4a9-d41d3639c385, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 06:33:27.426 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 06:33:27.429 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 06:33:32.407 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 10108 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 06:33:32.408 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 06:33:32.794 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 06:33:34.044 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:33:34.223 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 06:33:34.223 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 06:33:34.223 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 06:33:34.223 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 06:33:34.223 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 06:33:34.223 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 06:33:34.224 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 06:33:35.388 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:33:35.510 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 06:33:36.529 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:33:36.701 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [13525467-1261-4a59-bcbc-3a9848f3dfd7, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"2d526179-e287-4624-ac69-11da20abcf05", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 06:33:36.705 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [13525467-1261-4a59-bcbc-3a9848f3dfd7, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 06:33:37.544 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:33:37.553 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.461 seconds (process running for 7.051)
-2025-05-05 06:34:44.394 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 06:34:44.395 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 06:34:50.278 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 15528 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 06:34:50.280 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 06:34:50.671 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 06:34:51.918 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 06:34:52.092 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 06:34:52.093 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 06:34:52.093 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 06:34:52.093 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 06:34:52.093 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 06:34:52.093 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 06:34:53.197 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:34:53.327 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 06:34:53.680 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [7bd134bd-f5f6-4664-9ba0-3c3bd69b7745, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"f87483ff-35d4-47a1-90cc-c0b28d9b6442", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 06:34:53.685 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [7bd134bd-f5f6-4664-9ba0-3c3bd69b7745, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 06:34:54.335 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:34:55.344 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:34:55.354 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.408 seconds (process running for 6.85)
-2025-05-05 06:44:22.848 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [64570279-97ae-485f-af6f-618afdace3fe, /api/user-service/auth/account, GET] - Incoming request: GET /api/user-service/auth/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"c531533a-297c-4355-85b6-4ce5b21210f2", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 06:44:22.849 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [64570279-97ae-485f-af6f-618afdace3fe, /api/user-service/auth/account, GET] - Request completed successfully
-2025-05-05 06:47:50.441 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 06:47:50.443 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 06:47:56.969 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 15216 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 06:47:56.970 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 06:47:57.385 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 06:47:58.682 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:47:58.891 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 06:47:58.891 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 06:47:58.891 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 06:47:58.891 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 06:47:58.892 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 06:48:00.029 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:48:00.166 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 06:48:01.172 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:48:02.190 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 06:48:02.229 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.623 seconds (process running for 7.744)
-2025-05-05 06:48:51.482 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [59b30017-8504-4eca-b2ca-b774405d50ab, /api/user-service/auth/account, GET] - Incoming request: GET /api/user-service/auth/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"7d5eb792-4e2b-4fdf-b2ab-dca3f552c8f8", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 06:48:51.487 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [59b30017-8504-4eca-b2ca-b774405d50ab, /api/user-service/auth/account, GET] - Request completed successfully
-2025-05-05 07:00:24.603 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [2589c98c-df02-428c-8852-93d998890b1c, /api/user-service/auth/account, GET] - Incoming request: GET /api/user-service/auth/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"f90d0014-24a5-4945-9a4f-53d3d9a33d52", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 07:00:24.604 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [2589c98c-df02-428c-8852-93d998890b1c, /api/user-service/auth/account, GET] - Request completed successfully
-2025-05-05 07:00:49.431 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [314ee8bb-7b1c-490c-9bcb-e30ae00eaaff, /api/user-service/auth/account, GET] - Incoming request: GET /api/user-service/auth/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"b8013ee6-1e15-474c-a7ec-1b6b70cac0c5", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 07:00:49.432 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [314ee8bb-7b1c-490c-9bcb-e30ae00eaaff, /api/user-service/auth/account, GET] - Request completed successfully
-2025-05-05 07:04:41.375 [reactor-http-nio-8] INFO  o.e.apigateway.filters.LoggingFilter [09233fee-bffd-403a-8726-85a1d2474807, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"fe30ec78-5063-4030-b282-103326210413", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 07:04:41.376 [reactor-http-nio-8] INFO  o.e.apigateway.filters.LoggingFilter [09233fee-bffd-403a-8726-85a1d2474807, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 07:19:14.641 [reactor-http-nio-10] INFO  o.e.apigateway.filters.LoggingFilter [853384b2-9d10-4b26-ba4e-a886f286b341, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"20dcfe2f-7d14-4865-b47e-e206502a3a88", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 07:19:14.642 [reactor-http-nio-10] INFO  o.e.apigateway.filters.LoggingFilter [853384b2-9d10-4b26-ba4e-a886f286b341, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 07:20:43.565 [reactor-http-nio-12] INFO  o.e.apigateway.filters.LoggingFilter [8e5643d7-4621-4d75-b9a4-1a819596e04e, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"83c5a1ff-ff33-4b88-8e7d-187205e40212", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 07:20:43.566 [reactor-http-nio-12] INFO  o.e.apigateway.filters.LoggingFilter [8e5643d7-4621-4d75-b9a4-1a819596e04e, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 07:22:28.103 [reactor-http-nio-14] INFO  o.e.apigateway.filters.LoggingFilter [dee2ad91-3559-4713-bd5d-319dca0fdf91, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"e8fe485c-62e2-4b25-9244-a570fc13c8fd", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive"]
-2025-05-05 07:22:28.103 [reactor-http-nio-14] INFO  o.e.apigateway.filters.LoggingFilter [dee2ad91-3559-4713-bd5d-319dca0fdf91, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 07:23:13.096 [reactor-http-nio-14] INFO  o.e.apigateway.filters.LoggingFilter [5c3e3514-7e7f-4d80-abe3-0a619dffbcf5, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"190404e8-2afc-4b8f-aa8b-441178db9717", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"0"]
-2025-05-05 07:23:13.096 [reactor-http-nio-14] INFO  o.e.apigateway.filters.LoggingFilter [5c3e3514-7e7f-4d80-abe3-0a619dffbcf5, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 07:26:44.004 [reactor-http-nio-16] INFO  o.e.apigateway.filters.LoggingFilter [2562471d-3253-4ea2-9fae-901da68f9abb, /api/user-service/auth/validate, POST] - Incoming request: POST /api/user-service/auth/validate, Headers: [User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"cd11289c-30c3-4748-b3a3-636822005398", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"0"]
-2025-05-05 07:26:44.005 [reactor-http-nio-16] INFO  o.e.apigateway.filters.LoggingFilter [2562471d-3253-4ea2-9fae-901da68f9abb, /api/user-service/auth/validate, POST] - Request completed successfully
-2025-05-05 07:34:28.260 [reactor-http-nio-18] INFO  o.e.apigateway.filters.LoggingFilter [a0ee93fb-cf94-4a37-8502-b7a7358ef6a8, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"caf0ab07-1c66-40f7-b259-b1b5e77ba28a", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 07:34:28.261 [reactor-http-nio-18] INFO  o.e.apigateway.filters.LoggingFilter [a0ee93fb-cf94-4a37-8502-b7a7358ef6a8, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 07:34:42.298 [reactor-http-nio-18] INFO  o.e.apigateway.filters.LoggingFilter [746eadf9-573d-445a-bd93-75cc826af249, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"4d4b5467-73ae-4996-a497-bcb62d7d726f", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 07:34:42.299 [reactor-http-nio-18] INFO  o.e.apigateway.filters.LoggingFilter [746eadf9-573d-445a-bd93-75cc826af249, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 07:48:21.255 [reactor-http-nio-20] INFO  o.e.apigateway.filters.LoggingFilter [84279979-5086-46dd-80fd-23b07882b338, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"73a28367-3020-48dc-b87a-f8ec029f61f5", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 07:48:21.255 [reactor-http-nio-20] INFO  o.e.apigateway.filters.LoggingFilter [84279979-5086-46dd-80fd-23b07882b338, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 07:48:32.443 [reactor-http-nio-20] INFO  o.e.apigateway.filters.LoggingFilter [02fde97e-2953-4f27-86a9-8b531c0e04a0, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"67fa6cfe-bf6b-4f4e-b407-9c77096cf599", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 07:48:32.443 [reactor-http-nio-20] INFO  o.e.apigateway.filters.LoggingFilter [02fde97e-2953-4f27-86a9-8b531c0e04a0, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 07:48:49.258 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 07:48:49.259 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 07:48:57.078 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 5924 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 07:48:57.080 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 07:48:57.485 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 07:48:58.769 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 07:48:58.967 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 07:48:58.967 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 07:48:58.968 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 07:49:00.119 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 07:49:00.250 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 07:49:01.261 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 07:49:02.273 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 07:49:02.309 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.576 seconds (process running for 7.178)
-2025-05-05 07:49:07.398 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [3bf2c912-1663-44b2-8750-9e94626ac73e, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"fd6db3f8-d3ff-48c9-a8dc-24d3478c2c62", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 07:49:07.722 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [3bf2c912-1663-44b2-8750-9e94626ac73e, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 07:50:50.557 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [48aeffe8-7277-4a49-809e-fb471039a17d, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"be6a9057-9ad3-4021-ab27-cf0c92dcd05e", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 07:59:47.659 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 08:00:01.253 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 08:00:01.262 [reactor-http-nio-6] WARN  r.n.http.client.HttpClientConnect [48aeffe8-7277-4a49-809e-fb471039a17d, /api/user-service/auth/login, POST] - [f1129e1e-1, L:/127.0.0.1:54613 ! R:localhost/127.0.0.1:8000] The connection observed an error
-reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
-2025-05-05 08:00:01.266 [reactor-http-nio-6] ERROR o.e.apigateway.filters.LoggingFilter [48aeffe8-7277-4a49-809e-fb471039a17d, /api/user-service/auth/login, POST] - Request failed: Connection prematurely closed BEFORE response
-2025-05-05 08:00:01.275 [reactor-http-nio-6] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler [48aeffe8-7277-4a49-809e-fb471039a17d, /api/user-service/auth/login, POST] - [de94c3cc-2]  500 Server Error for HTTP POST "/api/user-service/auth/login"
-reactor.netty.http.client.PrematureCloseException: Connection prematurely closed BEFORE response
-	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
-Assembly trace from producer [reactor.core.publisher.MonoCreate] :
-	reactor.core.publisher.Mono.create(Mono.java:203)
-	reactor.netty.http.client.HttpClientConnect$MonoHttpConnect.subscribe(HttpClientConnect.java:211)
-Error has been observed at the following site(s):
-	*___________Mono.create ⇢ at reactor.netty.http.client.HttpClientConnect$MonoHttpConnect.subscribe(HttpClientConnect.java:211)
-	|_       Mono.retryWhen ⇢ at reactor.netty.http.client.HttpClientConnect$MonoHttpConnect.subscribe(HttpClientConnect.java:282)
-	*________Flux.concatMap ⇢ at reactor.util.retry.RetrySpec.lambda$generateCompanion$6(RetrySpec.java:360)
-	|_     Flux.onErrorStop ⇢ at reactor.util.retry.RetrySpec.lambda$generateCompanion$6(RetrySpec.java:379)
-	*__Flux.deferContextual ⇢ at reactor.util.retry.RetrySpec.generateCompanion(RetrySpec.java:357)
-	*______Mono.flatMapMany ⇢ at reactor.netty.http.client.HttpClientFinalizer.responseConnection(HttpClientFinalizer.java:102)
-	*______Mono.flatMapMany ⇢ at org.springframework.cloud.gateway.filter.NettyRoutingFilter.filter(NettyRoutingFilter.java:134)
-	*_____________Flux.then ⇢ at org.springframework.cloud.gateway.filter.NettyRoutingFilter.filter(NettyRoutingFilter.java:200)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*_____________Mono.then ⇢ at org.springframework.cloud.gateway.filter.NettyWriteResponseFilter.filter(NettyWriteResponseFilter.java:70)
-	|_       Mono.doFinally ⇢ at org.springframework.cloud.gateway.filter.NettyWriteResponseFilter.filter(NettyWriteResponseFilter.java:103)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	|_       Mono.doFinally ⇢ at org.springframework.cloud.gateway.filter.RemoveCachedBodyFilter.filter(RemoveCachedBodyFilter.java:29)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	|_     Mono.doOnSuccess ⇢ at org.example.apigateway.filters.LoggingFilter.filter(LoggingFilter.java:44)
-	|_       Mono.doOnError ⇢ at org.example.apigateway.filters.LoggingFilter.filter(LoggingFilter.java:47)
-	|_       Mono.doFinally ⇢ at org.example.apigateway.filters.LoggingFilter.filter(LoggingFilter.java:50)
-	|_    Mono.contextWrite ⇢ at org.example.apigateway.filters.LoggingFilter.filter(LoggingFilter.java:53)
-	*____________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*_____________Mono.then ⇢ at org.springframework.web.reactive.result.SimpleHandlerAdapter.handle(SimpleHandlerAdapter.java:46)
-	|_   Mono.onErrorResume ⇢ at org.springframework.web.reactive.DispatcherHandler.handleResultMono(DispatcherHandler.java:168)
-	|_         Mono.flatMap ⇢ at org.springframework.web.reactive.DispatcherHandler.handleResultMono(DispatcherHandler.java:172)
-	*____________Mono.error ⇢ at org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerAdapter.handleException(RequestMappingHandlerAdapter.java:340)
-	*__________Mono.flatMap ⇢ at org.springframework.web.reactive.DispatcherHandler.handle(DispatcherHandler.java:154)
-	*____________Mono.defer ⇢ at org.springframework.web.server.handler.DefaultWebFilterChain.filter(DefaultWebFilterChain.java:106)
-	|_           checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*____________Mono.defer ⇢ at org.springframework.web.server.handler.DefaultWebFilterChain.filter(DefaultWebFilterChain.java:106)
-	|_       Mono.doOnError ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler.handle(ExceptionHandlingWebHandler.java:84)
-	|_   Mono.onErrorResume ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler.handle(ExceptionHandlingWebHandler.java:85)
-	|_       Mono.doOnError ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler.handle(ExceptionHandlingWebHandler.java:84)
-	*____________Mono.error ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler$CheckpointInsertingHandler.handle(ExceptionHandlingWebHandler.java:106)
-	|_           checkpoint ⇢ HTTP POST "/api/user-service/auth/login" [ExceptionHandlingWebHandler]
-Original Stack Trace:
-2025-05-05 08:00:11.847 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 19424 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 08:00:11.849 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 08:00:12.288 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 08:00:13.583 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:13.788 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 08:00:13.789 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 08:00:14.910 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:15.060 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 08:00:16.069 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:17.079 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:17.113 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.644 seconds (process running for 7.273)
-2025-05-05 08:00:23.213 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 08:00:23.215 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 08:00:29.579 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 7952 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 08:00:29.585 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 08:00:30.058 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 08:00:31.421 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 08:00:31.610 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 08:00:32.745 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:32.900 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 08:00:33.875 [reactor-http-nio-4] ERROR o.s.b.a.w.r.e.AbstractErrorWebExceptionHandler [, , ] - [822235c6-1]  500 Server Error for HTTP POST "/api/user-service/auth/login"
-java.lang.UnsupportedOperationException: null
-	at org.springframework.http.ReadOnlyHttpHeaders.add(ReadOnlyHttpHeaders.java:97)
-	Suppressed: reactor.core.publisher.FluxOnAssembly$OnAssemblyException: 
-Assembly trace from producer [reactor.core.publisher.MonoDefer] :
-	reactor.core.publisher.Mono.defer(Mono.java:219)
-	org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-Error has been observed at the following site(s):
-	*__________Mono.defer ⇢ at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.filter(FilteringWebHandler.java:154)
-	*___________Mono.then ⇢ at org.springframework.web.reactive.result.SimpleHandlerAdapter.handle(SimpleHandlerAdapter.java:46)
-	|_ Mono.onErrorResume ⇢ at org.springframework.web.reactive.DispatcherHandler.handleResultMono(DispatcherHandler.java:168)
-	|_       Mono.flatMap ⇢ at org.springframework.web.reactive.DispatcherHandler.handleResultMono(DispatcherHandler.java:172)
-	*__________Mono.error ⇢ at org.springframework.web.reactive.result.method.annotation.RequestMappingHandlerAdapter.handleException(RequestMappingHandlerAdapter.java:340)
-	*________Mono.flatMap ⇢ at org.springframework.web.reactive.DispatcherHandler.handle(DispatcherHandler.java:154)
-	*__________Mono.defer ⇢ at org.springframework.web.server.handler.DefaultWebFilterChain.filter(DefaultWebFilterChain.java:106)
-	|_         checkpoint ⇢ org.springframework.cloud.gateway.filter.WeightCalculatorWebFilter [DefaultWebFilterChain]
-	*__________Mono.defer ⇢ at org.springframework.web.server.handler.DefaultWebFilterChain.filter(DefaultWebFilterChain.java:106)
-	|_     Mono.doOnError ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler.handle(ExceptionHandlingWebHandler.java:84)
-	|_ Mono.onErrorResume ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler.handle(ExceptionHandlingWebHandler.java:85)
-	|_     Mono.doOnError ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler.handle(ExceptionHandlingWebHandler.java:84)
-	*__________Mono.error ⇢ at org.springframework.web.server.handler.ExceptionHandlingWebHandler$CheckpointInsertingHandler.handle(ExceptionHandlingWebHandler.java:106)
-	|_         checkpoint ⇢ HTTP POST "/api/user-service/auth/login" [ExceptionHandlingWebHandler]
-Original Stack Trace:
-		at org.springframework.http.ReadOnlyHttpHeaders.add(ReadOnlyHttpHeaders.java:97)
-		at org.example.apigateway.filters.LoggingFilter.generateOrGetCorrelationId(LoggingFilter.java:60)
-		at org.example.apigateway.filters.LoggingFilter.filter(LoggingFilter.java:30)
-		at org.springframework.cloud.gateway.handler.FilteringWebHandler$GatewayFilterAdapter.filter(FilteringWebHandler.java:178)
-		at org.springframework.cloud.gateway.filter.OrderedGatewayFilter.filter(OrderedGatewayFilter.java:44)
-		at org.springframework.cloud.gateway.handler.FilteringWebHandler$DefaultGatewayFilterChain.lambda$filter$0(FilteringWebHandler.java:158)
-		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:45)
-		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
-		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
-		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
-		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
-		at reactor.core.publisher.MonoFlatMap$FlatMapMain.onNext(MonoFlatMap.java:165)
-		at reactor.core.publisher.FluxOnErrorResume$ResumeSubscriber.onNext(FluxOnErrorResume.java:79)
-		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
-		at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:82)
-		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.innerNext(FluxConcatMapNoPrefetch.java:259)
-		at reactor.core.publisher.FluxConcatMap$ConcatMapInner.onNext(FluxConcatMap.java:865)
-		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
-		at reactor.core.publisher.FluxSwitchIfEmpty$SwitchIfEmptySubscriber.onNext(FluxSwitchIfEmpty.java:74)
-		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
-		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.onNext(FluxMapFuseable.java:129)
-		at reactor.core.publisher.MonoNext$NextSubscriber.onNext(MonoNext.java:82)
-		at reactor.core.publisher.FluxFilterWhen$FluxFilterWhenSubscriber.drain(FluxFilterWhen.java:272)
-		at reactor.core.publisher.FluxFilterWhen$FluxFilterWhenSubscriber.request(FluxFilterWhen.java:160)
-		at reactor.core.publisher.MonoNext$NextSubscriber.request(MonoNext.java:108)
-		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
-		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
-		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.request(Operators.java:2331)
-		at reactor.core.publisher.FluxMapFuseable$MapFuseableSubscriber.request(FluxMapFuseable.java:171)
-		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.request(Operators.java:2331)
-		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.request(FluxConcatMapNoPrefetch.java:339)
-		at reactor.core.publisher.MonoNext$NextSubscriber.request(MonoNext.java:108)
-		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.set(Operators.java:2367)
-		at reactor.core.publisher.Operators$MultiSubscriptionSubscriber.onSubscribe(Operators.java:2241)
-		at reactor.core.publisher.MonoNext$NextSubscriber.onSubscribe(MonoNext.java:70)
-		at reactor.core.publisher.FluxConcatMapNoPrefetch$FluxConcatMapNoPrefetchSubscriber.onSubscribe(FluxConcatMapNoPrefetch.java:164)
-		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:201)
-		at reactor.core.publisher.FluxIterable.subscribe(FluxIterable.java:83)
-		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
-		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
-		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
-		at reactor.core.publisher.MonoDefer.subscribe(MonoDefer.java:53)
-		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
-		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
-		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
-		at reactor.core.publisher.Mono.subscribe(Mono.java:4576)
-		at reactor.core.publisher.MonoIgnoreThen$ThenIgnoreMain.subscribeNext(MonoIgnoreThen.java:265)
-		at reactor.core.publisher.MonoIgnoreThen.subscribe(MonoIgnoreThen.java:51)
-		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
-		at reactor.core.publisher.MonoDeferContextual.subscribe(MonoDeferContextual.java:55)
-		at reactor.core.publisher.InternalMonoOperator.subscribe(InternalMonoOperator.java:76)
-		at reactor.netty.http.server.HttpServer$HttpServerHandle.onStateChange(HttpServer.java:1249)
-		at reactor.netty.ReactorNetty$CompositeConnectionObserver.onStateChange(ReactorNetty.java:716)
-		at reactor.netty.transport.ServerTransport$ChildObserver.onStateChange(ServerTransport.java:486)
-		at reactor.netty.http.server.HttpServerOperations.handleDefaultHttpRequest(HttpServerOperations.java:855)
-		at reactor.netty.http.server.HttpServerOperations.onInboundNext(HttpServerOperations.java:781)
-		at reactor.netty.channel.ChannelOperationsHandler.channelRead(ChannelOperationsHandler.java:115)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:444)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
-		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
-		at reactor.netty.http.server.HttpTrafficHandler.channelRead(HttpTrafficHandler.java:272)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
-		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
-		at io.netty.channel.CombinedChannelDuplexHandler$DelegatingChannelHandlerContext.fireChannelRead(CombinedChannelDuplexHandler.java:436)
-		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:346)
-		at io.netty.handler.codec.ByteToMessageDecoder.fireChannelRead(ByteToMessageDecoder.java:333)
-		at io.netty.handler.codec.ByteToMessageDecoder.callDecode(ByteToMessageDecoder.java:455)
-		at io.netty.handler.codec.ByteToMessageDecoder.channelRead(ByteToMessageDecoder.java:290)
-		at io.netty.channel.CombinedChannelDuplexHandler.channelRead(CombinedChannelDuplexHandler.java:251)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:442)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
-		at io.netty.channel.AbstractChannelHandlerContext.fireChannelRead(AbstractChannelHandlerContext.java:412)
-		at io.netty.channel.DefaultChannelPipeline$HeadContext.channelRead(DefaultChannelPipeline.java:1357)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:440)
-		at io.netty.channel.AbstractChannelHandlerContext.invokeChannelRead(AbstractChannelHandlerContext.java:420)
-		at io.netty.channel.DefaultChannelPipeline.fireChannelRead(DefaultChannelPipeline.java:868)
-		at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:166)
-		at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:796)
-		at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:732)
-		at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:658)
-		at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:562)
-		at io.netty.util.concurrent.SingleThreadEventExecutor$4.run(SingleThreadEventExecutor.java:998)
-		at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
-		at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
-		at java.base/java.lang.Thread.run(Thread.java:1583)
-2025-05-05 08:00:33.904 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:34.916 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:00:34.927 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.751 seconds (process running for 7.5)
-2025-05-05 08:10:13.445 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 08:10:13.447 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
-2025-05-05 08:10:20.828 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 6016 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
-2025-05-05 08:10:20.830 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-05 08:10:21.270 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=4cfa5e38-8c61-3bf3-96a7-01ab1650d141
-2025-05-05 08:10:22.568 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-05 08:10:22.777 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-05 08:10:23.902 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:10:24.141 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
-2025-05-05 08:10:25.153 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:10:26.163 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-05 08:10:26.202 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.742 seconds (process running for 8.87)
-2025-05-05 08:10:31.193 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [1348c248-c761-4780-9b5b-906aca0d9675, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"1ab5120d-f9c3-4579-9faf-913352d8bd94", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 08:10:31.710 [reactor-http-nio-4] INFO  o.e.apigateway.filters.LoggingFilter [1348c248-c761-4780-9b5b-906aca0d9675, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 08:14:49.044 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [a3ec4693-2313-4fc4-8440-c97a6dedc3a4, /api/user-service/auth/login, POST] - Incoming request: POST /api/user-service/auth/login, Headers: [Content-Type:"application/json", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"1a429792-e89d-4aeb-bc5b-fa52f60f9f6b", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 08:14:49.240 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [a3ec4693-2313-4fc4-8440-c97a6dedc3a4, /api/user-service/auth/login, POST] - Request completed successfully
-2025-05-05 08:15:23.435 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [02377bad-de13-41ba-b91c-00bff37f8219, /api/user-service/account, POST] - Incoming request: POST /api/user-service/account, Headers: [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImQxZDA5N2RjLWRiYzItNGMzNi04MDYxLTYyNzA0NDM4NzgzZSIsInN1YiI6InN0ckBpbmciLCJpYXQiOjE3NDY0MDc2ODksImV4cCI6MTc0NjQxMTI4OX0.i2MTBpwl5IYhsAnL6PBFdmc9MBhgAcfgixEwsZI1zMNyO2EFv7R-PiMNlt1BO0WbXe-_DBq_laVQ7bsNtyrCTg", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"85c99213-27c6-49f7-920d-6bff80fdbf39", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 08:15:23.509 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [02377bad-de13-41ba-b91c-00bff37f8219, /api/user-service/account, POST] - Request completed successfully
-2025-05-05 08:15:32.506 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [c7c1265b-9521-47df-8cda-2a566db305f4, /api/user-service/account, GET] - Incoming request: GET /api/user-service/account, Headers: [Content-Type:"application/json", Authorization:"Bearer eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6WyJVU0VSIl0sIm5hbWUiOiJzdHJpbmciLCJpZCI6ImQxZDA5N2RjLWRiYzItNGMzNi04MDYxLTYyNzA0NDM4NzgzZSIsInN1YiI6InN0ckBpbmciLCJpYXQiOjE3NDY0MDc2ODksImV4cCI6MTc0NjQxMTI4OX0.i2MTBpwl5IYhsAnL6PBFdmc9MBhgAcfgixEwsZI1zMNyO2EFv7R-PiMNlt1BO0WbXe-_DBq_laVQ7bsNtyrCTg", User-Agent:"PostmanRuntime/7.43.4", Accept:"*/*", Cache-Control:"no-cache", Postman-Token:"bad2a2b5-b9fe-41bd-828c-03fcbff54a75", Host:"localhost:8080", Accept-Encoding:"gzip, deflate, br", Connection:"keep-alive", Content-Length:"51"]
-2025-05-05 08:15:32.553 [reactor-http-nio-6] INFO  o.e.apigateway.filters.LoggingFilter [c7c1265b-9521-47df-8cda-2a566db305f4, /api/user-service/account, GET] - Request completed successfully
-2025-05-05 08:26:26.049 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
-2025-05-05 08:26:26.051 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-06-07 02:48:14.342 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 14120 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-06-07 02:48:14.345 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-07 02:48:14.786 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=b34b1338-2d96-3bde-aac9-0d7107bc7796
+2025-06-07 02:48:16.104 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 02:48:16.140 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-07 02:48:16.317 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-07 02:48:16.426 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: 89e167e5-ce30-4b85-8448-c7174637a6cd
+
+2025-06-07 02:48:17.453 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 02:48:19.685 [main] WARN  o.s.b.w.r.c.AnnotationConfigReactiveWebServerApplicationContext [, , ] - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-06-07 02:48:19.691 [main] INFO  o.s.b.a.l.ConditionEvaluationReportLogger [, , ] - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-06-07 02:48:19.702 [main] ERROR o.s.b.d.LoggingFailureAnalysisReporter [, , ] - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-06-07 02:49:44.033 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 19556 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-06-07 02:49:44.033 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-07 02:49:44.454 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=b34b1338-2d96-3bde-aac9-0d7107bc7796
+2025-06-07 02:49:45.728 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 02:49:45.759 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-07 02:49:45.908 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-07 02:49:45.909 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-07 02:49:46.023 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: e20287ec-fc11-4754-9452-d8f42b2aa649
+
+2025-06-07 02:49:47.057 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 02:49:47.206 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-06-07 02:49:48.218 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 02:49:49.224 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 02:49:49.253 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.591 seconds (process running for 7.107)
+2025-06-07 02:56:17.104 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-07 02:56:17.108 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-06-07 03:07:03.398 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 20176 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-06-07 03:07:03.399 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-07 03:07:03.833 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=b34b1338-2d96-3bde-aac9-0d7107bc7796
+2025-06-07 03:07:05.164 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 03:07:05.199 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-07 03:07:05.352 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-07 03:07:05.352 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-07 03:07:05.352 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-07 03:07:05.352 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-07 03:07:05.353 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-07 03:07:05.457 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: dc86854c-e9d5-477f-ac98-cb054b30f9fa
+
+2025-06-07 03:07:06.490 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 03:07:06.617 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-06-07 03:07:07.621 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 03:07:08.631 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-07 03:07:08.669 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.627 seconds (process running for 7.113)
+2025-06-07 03:07:13.165 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-07 03:07:13.167 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
