@@ -10,8 +10,12 @@ import org.example.common.enums.CarStatus;
 import org.example.common.enums.PaymentStatus;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.events.PaymentEvent;
+import org.example.common.headers.CustomHeaders;
+import org.slf4j.MDC;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.kafka.support.KafkaHeaders;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
@@ -20,18 +24,19 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BookingStatusEventConsumer {
 
+    private static final String CORRELATION_ID_MDC = "correlationId";
     private final CarRepository carRepository;
 
     @KafkaListener(
-            topics = "payment-events",
-            groupId = "car-service",
-            containerFactory = "kafkaListenerContainerFactory"
+            topics = "booking-status-events"
     )
     public void consumeBookingStatusEvent(
+            @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
             @Payload BookingStatusEvent event,
             Acknowledgment acknowledgment
     ) {
         try {
+            MDC.put(CORRELATION_ID_MDC, correlationId);
             log.info("Received payment event: {}", event);
 
             Car car = carRepository
@@ -59,7 +64,9 @@ public class BookingStatusEventConsumer {
             acknowledgment.acknowledge();
         } catch (Exception e) {
             log.error("Error processing booking event: {}", event, e);
-            // todo dead-letter queue logic here
+        }
+        finally {
+            MDC.remove(CORRELATION_ID_MDC);
         }
     }
 }

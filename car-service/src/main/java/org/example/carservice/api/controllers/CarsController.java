@@ -35,7 +35,7 @@ public class CarsController {
         return carMapper.toDto(carService.getCarById(id));
     }
 
-    @GetMapping("{available/{id}")
+    @GetMapping("available/{id}")
     public boolean isCarAvailableById(@PathVariable("id") UUID id) {
         return carService.isCarAvailable(id);
     }

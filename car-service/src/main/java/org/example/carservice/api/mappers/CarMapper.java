@@ -11,10 +11,7 @@ public class CarMapper {
                 .id(model.getId())
                 .creatorId(model.getCreatorId())
                 .creatorName(model.getCreatorName())
-                .isOnRental(model.isOnRental())
-                .isOnRepair(model.isOnRepair())
-                .creationDate(model.getCreationDate())
-                .modificationDate(model.getModificationDate())
+                .status(model.getStatus())
                 .model(model.getModel())
                 .build();
     }

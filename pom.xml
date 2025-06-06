@@ -56,6 +56,8 @@
   <modules>
     <module>api-gateway</module>
     <module>user-service</module>
+    <module>car-service</module>
+    <module>payment-service</module>
     <module>common</module>
   </modules>
 </project>

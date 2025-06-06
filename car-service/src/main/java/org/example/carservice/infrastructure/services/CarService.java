@@ -49,7 +49,7 @@ public class CarService {
 
     public List<Car> getAllAvailableToRentalCars() {
         return carRepository
-                .findAllByIsOnRentalIsFalseAndIsOnRepairIsFalse();
+                .findAllByStatus(CarStatus.AVAILABLE);
     }
 
     public boolean isCarAvailable(@NonNull UUID id) {

@@ -3,6 +3,8 @@ package org.example.bookingservice.infrastructure.kafka.producers;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.events.BookingStatusEvent;
+import org.example.common.headers.CustomHeaders;
+import org.slf4j.MDC;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -20,20 +22,21 @@ public class BookingStatusEventProducer {
         try {
             Message<BookingStatusEvent> message = MessageBuilder
                     .withPayload(event)
-                    .setHeader(KafkaHeaders.TOPIC, "payment-events")
+                    .setHeader(KafkaHeaders.TOPIC, "booking-status-events")
                     .setHeader(KafkaHeaders.KEY, event.getBookingId().toString())
+                    .setHeader(CustomHeaders.CORRELATION_ID_HEADER, MDC.get("correlationId"))
                     .build();
 
             kafkaTemplate.send(message)
                     .whenComplete((result, ex) -> {
                         if (ex == null) {
-                            log.info("Sent payment event: {}", event);
+                            log.info("Sent booking status event: {}", event);
                         } else {
-                            log.error("Failed to send payment event: {}", event, ex);
+                            log.error("Failed to send booking status event: {}", event, ex);
                         }
                     });
         } catch (Exception e) {
-            log.error("Error sending payment event: {}", event, e);
+            log.error("Error sending booking status event: {}", event, e);
         }
     }
 }

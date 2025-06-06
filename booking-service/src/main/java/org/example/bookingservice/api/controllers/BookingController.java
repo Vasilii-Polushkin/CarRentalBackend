@@ -8,6 +8,7 @@ import org.example.bookingservice.api.dtos.BookingDto;
 import org.example.bookingservice.api.mappers.BookingCreateModelMapper;
 import org.example.bookingservice.api.mappers.BookingMapper;
 import org.example.bookingservice.infrastructure.services.BookingService;
+import org.example.common.enums.Role;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.*;
 import org.springframework.web.bind.annotation.*;

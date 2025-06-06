@@ -147,6 +147,11 @@
                         <artifactId>hibernate-validator</artifactId>
                         <version>${hibernate-validator.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.example</groupId>
+                        <artifactId>common</artifactId>
+                        <version>1.0.0</version>
+                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>

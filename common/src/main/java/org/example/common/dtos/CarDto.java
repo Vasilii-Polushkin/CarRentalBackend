@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.common.enums.CarStatus;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Builder
 public class CarDto {
     @NotNull
-    private UUID id;
+    public UUID id;
 
     @NotNull
     @NotBlank
@@ -29,9 +30,7 @@ public class CarDto {
     private boolean isOnRental;
 
     @NotNull
-    private LocalDate creationDate;
-
-    private LocalDate modificationDate;
+    private CarStatus status;
 
     @NotNull
     @NotBlank

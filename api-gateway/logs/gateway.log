@@ -1,20 +1,25 @@
-2025-05-24 20:41:04.678 [main] INFO  o.e.a.ApiGatewayApplicationTests [, , ] - Starting ApiGatewayApplicationTests using Java 21 with PID 12112 (started by Vasya in C:\Users\Василий\IdeaProjects\CarRental\api-gateway)
-2025-05-24 20:41:04.679 [main] INFO  o.e.a.ApiGatewayApplicationTests [, , ] - No active profile set, falling back to 1 default profile: "default"
-2025-05-24 20:41:05.440 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=5a3936b1-31e4-37c6-8155-397590365d9f
-2025-05-24 20:41:06.917 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
-2025-05-24 20:41:07.267 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
-2025-05-24 20:41:07.268 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
-2025-05-24 20:41:08.455 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
-2025-05-24 20:41:08.660 [main] INFO  o.e.a.ApiGatewayApplicationTests [, , ] - Started ApiGatewayApplicationTests in 5.365 seconds (process running for 6.318)
+2025-06-06 20:54:21.080 [main] INFO  o.e.a.ApiGatewayApplicationTests [, , ] - Starting ApiGatewayApplicationTests using Java 21 with PID 14836 (started by Vasya in C:\Users\Василий\IdeaProjects\CarRental\api-gateway)
+2025-06-06 20:54:21.083 [main] INFO  o.e.a.ApiGatewayApplicationTests [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-06 20:54:21.667 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=79eb342d-b8e5-3393-99ac-659c78b554fc
+2025-06-06 20:54:23.029 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-06 20:54:23.077 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-06 20:54:23.337 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-06 20:54:23.338 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-06 20:54:23.338 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-06 20:54:23.338 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-06 20:54:23.338 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-06 20:54:23.338 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-06 20:54:23.677 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: e6f57012-2a3b-4fab-9e02-16a94244c522
+
+2025-06-06 20:54:24.712 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-06 20:54:24.921 [main] INFO  o.e.a.ApiGatewayApplicationTests [, , ] - Started ApiGatewayApplicationTests in 5.173 seconds (process running for 6.085)

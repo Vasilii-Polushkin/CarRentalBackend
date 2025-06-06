@@ -12,7 +12,6 @@ public class BookingCreateModelMapper {
         return BookingCreateRequestModel.builder()
                 .carId(request.getCarId())
                 .userId(request.getUserId())
-                .startDate(request.getStartDate())
                 .endDate(request.getEndDate())
                 .build();
     }
