@@ -9,6 +9,7 @@ import org.example.common.enums.BookingStatus;
 import org.example.common.enums.CarStatus;
 import org.example.common.enums.PaymentStatus;
 import org.example.common.events.PaymentEvent;
+import org.example.common.topics.KafkaTopics;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -22,9 +23,8 @@ public class PaymentEventConsumer {
     private final CarRepository carRepository;
 
     @KafkaListener(
-            topics = "payment-events",
-            groupId = "car-service",
-            containerFactory = "kafkaListenerContainerFactory"
+            topics = KafkaTopics.PAYMENT_EVENTS,
+            groupId = "car-service"
     )
     public void consumePaymentEvent(
             @Payload PaymentEvent event,

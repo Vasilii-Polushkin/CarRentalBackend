@@ -10,10 +10,12 @@ import org.example.common.events.BookingStatusEvent;
 import org.example.common.exceptions.status_code_exceptions.BadRequestException;
 import org.example.common.feign.clients.CarServiceClient;
 import org.example.common.feign.clients.PaymentServiceClient;
+import org.example.common.topics.KafkaTopics;
 import org.springframework.kafka.core.*;
 import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.bookingservice.domain.models.requests.BookingCreateRequestModel;
 import org.example.bookingservice.infrastructure.repositories.BookingRepository;
+import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
@@ -27,6 +29,7 @@ import java.util.*;
 public class BookingService {
     private final BookingRepository bookingRepository;
     private final CarServiceClient carServiceClient;
+    private final CurrentUserService currentUserService;
     private final KafkaTemplate<String, BookingStatusEvent> kafkaTemplate;
 
     public Booking getBookingById(@NotNull UUID id) {
@@ -42,14 +45,12 @@ public class BookingService {
 
         Booking booking = Booking.builder()
                 .carId(request.getCarId())
-                .userId(request.getUserId())
+                .userId(currentUserService.getUserId())
                 .startDate(LocalDateTime.now())
                 .endDate(request.getEndDate())
                 .createdAt(LocalDateTime.now())
                 .status(BookingStatus.BOOKED)
                 .build();
-
-        carServiceClient.changeCarStatus(request.getCarId(), CarStatus.BOOKED);
 
         sendBookingStatusEvent(booking);
 
@@ -92,6 +93,6 @@ public class BookingService {
                 .status(booking.getStatus())
                 .timestamp(LocalDateTime.now())
                 .build();
-        kafkaTemplate.send("booking-status-topic", event);
+        kafkaTemplate.send(KafkaTopics.BOOKING_STATUS_EVENTS, event);
     }
 }

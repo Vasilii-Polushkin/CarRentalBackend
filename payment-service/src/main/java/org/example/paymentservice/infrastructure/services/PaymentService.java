@@ -24,14 +24,15 @@ import java.util.UUID;
 public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final PaymentEventProducer paymentEventProducer;
+    private final CurrentUserService currentUserService;
 
-    public List<Payment> findByStatus(PaymentStatus status) {
-        return paymentRepository.findByStatus(status);
+    public List<Payment> findCurrentUsersPaymentsByStatus(PaymentStatus status) {
+        return paymentRepository.findAllByCreatorIdAndStatus(currentUserService.getUserId(), status);
     }
 
     public Payment createPayment(PaymentRequestCreateModel model) {
         Payment payment = Payment.builder()
-                .creatorId(model.getPayerId())
+                .creatorId(currentUserService.getUserId())
                 .bookingId(model.getBookingId())
                 .amount(model.getAmount())
                 .status(PaymentStatus.PENDING)
@@ -60,12 +61,13 @@ public class PaymentService {
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + paymentId));
 
+        /*
         if (payment.getStatus() == PaymentStatus.PAID){
             throw new BadRequestException("Payment is already paid");
         }
         if (payment.getStatus() == PaymentStatus.CANCELED){
             throw new BadRequestException("Cannot pay for cancelled payment");
-        }
+        }*/
 
         //actual payment logic
 
@@ -77,6 +79,7 @@ public class PaymentService {
 
     private void sendPaymentEvent(@Valid Payment payment) {
         PaymentEvent event = PaymentEvent.builder()
+                .paymentId(payment.getId())
                 .bookingId(payment.getBookingId())
                 .userId(payment.getCreatorId())
                 .status(payment.getStatus())

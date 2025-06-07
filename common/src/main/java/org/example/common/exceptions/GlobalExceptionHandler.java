@@ -1,5 +1,6 @@
 package org.example.common.exceptions;
 
+import feign.FeignException;
 import jakarta.persistence.EntityNotFoundException;
 import org.example.common.exceptions.status_code_exceptions.*;
 import org.springframework.security.authorization.AuthorizationDeniedException;
@@ -27,6 +28,7 @@ public class GlobalExceptionHandler {
 
     private final EnvUtil envUtil;
 
+    //Custom exceptions
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ErrorResponse> handleNotFoundException(NotFoundException ex) {
         return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
@@ -52,11 +54,40 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    //Feign exceptions
+    @ExceptionHandler(FeignException.NotFound.class)
+    public ResponseEntity<ErrorResponse> handleFeignNotFoundException(FeignException.NotFound ex) {
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(FeignException.BadRequest.class)
+    public ResponseEntity<ErrorResponse> handleFeignBadRequestException(FeignException.BadRequest ex) {
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(FeignException.Forbidden.class)
+    public ResponseEntity<ErrorResponse> handleFeignBadRequestException(FeignException.Forbidden ex) {
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(FeignException.Unauthorized.class)
+    public ResponseEntity<ErrorResponse> handleFeignUnauthorizedException(FeignException.Unauthorized ex) {
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(FeignException.InternalServerError.class)
+    public ResponseEntity<ErrorResponse> handleFeignInternalServerErrorException(FeignException.InternalServerError ex) {
+        return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+
+    //Db exceptions
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleInternalServerErrorException(EntityNotFoundException ex) {
         return new ResponseEntity<>(new ErrorResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
     }
 
+    //Validation exceptions
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult()
@@ -79,12 +110,14 @@ public class GlobalExceptionHandler {
         ), HttpStatus.BAD_REQUEST);
     }
 
+    //Auth exceptions
     @ExceptionHandler(AuthorizationDeniedException.class)
-    public ResponseEntity<ErrorResponse> handleTypeMismatch(AuthorizationDeniedException ex) {
+    public ResponseEntity<ErrorResponse> handleAuthorizationDeniedException(AuthorizationDeniedException ex) {
         return new ResponseEntity<>(new
                 ErrorResponse("Access denied"), HttpStatus.FORBIDDEN);
     }
 
+    //Any other exception
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handleAnyOtherException(Exception ex, WebRequest request) {
         logErrorWithContext(ex, request);

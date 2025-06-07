@@ -24,12 +24,6 @@ public class CarDto {
     private String model;
 
     @NotNull
-    private boolean isOnRepair;
-
-    @NotNull
-    private boolean isOnRental;
-
-    @NotNull
     private CarStatus status;
 
     @NotNull

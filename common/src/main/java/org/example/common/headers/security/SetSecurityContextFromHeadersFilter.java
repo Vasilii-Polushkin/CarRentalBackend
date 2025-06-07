@@ -1,4 +1,4 @@
-package org.example.carservice.configuration.security;
+package org.example.common.headers.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

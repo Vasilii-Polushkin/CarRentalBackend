@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.headers.CustomHeaders;
+import org.example.common.topics.KafkaTopics;
 import org.slf4j.MDC;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
@@ -22,7 +23,7 @@ public class BookingStatusEventProducer {
         try {
             Message<BookingStatusEvent> message = MessageBuilder
                     .withPayload(event)
-                    .setHeader(KafkaHeaders.TOPIC, "booking-status-events")
+                    .setHeader(KafkaHeaders.TOPIC, KafkaTopics.BOOKING_STATUS_EVENTS)
                     .setHeader(KafkaHeaders.KEY, event.getBookingId().toString())
                     .setHeader(CustomHeaders.CORRELATION_ID_HEADER, MDC.get("correlationId"))
                     .build();

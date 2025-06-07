@@ -14,8 +14,5 @@ public class BookingCreateRequestModel {
     private UUID carId;
 
     @NotNull
-    private UUID userId;
-
-    @NotNull
     private LocalDateTime endDate;
 }

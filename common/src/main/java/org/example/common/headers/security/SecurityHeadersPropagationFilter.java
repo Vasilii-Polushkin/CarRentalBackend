@@ -1,4 +1,4 @@
-package org.example.carservice.configuration.security;
+package org.example.common.headers.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -7,10 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import org.example.common.headers.CustomHeaders;
 import org.springframework.http.HttpHeaders;
-import org.springframework.security.web.header.Header;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.servlet.function.ServerRequest;
 
 import java.io.IOException;
 

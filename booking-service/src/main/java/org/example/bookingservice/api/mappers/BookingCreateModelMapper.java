@@ -11,7 +11,6 @@ public class BookingCreateModelMapper {
     public BookingCreateRequestModel toDomain(BookingCreateModelDto request) {
         return BookingCreateRequestModel.builder()
                 .carId(request.getCarId())
-                .userId(request.getUserId())
                 .endDate(request.getEndDate())
                 .build();
     }

@@ -14,6 +14,5 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PaymentRequestCreateModel {
     private UUID bookingId;
-    private UUID payerId;
     private BigDecimal amount;
 }

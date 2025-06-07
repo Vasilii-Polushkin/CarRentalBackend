@@ -9,7 +9,6 @@ public class PaymentRequestMapper {
     public PaymentRequestCreateModel toDomain(PaymentCreateModelDto dto) {
         return PaymentRequestCreateModel.builder()
                 .bookingId(dto.getBookingId())
-                .payerId(dto.getPayerId())
                 .amount(dto.getAmount())
                 .build();
     }

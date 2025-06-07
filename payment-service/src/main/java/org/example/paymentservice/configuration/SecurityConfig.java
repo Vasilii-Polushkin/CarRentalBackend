@@ -1,4 +1,4 @@
-package org.example.carservice.configuration;
+package org.example.paymentservice.configuration;
 
 import lombok.RequiredArgsConstructor;
 import org.example.common.headers.security.SecurityHeadersPropagationFilter;

@@ -1,4 +1,4 @@
-package org.example.carservice.configuration;
+package org.example.bookingservice.configurations;
 
 import lombok.RequiredArgsConstructor;
 import org.example.common.headers.security.SecurityHeadersPropagationFilter;

@@ -11,6 +11,7 @@ import org.example.common.enums.PaymentStatus;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.events.PaymentEvent;
 import org.example.common.headers.CustomHeaders;
+import org.example.common.topics.KafkaTopics;
 import org.slf4j.MDC;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
@@ -28,7 +29,7 @@ public class BookingStatusEventConsumer {
     private final CarRepository carRepository;
 
     @KafkaListener(
-            topics = "booking-status-events"
+            topics = KafkaTopics.BOOKING_STATUS_EVENTS
     )
     public void consumeBookingStatusEvent(
             @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,

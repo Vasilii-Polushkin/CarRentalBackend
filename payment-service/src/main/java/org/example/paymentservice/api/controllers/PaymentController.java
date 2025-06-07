@@ -28,28 +28,23 @@ public class PaymentController {
         );
     }
 
-    @PostMapping("/{id}/cancel")
-    public PaymentDto cancelPayment(@PathVariable UUID id) {
+    @PutMapping("/{id}/cancel")
+    public PaymentDto cancelPayment(@PathVariable("id") UUID id) {
         return paymentMapper.toDto(
                 paymentService.cancelPayment(id)
         );
     }
 
-    /*
-    @GetMapping
-    public List<PaymentDto> getAllPayments() {
-        return paymentService.findAll()
-                .stream().map(paymentMapper::toDto).toList();
+    @PutMapping("/{id}/perform")
+    public PaymentDto performPayment(@PathVariable("id") UUID id) {
+        return paymentMapper.toDto(
+                paymentService.performPayment(id)
+        );
     }
-
-    @GetMapping("/{id}")
-    public PaymentDto getPaymentById(@PathVariable UUID id) {
-        return paymentMapper.toDto(paymentService.findById(id));
-    }*/
 
     @GetMapping("/pending")
     public List<PaymentDto> getPendingPayments() {
-        return paymentService.findByStatus(PaymentStatus.PENDING)
+        return paymentService.findCurrentUsersPaymentsByStatus(PaymentStatus.PENDING)
                 .stream().map(paymentMapper::toDto).toList();
     }
 }
