@@ -2,6 +2,7 @@ package org.example.bookingservice.infrastructure.kafka.producers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.common.correlation.CorrelationConstants;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.headers.CustomHeaders;
 import org.example.common.topics.KafkaTopics;
@@ -25,7 +26,7 @@ public class BookingStatusEventProducer {
                     .withPayload(event)
                     .setHeader(KafkaHeaders.TOPIC, KafkaTopics.BOOKING_STATUS_EVENTS)
                     .setHeader(KafkaHeaders.KEY, event.getBookingId().toString())
-                    .setHeader(CustomHeaders.CORRELATION_ID_HEADER, MDC.get("correlationId"))
+                    .setHeader(CustomHeaders.CORRELATION_ID_HEADER, MDC.get(CorrelationConstants.CORRELATION_ID_MDC))
                     .build();
 
             kafkaTemplate.send(message)

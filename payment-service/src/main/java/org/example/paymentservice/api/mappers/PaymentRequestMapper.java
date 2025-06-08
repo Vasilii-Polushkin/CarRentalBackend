@@ -10,6 +10,7 @@ public class PaymentRequestMapper {
         return PaymentRequestCreateModel.builder()
                 .bookingId(dto.getBookingId())
                 .amount(dto.getAmount())
+                .carId(dto.getCarId())
                 .build();
     }
 }

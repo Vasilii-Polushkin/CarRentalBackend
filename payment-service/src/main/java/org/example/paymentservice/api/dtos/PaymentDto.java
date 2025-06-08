@@ -23,6 +23,9 @@ public class PaymentDto {
     private UUID bookingId;
 
     @NotNull
+    private UUID cardId;
+
+    @NotNull
     private UUID creatorId;
 
     @NotNull

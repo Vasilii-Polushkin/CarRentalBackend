@@ -10,6 +10,7 @@ import org.example.carservice.api.mappers.CarEditModelMapper;
 import org.example.carservice.api.mappers.CarMapper;
 import org.example.carservice.infrastructure.services.CarService;
 import org.example.common.enums.CarStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -57,11 +58,13 @@ public class CarsController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN') OR @carAccessManager.isOwner(#id)")
     public void deleteCarById(@PathVariable("id") UUID id) {
         carService.deleteCarById(id);
     }
 
     @PutMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN') OR @carAccessManager.isOwner(#id)")
     public CarDto editCarById(@PathVariable("id") UUID id, @RequestBody CarEditModelDto carEditModel) {
         return carMapper.toDto(
                 carService.editCarById(id, carEditModelMapper.toDomain(carEditModel))
@@ -69,22 +72,13 @@ public class CarsController {
     }
 
     @PutMapping("{id}/onRepair/{isOnRepair}")
+    @PreAuthorize("hasRole('ADMIN') OR @carAccessManager.isOwner(#id)")
     public CarDto changeCarRepairStatus(
             @PathVariable("id") UUID id,
             @PathVariable("isOnRepair") boolean isOnRepair
     ) {
         return carMapper.toDto(
                 carService.changeCarRepairStatusById(id, isOnRepair)
-        );
-    }
-
-    @PutMapping("{id}/status/{status}")
-    public CarDto changeCarStatus(
-            @PathVariable("id") UUID id,
-            @PathVariable("status") CarStatus status
-    ) {
-        return carMapper.toDto(
-                carService.changeCarStatusById(id, status)
         );
     }
 }

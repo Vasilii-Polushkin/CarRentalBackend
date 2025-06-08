@@ -9,6 +9,7 @@ public class PaymentMapper {
     public PaymentDto toDto (Payment model){
         return PaymentDto.builder()
                 .id(model.getId())
+                .cardId(model.getCarId())
                 .status(model.getStatus())
                 .creatorId(model.getCreatorId())
                 .amount(model.getAmount())

@@ -1,23 +1,18 @@
-package org.example.bookingservice.infrastructure.kafka.consumers;
+package org.example.paymentservice.infrastructure.kafka.consumers;
 
-import jakarta.persistence.EntityExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.example.bookingservice.domain.models.entities.Booking;
-import org.example.bookingservice.infrastructure.repositories.BookingRepository;
-import org.example.bookingservice.infrastructure.services.BookingService;
 import org.example.common.correlation.CorrelationConstants;
 import org.example.common.enums.BookingStatus;
-import org.example.common.enums.CarStatus;
 import org.example.common.enums.PaymentStatus;
-import org.example.common.events.BookingStatusEvent;
 import org.example.common.events.PaymentEvent;
 import org.example.common.headers.CustomHeaders;
 import org.example.common.topics.KafkaTopics;
+import org.example.paymentservice.domain.models.entities.Payment;
+import org.example.paymentservice.infrastructure.repositories.PaymentRepository;
 import org.slf4j.MDC;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
@@ -25,32 +20,30 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class PaymentEventConsumer {
-    private final BookingRepository bookingRepository;
+public class BookingStatusEventConsumer {
+    private final PaymentRepository paymentRepository;
 
     @KafkaListener(
             topics = KafkaTopics.PAYMENT_EVENTS,
             groupId = "booking-service"
     )
-    public void consumePaymentEvent(
+    public void consumeBookingStatusEvent(
             @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
             @Payload PaymentEvent event
     ) {
         try {
             MDC.put(CorrelationConstants.CORRELATION_ID_MDC, correlationId);
-            log.info("Received payment event: {}", event);
+            log.info("Received booking status event: {}", event);
 
-            if (event.getStatus() == PaymentStatus.PAID) {
-                Booking booking = bookingRepository
+            if (event.getStatus() == PaymentStatus.CANCELED) {
+                Payment payment = paymentRepository
                         .findById(event.getPaymentId())
-                        .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + event.getPaymentId()));
-                booking.setStatus(BookingStatus.RENTED);
-            } else {
-                log.warn("Unhandled event status: {}", event.getStatus());
+                        .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + event.getPaymentId()));
+                payment.setStatus(PaymentStatus.CANCELED);
             }
 
         } catch (Exception e) {
-            log.error("Error processing payment event: {}", event, e);
+            log.error("Error processing booking status event: {}", event, e);
         }
         finally {
             MDC.remove(CorrelationConstants.CORRELATION_ID_MDC);

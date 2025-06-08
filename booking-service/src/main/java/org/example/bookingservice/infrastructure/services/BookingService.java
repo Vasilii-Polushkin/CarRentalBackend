@@ -4,14 +4,12 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import org.example.bookingservice.infrastructure.kafka.producers.BookingStatusEventProducer;
 import org.example.common.enums.BookingStatus;
 import org.example.common.enums.CarStatus;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.exceptions.status_code_exceptions.BadRequestException;
 import org.example.common.feign.clients.CarServiceClient;
-import org.example.common.feign.clients.PaymentServiceClient;
-import org.example.common.topics.KafkaTopics;
-import org.springframework.kafka.core.*;
 import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.bookingservice.domain.models.requests.BookingCreateRequestModel;
 import org.example.bookingservice.infrastructure.repositories.BookingRepository;
@@ -30,11 +28,23 @@ public class BookingService {
     private final BookingRepository bookingRepository;
     private final CarServiceClient carServiceClient;
     private final CurrentUserService currentUserService;
-    private final KafkaTemplate<String, BookingStatusEvent> kafkaTemplate;
+    private final BookingStatusEventProducer bookingStatusEventProducer;
 
     public Booking getBookingById(@NotNull UUID id) {
         return bookingRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + id));
+    }
+
+    public List<Booking> getAllBookingsByCarId(@NotNull UUID id) {
+        return bookingRepository.findAllByCarId(id);
+    }
+
+    public List<Booking> getAllBookingsByUserId(@NotNull UUID id) {
+        return bookingRepository.findAllByUserId(id);
+    }
+
+    public List<Booking> getAllCurrentUsersBookings() {
+        return bookingRepository.findAllByUserId(currentUserService.getUserId());
     }
 
     @Transactional
@@ -52,9 +62,11 @@ public class BookingService {
                 .status(BookingStatus.BOOKED)
                 .build();
 
-        sendBookingStatusEvent(booking);
+        Booking savedBooking = bookingRepository.save(booking);
 
-        return bookingRepository.save(booking);
+        sendBookingStatusEvent(savedBooking);
+
+        return savedBooking;
     }
 
     @Scheduled(fixedRate = 30 * 60 * 1000)
@@ -66,7 +78,7 @@ public class BookingService {
 
         pending.forEach(booking -> {
             booking.setStatus(BookingStatus.CANCELLED);
-            sendBookingStatusEvent(booking);
+            sendBookingStatusEvent(bookingRepository.save(booking));
         });
     }
 
@@ -81,7 +93,7 @@ public class BookingService {
 
         bookings.forEach(booking -> {
             booking.setStatus(BookingStatus.COMPLETED);
-            sendBookingStatusEvent(booking);
+            sendBookingStatusEvent(bookingRepository.save(booking));
         });
     }
 
@@ -93,6 +105,6 @@ public class BookingService {
                 .status(booking.getStatus())
                 .timestamp(LocalDateTime.now())
                 .build();
-        kafkaTemplate.send(KafkaTopics.BOOKING_STATUS_EVENTS, event);
+        bookingStatusEventProducer.sendEvent(event);
     }
 }

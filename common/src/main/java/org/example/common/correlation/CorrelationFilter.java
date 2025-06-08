@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.UUID;
 
+import static org.example.common.correlation.CorrelationConstants.CORRELATION_ID_MDC;
+
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorrelationFilter implements Filter {
-
-    private static final String CORRELATION_ID_MDC = "correlationId";
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

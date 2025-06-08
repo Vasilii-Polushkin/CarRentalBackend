@@ -1,5 +1,6 @@
 package org.example.bookingservice.api.controllers;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api/bookings")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 @Validated
 public class BookingController {
@@ -25,15 +26,34 @@ public class BookingController {
 
     @PostMapping
     public BookingDto createBooking(@RequestBody @Valid BookingCreateModelDto request) {
-        // todo mb check for request's user id and user id mismatch
         return bookingMapper.toDto(
                 bookingService.createBooking(bookingCreateModelMapper.toDomain(request))
         );
     }
 
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN') OR @accessChecker.isSelf(#userId)")//todo impl + make common util
+    @GetMapping("bookings/{id}")
+    @PreAuthorize("hasRole('ADMIN') OR @bookingAccessManager.isOwner(#id)")
     public BookingDto getBooking(@PathVariable @NotNull UUID id) {
         return bookingMapper.toDto(bookingService.getBookingById(id));
+    }
+
+    @GetMapping("/car/{id}/bookings")
+    @RolesAllowed("ADMIN")
+    public List<BookingDto> getAllBookingsByCarId(@PathVariable @NotNull UUID id) {
+        return bookingService.getAllBookingsByCarId(id)
+                .stream().map(bookingMapper::toDto).toList();
+    }
+
+    @GetMapping("/user/{id}/bookings")
+    @PreAuthorize("hasRole('ADMIN') OR @currentUserService.userId==#id")
+    public List<BookingDto> getAllBookingsByCreatorId(@PathVariable @NotNull UUID id) {
+        return bookingService.getAllBookingsByUserId(id)
+                .stream().map(bookingMapper::toDto).toList();
+    }
+
+    @GetMapping("bookings/my")
+    public List<BookingDto> getAllCurrentUsersBookings() {
+        return bookingService.getAllCurrentUsersBookings()
+                .stream().map(bookingMapper::toDto).toList();
     }
 }

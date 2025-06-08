@@ -9,11 +9,16 @@ import org.example.common.enums.BookingStatus;
 import org.example.common.enums.CarStatus;
 import org.example.common.enums.PaymentStatus;
 import org.example.common.events.PaymentEvent;
+import org.example.common.headers.CustomHeaders;
 import org.example.common.topics.KafkaTopics;
+import org.slf4j.MDC;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
+
+import static org.example.common.correlation.CorrelationConstants.CORRELATION_ID_MDC;
 
 @Slf4j
 @Component
@@ -27,25 +32,27 @@ public class PaymentEventConsumer {
             groupId = "car-service"
     )
     public void consumePaymentEvent(
-            @Payload PaymentEvent event,
-            Acknowledgment acknowledgment
+            @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
+            @Payload PaymentEvent event
     ) {
         try {
+            MDC.put(CORRELATION_ID_MDC, correlationId);
             log.info("Received payment event: {}", event);
 
             if (event.getStatus() == PaymentStatus.PAID) {
                 Car car = carRepository
                         .findById(event.getCarId())
-                        .orElseThrow(() ->new EntityNotFoundException("Car not found with id " + event.getCarId()));
+                        .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + event.getCarId()));
                 car.setStatus(CarStatus.RENTED);
+                carRepository.save(car);
             } else {
                 log.warn("Unhandled event status: {}", event.getStatus());
             }
-
-            acknowledgment.acknowledge();
         } catch (Exception e) {
-            log.error("Error processing payment event: {}", event, e);
-            // todo dead-letter queue logic here
+            log.error("Error processing booking event: {}", event, e);
+        }
+        finally {
+            MDC.remove(CORRELATION_ID_MDC);
         }
     }
 }

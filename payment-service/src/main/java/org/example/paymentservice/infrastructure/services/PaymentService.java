@@ -13,6 +13,8 @@ import org.example.paymentservice.domain.models.entities.Payment;
 import org.example.paymentservice.domain.models.requests.PaymentRequestCreateModel;
 import org.example.paymentservice.infrastructure.kafka.producers.PaymentEventProducer;
 import org.example.paymentservice.infrastructure.repositories.PaymentRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +34,7 @@ public class PaymentService {
 
     public Payment createPayment(PaymentRequestCreateModel model) {
         Payment payment = Payment.builder()
+                .carId(model.getCarId())
                 .creatorId(currentUserService.getUserId())
                 .bookingId(model.getBookingId())
                 .amount(model.getAmount())
@@ -61,13 +64,12 @@ public class PaymentService {
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + paymentId));
 
-        /*
         if (payment.getStatus() == PaymentStatus.PAID){
             throw new BadRequestException("Payment is already paid");
         }
         if (payment.getStatus() == PaymentStatus.CANCELED){
             throw new BadRequestException("Cannot pay for cancelled payment");
-        }*/
+        }
 
         //actual payment logic
 
@@ -82,9 +84,14 @@ public class PaymentService {
                 .paymentId(payment.getId())
                 .bookingId(payment.getBookingId())
                 .userId(payment.getCreatorId())
+                .carId(payment.getCarId())
                 .status(payment.getStatus())
                 .timestamp(LocalDateTime.now())
                 .build();
         paymentEventProducer.sendEvent(event);
+    }
+
+    public Page<Payment> getCurrentUsersPaymentsPaged(Pageable page) {
+        return paymentRepository.getAllByCreatorId(currentUserService.getUserId(), page);
     }
 }

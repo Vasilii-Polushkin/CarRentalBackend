@@ -29,6 +29,9 @@ public class Payment {
     private UUID creatorId;
 
     @NotNull
+    private UUID carId;
+
+    @NotNull
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)

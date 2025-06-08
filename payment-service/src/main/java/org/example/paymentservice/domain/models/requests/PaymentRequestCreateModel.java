@@ -1,9 +1,7 @@
 package org.example.paymentservice.domain.models.requests;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -13,6 +11,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PaymentRequestCreateModel {
+    @NotNull
     private UUID bookingId;
+
+    @NotNull
+    private UUID carId;
+
+    @NotNull
     private BigDecimal amount;
 }

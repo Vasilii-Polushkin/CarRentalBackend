@@ -18,5 +18,8 @@ public class PaymentCreateModelDto {
     private UUID bookingId;
 
     @NotNull
+    private UUID carId;
+
+    @NotNull
     private BigDecimal amount;
 }

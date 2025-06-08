@@ -14,18 +14,16 @@ import org.example.common.headers.CustomHeaders;
 import org.example.common.topics.KafkaTopics;
 import org.slf4j.MDC;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.kafka.support.Acknowledgment;
-import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
+
+import static org.example.common.correlation.CorrelationConstants.CORRELATION_ID_MDC;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
 public class BookingStatusEventConsumer {
-
-    private static final String CORRELATION_ID_MDC = "correlationId";
     private final CarRepository carRepository;
 
     @KafkaListener(
@@ -33,8 +31,7 @@ public class BookingStatusEventConsumer {
     )
     public void consumeBookingStatusEvent(
             @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
-            @Payload BookingStatusEvent event,
-            Acknowledgment acknowledgment
+            @Payload BookingStatusEvent event
     ) {
         try {
             MDC.put(CORRELATION_ID_MDC, correlationId);
@@ -45,24 +42,13 @@ public class BookingStatusEventConsumer {
                     .orElseThrow(() ->new EntityNotFoundException("Car not found with id " + event.getCarId()));
 
             switch (event.getStatus()){
-                case BOOKED -> {
-                    car.setStatus(CarStatus.BOOKED);
-                    return;
-                }
-                case RENTED -> {
-                    car.setStatus(CarStatus.RENTED);
-                    return;
-                }
-                case CANCELLED, COMPLETED -> {
-                    car.setStatus(CarStatus.AVAILABLE);
-                    return;
-                }
-                default -> {
-                    log.warn("Unhandled event status: {}", event.getStatus());
-                }
+                case BOOKED -> car.setStatus(CarStatus.BOOKED);
+                case RENTED -> car.setStatus(CarStatus.RENTED);
+                case CANCELLED, COMPLETED -> car.setStatus(CarStatus.AVAILABLE);
+                default -> log.warn("Unhandled event status: {}", event.getStatus());
             }
 
-            acknowledgment.acknowledge();
+            carRepository.save(car);
         } catch (Exception e) {
             log.error("Error processing booking event: {}", event, e);
         }
