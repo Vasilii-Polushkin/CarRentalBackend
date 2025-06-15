@@ -33,12 +33,6 @@ public class AuthController {
         );
     }
 
-    /*
-    @PostMapping("token/{value}/validate")
-    public TokenValidationResponseDto isTokenValid(@PathVariable("value") String tokenValue) {
-        return new TokenValidationResponseDto(authService.isTokenValid(tokenValue));
-    }*/
-
     @GetMapping("validate")
     public void isTokenValid() {}
 

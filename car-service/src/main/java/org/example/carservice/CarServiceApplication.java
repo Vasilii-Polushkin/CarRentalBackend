@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
                 "org.example.carservice",
                 "org.example.common"
         })
-@EnableFeignClients(basePackages = "org.example.common.feign")//todo мб не надо
+@EnableFeignClients(basePackages = "org.example.common.feign")
 public class CarServiceApplication {
     public static void main(String[] args) {
         SpringApplication.run(CarServiceApplication.class, args);

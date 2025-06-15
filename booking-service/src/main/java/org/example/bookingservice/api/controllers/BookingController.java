@@ -18,7 +18,6 @@ import java.util.*;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@Validated
 public class BookingController {
     private final BookingService bookingService;
     private final BookingMapper bookingMapper;
