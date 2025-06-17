@@ -32,7 +32,7 @@ public class TokenValidationFilter extends AbstractGatewayFilterFactory<TokenVal
             String token = authHeader.substring(7);
 
             return webClient.get()
-                    .uri(config.getUserServiceUrl())
+                    .uri(config.getTokenValidationEndpointUrl())
                     .header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                     .retrieve()
                     .toBodilessEntity()
@@ -47,6 +47,6 @@ public class TokenValidationFilter extends AbstractGatewayFilterFactory<TokenVal
     @Setter
     @Getter
     public static class Config {
-        private String userServiceUrl;
+        private String tokenValidationEndpointUrl;
     }
 }

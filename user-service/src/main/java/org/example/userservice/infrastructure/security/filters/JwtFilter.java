@@ -46,6 +46,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     private void SetContextAuthenticationAndAddHeaderIfValid(String token, HttpServletResponse response) {
         if (token == null){
+            log.debug("Token is not present");
             return;
         }
         String error = accessTokenService.getValidationErrorMessageOrNull(token);
@@ -60,15 +61,15 @@ public class JwtFilter extends OncePerRequestFilter {
 
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(token, null, authorities);
-
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        log.debug("Token is valid and security context holder is filled");
 
         String rolesString = roles.stream()
                 .map(Enum::name)
                 .collect(Collectors.joining(","));
-
         response.addHeader(CustomHeaders.USER_ROLES_HEADER, rolesString);
         response.addHeader(CustomHeaders.USER_ID_HEADER, id.toString());
+        log.debug("Response auth headers are filled");
     }
 
     private String getTokenFromRequestOrNull(HttpServletRequest request) {

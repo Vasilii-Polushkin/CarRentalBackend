@@ -5,6 +5,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.carservice.domain.models.entities.Car;
 import org.example.carservice.domain.models.requests.CarCreateRequestModel;
 import org.example.carservice.domain.models.requests.CarEditRequestModel;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @Validated
 @RequiredArgsConstructor
@@ -33,7 +35,9 @@ public class CarService {
                 .status(CarStatus.AVAILABLE)
                 .build();
 
-        return carRepository.save(car);
+        Car savedCar = carRepository.save(car);
+        log.info("Car created with model {} and id {}", car.getModel(), car.getId());
+        return savedCar;
     }
 
     public Car getCarById(@NonNull UUID id) {
@@ -68,7 +72,9 @@ public class CarService {
         car.setModificationDate(LocalDate.now());
         car.setModel(carEditModel.getModel());
 
-        return carRepository.save(car);
+        Car savedCar = carRepository.save(car);
+        log.info("Car edited with id {}", car.getId());
+        return savedCar;
     }
 
     public Car changeCarRepairStatusById(@NonNull UUID id, boolean isOnRepair) {
@@ -78,24 +84,17 @@ public class CarService {
 
         car.setStatus(isOnRepair ? CarStatus.UNDER_REPAIR : CarStatus.AVAILABLE);
 
-        return carRepository.save(car);
-    }
-
-    public Car changeCarStatusById(@NonNull UUID id, @NonNull CarStatus status) {
-        Car car = carRepository
-                .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
-
-        car.setStatus(status);
-
-        return carRepository.save(car);
+        Car savedCar = carRepository.save(car);
+        log.info("Car with id {} status changed to {}", savedCar.getId(), savedCar.getStatus());
+        return savedCar;
     }
 
     public void deleteCarById(@NonNull UUID id) {
         Car car = carRepository
                 .findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("User not found with id " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
 
         carRepository.delete(car);
+        log.info("Car deleted with id {}", car.getId());
     }
 }

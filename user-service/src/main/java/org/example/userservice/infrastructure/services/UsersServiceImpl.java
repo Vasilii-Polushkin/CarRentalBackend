@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.UserEditRequestModel;
 import org.example.userservice.domain.services.UsersService;
@@ -16,6 +17,7 @@ import java.util.UUID;
 
 @Service
 @Validated
+@Slf4j
 @RequiredArgsConstructor
 public class UsersServiceImpl implements UsersService {
     private final UserRepository userRepository;
@@ -35,7 +37,9 @@ public class UsersServiceImpl implements UsersService {
 
         user.setName(userEditModel.getName());
 
-        return userRepository.save(user);
+        User saved = userRepository.save(user);
+        log.info("Edited user with id: {}", saved.getId());
+        return saved;
     }
 
     @Override
@@ -46,6 +50,8 @@ public class UsersServiceImpl implements UsersService {
 
         user.setActive(false);
 
-        return userRepository.save(user);
+        User saved = userRepository.save(user);
+        log.info("Deleted user with id: {}", saved.getId());
+        return saved;
     }
 }

@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
+import lombok.extern.slf4j.Slf4j;
 import org.example.bookingservice.infrastructure.kafka.producers.BookingStatusEventProducer;
 import org.example.common.enums.BookingStatus;
 import org.example.common.enums.CarStatus;
@@ -21,6 +22,7 @@ import org.springframework.validation.annotation.*;
 import java.time.*;
 import java.util.*;
 
+@Slf4j
 @Service
 @Validated
 @RequiredArgsConstructor
@@ -63,14 +65,14 @@ public class BookingService {
                 .build();
 
         Booking savedBooking = bookingRepository.save(booking);
-
         sendBookingStatusEvent(savedBooking);
-
+        log.info("Booking created with id {} for car with id {}", savedBooking.getId(), savedBooking.getCarId());
         return savedBooking;
     }
 
     @Scheduled(fixedRate = 30 * 60 * 1000)
     private void cancelExpiredBookings() {
+        log.info("Cancelling expired bookings...");
         List<Booking> pending = bookingRepository
                 .findByStatusAndCreatedAtBefore(
                         BookingStatus.BOOKED,
@@ -80,11 +82,13 @@ public class BookingService {
             booking.setStatus(BookingStatus.CANCELLED);
             sendBookingStatusEvent(bookingRepository.save(booking));
         });
+        log.info("All expired bookings are cancelled");
     }
 
     //todo might be done better probably
     @Scheduled(fixedRate = 30 * 60 * 1000)
-    private void completeExpiredRentals() {
+    private void completeEndedRentals() {
+        log.info("Checking for bookings to complete...");
         List<Booking> bookings = bookingRepository
                 .findByStatusAndEndDateBefore(
                         BookingStatus.RENTED,
@@ -95,6 +99,7 @@ public class BookingService {
             booking.setStatus(BookingStatus.COMPLETED);
             sendBookingStatusEvent(bookingRepository.save(booking));
         });
+        log.info("Bookings that should've been completed changed statuses and events has been send");
     }
 
     private void sendBookingStatusEvent(@Valid Booking booking) {

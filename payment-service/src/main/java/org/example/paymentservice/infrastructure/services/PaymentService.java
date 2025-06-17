@@ -5,6 +5,7 @@ import jakarta.persistence.Transient;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.common.enums.PaymentStatus;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.events.PaymentEvent;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
@@ -41,7 +43,9 @@ public class PaymentService {
                 .status(PaymentStatus.PENDING)
                 .build();
 
-        return paymentRepository.save(payment);
+        Payment savedPayment = paymentRepository.save(payment);
+        log.info("Payment created with id {}", savedPayment.getId());
+        return savedPayment;
     }
 
     public Payment cancelPayment(UUID paymentId) {
@@ -56,7 +60,10 @@ public class PaymentService {
         }
 
         payment.setStatus(PaymentStatus.CANCELED);
-        return paymentRepository.save(payment);
+
+        Payment savedPayment = paymentRepository.save(payment);
+        log.info("Payment cancelled with id {}", savedPayment.getId());
+        return savedPayment;
     }
 
     @Transactional
@@ -76,7 +83,9 @@ public class PaymentService {
         payment.setStatus(PaymentStatus.PAID);
         sendPaymentEvent(payment);
 
-        return paymentRepository.save(payment);
+        Payment savedPayment = paymentRepository.save(payment);
+        log.info("Payment paid with id {}", savedPayment.getId());
+        return savedPayment;
     }
 
     private void sendPaymentEvent(@Valid Payment payment) {

@@ -1,6 +1,7 @@
 package org.example.userservice.infrastructure.security.oauth;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.api.mappers.RolesMapper;
 import org.example.common.enums.Role;
 import org.example.userservice.domain.models.entities.OAuth2Provider;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.Set;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class OAuth2UserService extends DefaultOAuth2UserService {
@@ -69,6 +71,8 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
                 .build();
 
         userRepository.save(user);
+
+        log.info("Created new user with oauth2 provider {} and email {}", providerId, userInfo.getEmail());
 
         userProviderEntity.setUser(user);
         oAuth2ProviderRepository.save(userProviderEntity);

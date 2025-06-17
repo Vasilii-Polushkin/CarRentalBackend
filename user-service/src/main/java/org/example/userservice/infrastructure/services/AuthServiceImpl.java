@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.domain.models.entities.RefreshToken;
 import org.example.userservice.domain.models.entities.User;
 import org.example.userservice.domain.models.requests.LoginRequestModel;
@@ -14,6 +15,7 @@ import org.example.userservice.infrastructure.repositories.RefreshTokenRepositor
 import org.example.userservice.infrastructure.repositories.UserRepository;
 import org.example.common.enums.Role;
 import org.example.userservice.infrastructure.exceptions.AuthException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -22,9 +24,11 @@ import java.util.Set;
 
 @Service
 @Validated
+@Slf4j
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
 
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final JwtAccessTokenUtil accessTokenUtil;
     private final JwtRefreshTokenUtil refreshTokenUtil;
@@ -42,11 +46,14 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByEmail(authRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User with email " + authRequest.getEmail() + " not found"));
 
-        if (!Objects.equals(user.getPassword(), authRequest.getPassword())) {
+        if (passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
+            log.info("Unsuccessful login for user with email {}", authRequest.getEmail());
             throw new AuthException("Wrong password");
         }
 
-        return createAndSaveJwtToken(user);
+        JwtModel saved = createAndSaveJwtToken(user);
+        log.info("User with id {} logged in", user.getId());
+        return saved;
     }
 
     @Override
@@ -68,14 +75,16 @@ public class AuthServiceImpl implements AuthService {
                 .builder()
                 .email(authRequest.getEmail())
                 .name(authRequest.getName())
-                .password(authRequest.getPassword())
+                .password(passwordEncoder.encode(authRequest.getPassword()))
                 .roles(Set.of(Role.USER))
                 .isActive(true)
                 .build();
 
         userRepository.save(user);
 
-        return createAndSaveJwtToken(user);
+        JwtModel saved = createAndSaveJwtToken(user);
+        log.info("User with email {} registered", authRequest.getEmail());
+        return saved;
     }
 
     @Override
