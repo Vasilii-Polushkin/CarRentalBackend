@@ -1,5 +1,7 @@
 package org.example.notificationservice.infrastructure.services;
 
+import jakarta.validation.Valid;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.notificationservice.api.dtos.NotificationDto;
@@ -17,7 +19,7 @@ public class NotificationService {
     private final SimpMessagingTemplate messagingTemplate;
     private final EmailService emailService;
 
-    public void sendNotification(UUID userId, String message) {
+    public void sendNotification(@NonNull UUID userId, @NonNull String message) {
         NotificationDto notification = NotificationDto.builder()
                 .id(UUID.randomUUID())
                 .message(message)

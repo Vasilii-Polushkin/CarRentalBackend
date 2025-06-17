@@ -1,14 +1,17 @@
 package org.example.carservice.domain.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.common.enums.CarStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -26,6 +29,10 @@ public class Car {
     @NotNull
     @NotBlank
     private String model;
+
+    @NotNull
+    @DecimalMin("0")
+    private BigDecimal usdPerHour;
 
     @NotNull
     @Enumerated(EnumType.STRING)

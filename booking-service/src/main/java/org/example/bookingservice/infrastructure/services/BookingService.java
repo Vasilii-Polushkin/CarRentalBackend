@@ -6,6 +6,9 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 import org.example.bookingservice.infrastructure.kafka.producers.BookingStatusEventProducer;
+import org.example.common.dtos.CarDto;
+import org.example.common.dtos.PaymentCreateModelDto;
+import org.example.common.dtos.PaymentDto;
 import org.example.common.enums.BookingStatus;
 import org.example.common.enums.CarStatus;
 import org.example.common.events.BookingStatusEvent;
@@ -14,12 +17,17 @@ import org.example.common.feign.clients.CarServiceClient;
 import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.bookingservice.domain.models.requests.BookingCreateRequestModel;
 import org.example.bookingservice.infrastructure.repositories.BookingRepository;
+import org.example.common.feign.clients.PaymentServiceClient;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.validation.annotation.*;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Slf4j
@@ -31,6 +39,7 @@ public class BookingService {
     private final CarServiceClient carServiceClient;
     private final CurrentUserService currentUserService;
     private final BookingStatusEventProducer bookingStatusEventProducer;
+    private final PaymentServiceClient paymentServiceClient;
 
     public Booking getBookingById(@NotNull UUID id) {
         return bookingRepository.findById(id)
@@ -49,22 +58,49 @@ public class BookingService {
         return bookingRepository.findAllByUserId(currentUserService.getUserId());
     }
 
+    public Booking cancelBooking(@NotNull UUID id) {
+        Booking booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + id));
+
+        booking.setStatus(BookingStatus.CANCELLED);
+        Booking savedBooking = bookingRepository.save(booking);
+        log.info("Booking cancelled with id {}", id);
+        return savedBooking;
+    }
+
     @Transactional
-    public Booking createBooking(@Valid BookingCreateRequestModel request) {
-        if (!carServiceClient.isCarAvailable(request.getCarId())) {
+    public Booking createBooking(@NotNull @Valid BookingCreateRequestModel request) {
+        CarDto car = carServiceClient.getCarById(request.getCarId());
+
+        if (!car.getStatus().equals(CarStatus.AVAILABLE)) {
             throw new BadRequestException("Car is not available");
         }
+
+        BigDecimal hoursOfRental = BigDecimal.valueOf(
+                (Duration.between(LocalDateTime.now(), request.getEndDate()).toMinutes() + 1) * 60
+        );
+        BigDecimal totalAmount = hoursOfRental.multiply(car.getUsdPerHour());
 
         Booking booking = Booking.builder()
                 .carId(request.getCarId())
                 .userId(currentUserService.getUserId())
+                .usdTotalAmount(totalAmount)
                 .startDate(LocalDateTime.now())
                 .endDate(request.getEndDate())
                 .createdAt(LocalDateTime.now())
                 .status(BookingStatus.BOOKED)
                 .build();
 
+        PaymentCreateModelDto paymentCreateModel = PaymentCreateModelDto.builder()
+                .bookingId(booking.getId())
+                .carId(car.getId())
+                .usdTotalAmount(totalAmount)
+                .build();
+
+        PaymentDto payment = paymentServiceClient.createPayment(paymentCreateModel);
+        booking.setPaymentId(payment.getId());
         Booking savedBooking = bookingRepository.save(booking);
+
         sendBookingStatusEvent(savedBooking);
         log.info("Booking created with id {} for car with id {}", savedBooking.getId(), savedBooking.getCarId());
         return savedBooking;
@@ -85,7 +121,6 @@ public class BookingService {
         log.info("All expired bookings are cancelled");
     }
 
-    //todo might be done better probably
     @Scheduled(fixedRate = 30 * 60 * 1000)
     private void completeEndedRentals() {
         log.info("Checking for bookings to complete...");
@@ -107,6 +142,7 @@ public class BookingService {
                 .bookingId(booking.getId())
                 .carId(booking.getCarId())
                 .userId(booking.getUserId())
+                .usdTotalAmount(booking.getUsdTotalAmount())
                 .status(booking.getStatus())
                 .timestamp(LocalDateTime.now())
                 .build();

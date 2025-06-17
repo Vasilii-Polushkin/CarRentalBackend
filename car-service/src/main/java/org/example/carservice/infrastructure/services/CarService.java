@@ -11,6 +11,7 @@ import org.example.carservice.domain.models.requests.CarCreateRequestModel;
 import org.example.carservice.domain.models.requests.CarEditRequestModel;
 import org.example.carservice.infrastructure.repositories.CarRepository;
 import org.example.common.enums.CarStatus;
+import org.example.common.exceptions.status_code_exceptions.BadRequestException;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -26,9 +27,10 @@ public class CarService {
     private final CarRepository carRepository;
     private final CurrentUserService currentUserService;
 
-    public Car createCar(@Valid CarCreateRequestModel carCreateModel) {
+    public Car createCar(@NonNull @Valid CarCreateRequestModel carCreateModel) {
         Car car = Car.builder()
                 .model(carCreateModel.getModel())
+                .usdPerHour(carCreateModel.getUsdPerHour())
                 .creationDate(LocalDate.now())
                 .creatorId(currentUserService.getUserId())
                 .creatorName(currentUserService.getUserName())
@@ -69,8 +71,13 @@ public class CarService {
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
 
+        if (car.getStatus() == CarStatus.BOOKED || car.getStatus() == CarStatus.RENTED) {
+            throw new BadRequestException("Car is currently booked");
+        }
+
         car.setModificationDate(LocalDate.now());
         car.setModel(carEditModel.getModel());
+        car.setUsdPerHour(carEditModel.getUsdPerHour());
 
         Car savedCar = carRepository.save(car);
         log.info("Car edited with id {}", car.getId());
@@ -81,6 +88,10 @@ public class CarService {
         Car car = carRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
+
+        if (car.getStatus() == CarStatus.BOOKED || car.getStatus() == CarStatus.RENTED) {
+            throw new BadRequestException("Car is currently booked");
+        }
 
         car.setStatus(isOnRepair ? CarStatus.UNDER_REPAIR : CarStatus.AVAILABLE);
 
@@ -93,6 +104,10 @@ public class CarService {
         Car car = carRepository
                 .findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Car not found with id " + id));
+
+        if (car.getStatus() == CarStatus.BOOKED || car.getStatus() == CarStatus.RENTED) {
+            throw new BadRequestException("Car is currently booked");
+        }
 
         carRepository.delete(car);
         log.info("Car deleted with id {}", car.getId());

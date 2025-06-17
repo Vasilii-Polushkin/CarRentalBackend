@@ -30,6 +30,14 @@ public class BookingController {
         );
     }
 
+    @PutMapping("/{id}/cancel")
+    @PreAuthorize("hasRole('ADMIN') OR @bookingAccessManager.isOwner(#id)")
+    public BookingDto cancelPayment(@PathVariable("id") UUID id) {
+        return bookingMapper.toDto(
+                bookingService.cancelBooking(id)
+        );
+    }
+
     @GetMapping("bookings/{id}")
     @PreAuthorize("hasRole('ADMIN') OR @bookingAccessManager.isOwner(#id)")
     public BookingDto getBooking(@PathVariable @NotNull UUID id) {

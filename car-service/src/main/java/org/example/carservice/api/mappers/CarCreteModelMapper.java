@@ -9,6 +9,7 @@ public class CarCreteModelMapper {
     public CarCreateRequestModel toDomain(CarCreateModelDto model) {
         return CarCreateRequestModel.builder()
                 .model(model.getModel())
+                .usdPerHour(model.getUsdPerHour())
                 .build();
     }
 }

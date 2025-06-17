@@ -1,6 +1,6 @@
 package org.example.paymentservice.api.mappers;
 
-import org.example.paymentservice.api.dtos.PaymentDto;
+import org.example.common.dtos.PaymentDto;
 import org.example.paymentservice.domain.models.entities.Payment;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ public class PaymentMapper {
                 .cardId(model.getCarId())
                 .status(model.getStatus())
                 .creatorId(model.getCreatorId())
-                .amount(model.getAmount())
+                .usdTotalAmount(model.getUsdTotalAmount())
                 .bookingId(model.getBookingId())
                 .build();
     }

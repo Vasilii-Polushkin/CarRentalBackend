@@ -1,5 +1,6 @@
-package org.example.paymentservice.api.dtos;
+package org.example.common.dtos;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,5 +22,6 @@ public class PaymentCreateModelDto {
     private UUID carId;
 
     @NotNull
-    private BigDecimal amount;
+    @DecimalMin("0")
+    private BigDecimal usdTotalAmount;
 }

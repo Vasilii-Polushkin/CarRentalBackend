@@ -1,6 +1,7 @@
 package org.example.paymentservice.domain.models.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -32,7 +33,8 @@ public class Payment {
     private UUID carId;
 
     @NotNull
-    private BigDecimal amount;
+    @DecimalMin("0")
+    private BigDecimal usdTotalAmount;
 
     @Enumerated(EnumType.STRING)
     @NotNull

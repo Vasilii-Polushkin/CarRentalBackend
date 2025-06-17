@@ -1,5 +1,6 @@
 package org.example.paymentservice.domain.models.requests;
 
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
@@ -18,5 +19,6 @@ public class PaymentRequestCreateModel {
     private UUID carId;
 
     @NotNull
-    private BigDecimal amount;
+    @DecimalMin("0")
+    private BigDecimal usdTotalAmount;
 }

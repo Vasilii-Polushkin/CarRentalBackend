@@ -1,6 +1,6 @@
-package org.example.paymentservice.api.dtos;
+package org.example.common.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,7 +29,8 @@ public class PaymentDto {
     private UUID creatorId;
 
     @NotNull
-    private BigDecimal amount;
+    @DecimalMin("0")
+    private BigDecimal usdTotalAmount;
 
     @NotNull
     private PaymentStatus status;

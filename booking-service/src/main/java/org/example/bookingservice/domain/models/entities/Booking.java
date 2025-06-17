@@ -5,6 +5,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.example.common.enums.BookingStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -34,8 +35,11 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private BookingStatus status;
 
-    private Double totalPrice;
+    @NotNull
+    @DecimalMin("0")
+    private BigDecimal usdTotalAmount;
 
+    @NotNull
     private UUID paymentId;
 
     @NotNull

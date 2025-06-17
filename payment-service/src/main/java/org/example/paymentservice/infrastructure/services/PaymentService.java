@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Transient;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.enums.PaymentStatus;
@@ -17,6 +18,7 @@ import org.example.paymentservice.infrastructure.repositories.PaymentRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,6 +26,7 @@ import java.util.UUID;
 
 @Slf4j
 @Service
+@Validated
 @RequiredArgsConstructor
 public class PaymentService {
     private final PaymentRepository paymentRepository;
@@ -34,12 +37,12 @@ public class PaymentService {
         return paymentRepository.findAllByCreatorIdAndStatus(currentUserService.getUserId(), status);
     }
 
-    public Payment createPayment(PaymentRequestCreateModel model) {
+    public Payment createPayment(@NonNull @Valid PaymentRequestCreateModel model) {
         Payment payment = Payment.builder()
                 .carId(model.getCarId())
                 .creatorId(currentUserService.getUserId())
                 .bookingId(model.getBookingId())
-                .amount(model.getAmount())
+                .usdTotalAmount(model.getUsdTotalAmount())
                 .status(PaymentStatus.PENDING)
                 .build();
 
@@ -48,15 +51,17 @@ public class PaymentService {
         return savedPayment;
     }
 
-    public Payment cancelPayment(UUID paymentId) {
+    public Payment cancelPayment(@NonNull UUID paymentId) {
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + paymentId));
 
         if (payment.getStatus() == PaymentStatus.PAID){
+            log.warn("Received cancel request on paid payment with id {}", payment.getId());
             throw new BadRequestException("Cannot cancel paid payment");
         }
         if (payment.getStatus() == PaymentStatus.CANCELED){
-            throw new BadRequestException("Payment is already cancelled");
+            log.warn("Payment is already cancelled with id {}", payment.getId());
+            return payment;
         }
 
         payment.setStatus(PaymentStatus.CANCELED);
@@ -67,14 +72,16 @@ public class PaymentService {
     }
 
     @Transactional
-    public Payment performPayment(UUID paymentId) {
+    public Payment performPayment(@NonNull UUID paymentId) {
         Payment payment = paymentRepository.findById(paymentId)
                 .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + paymentId));
 
         if (payment.getStatus() == PaymentStatus.PAID){
+            log.warn("Received payment request on paid payment with id {}", payment.getId());
             throw new BadRequestException("Payment is already paid");
         }
         if (payment.getStatus() == PaymentStatus.CANCELED){
+            log.warn("Received payment request on cancelled payment with id {}", payment.getId());
             throw new BadRequestException("Cannot pay for cancelled payment");
         }
 
@@ -88,7 +95,7 @@ public class PaymentService {
         return savedPayment;
     }
 
-    private void sendPaymentEvent(@Valid Payment payment) {
+    private void sendPaymentEvent(@NonNull @Valid Payment payment) {
         PaymentEvent event = PaymentEvent.builder()
                 .paymentId(payment.getId())
                 .bookingId(payment.getBookingId())
@@ -100,7 +107,7 @@ public class PaymentService {
         paymentEventProducer.sendEvent(event);
     }
 
-    public Page<Payment> getCurrentUsersPaymentsPaged(Pageable page) {
+    public Page<Payment> getCurrentUsersPaymentsPaged(@NonNull Pageable page) {
         return paymentRepository.getAllByCreatorId(currentUserService.getUserId(), page);
     }
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.common.dtos.PaginationDto;
+import org.example.common.dtos.PaymentDto;
 
 import java.util.List;
 

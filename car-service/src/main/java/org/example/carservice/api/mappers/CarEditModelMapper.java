@@ -9,6 +9,7 @@ public class CarEditModelMapper {
     public CarEditRequestModel toDomain(CarEditModelDto model) {
         return CarEditRequestModel.builder()
                 .model(model.getModel())
+                .usdPerHour(model.getUsdPerHour())
                 .build();
     }
 }

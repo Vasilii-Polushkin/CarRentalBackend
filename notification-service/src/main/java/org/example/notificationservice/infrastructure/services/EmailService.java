@@ -1,5 +1,7 @@
 package org.example.notificationservice.infrastructure.services;
 
+import jakarta.validation.Valid;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.feign.clients.UserServiceClient;
@@ -22,7 +24,7 @@ public class EmailService {
     private String apiKey;
 
     @Async
-    public void sendEmail(UUID userId, String subject, String content) {
+    public void sendEmail(@NonNull UUID userId, @NonNull String subject, @NonNull String content) {
         String email = userServiceClient.getUserByIdInternal(userId, apiKey).getEmail();
 
         SimpleMailMessage message = new SimpleMailMessage();
