@@ -58,12 +58,14 @@ public class BookingService {
         return bookingRepository.findAllByUserId(currentUserService.getUserId());
     }
 
+    @Transactional
     public Booking cancelBooking(@NotNull UUID id) {
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + id));
 
         booking.setStatus(BookingStatus.CANCELLED);
         Booking savedBooking = bookingRepository.save(booking);
+        sendBookingStatusEvent(savedBooking);
         log.info("Booking cancelled with id {}", id);
         return savedBooking;
     }
@@ -106,7 +108,7 @@ public class BookingService {
         return savedBooking;
     }
 
-    @Scheduled(fixedRate = 30 * 60 * 1000)
+    @Scheduled(fixedRate = 60 * 1000)
     private void cancelExpiredBookings() {
         log.info("Cancelling expired bookings...");
         List<Booking> pending = bookingRepository
@@ -114,27 +116,35 @@ public class BookingService {
                         BookingStatus.BOOKED,
                         LocalDateTime.now().minusMinutes(30));
 
-        pending.forEach(booking -> {
-            booking.setStatus(BookingStatus.CANCELLED);
-            sendBookingStatusEvent(bookingRepository.save(booking));
-        });
-        log.info("All expired bookings are cancelled");
+        pending.forEach(this::cancelExpiredBooking);
+        log.info("All expired bookings are cancelled and events has been send");
     }
 
-    @Scheduled(fixedRate = 30 * 60 * 1000)
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void cancelExpiredBooking(@NotNull @Valid Booking booking) {
+        booking.setStatus(BookingStatus.CANCELLED);
+        sendBookingStatusEvent(bookingRepository.save(booking));
+        log.debug("Cancelled expired booking with id {}", booking.getId());
+    }
+
+    @Scheduled(fixedRate = 60 * 1000)
     private void completeEndedRentals() {
-        log.info("Checking for bookings to complete...");
+        log.info("Completing ended rentals...");
         List<Booking> bookings = bookingRepository
                 .findByStatusAndEndDateBefore(
                         BookingStatus.RENTED,
                         LocalDateTime.now()
                 );
 
-        bookings.forEach(booking -> {
-            booking.setStatus(BookingStatus.COMPLETED);
-            sendBookingStatusEvent(bookingRepository.save(booking));
-        });
+        bookings.forEach(this::completeEndedRental);
         log.info("Bookings that should've been completed changed statuses and events has been send");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void completeEndedRental(@NotNull @Valid Booking booking) {
+        booking.setStatus(BookingStatus.COMPLETED);
+        sendBookingStatusEvent(bookingRepository.save(booking));
+        log.debug("Completed booking with id {}", booking.getId());
     }
 
     private void sendBookingStatusEvent(@Valid Booking booking) {

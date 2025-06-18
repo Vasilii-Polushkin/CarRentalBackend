@@ -34,16 +34,6 @@ public class PaymentController {
         );
     }
 
-    //todo should be internal probably
-    /*
-    @PutMapping("/{id}/cancel")
-    @PreAuthorize("hasRole('ADMIN') OR @paymentAccessManager.isOwner(#id)")
-    public PaymentDto cancelPayment(@PathVariable("id") UUID id) {
-        return paymentMapper.toDto(
-                paymentService.cancelPayment(id)
-        );
-    }*/
-
     @PutMapping("/{id}/perform")
     public PaymentDto performPayment(@PathVariable("id") UUID id) {
         return paymentMapper.toDto(

@@ -1,6 +1,8 @@
 package org.example.userservice.infrastructure.services;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -81,13 +83,13 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         userRepository.save(user);
-
-        JwtModel saved = createAndSaveJwtToken(user);
         log.info("User with email {} registered", authRequest.getEmail());
-        return saved;
+
+        return createAndSaveJwtToken(user);
     }
 
     @Override
+    @Transactional
     public JwtModel refreshAndRotate(@Valid @NonNull String refreshTokenValue) {
         final RefreshToken savedRefreshToken = refreshTokenRepository
                 .findByValue(refreshTokenValue)

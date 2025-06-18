@@ -37,6 +37,10 @@ public class PaymentService {
         return paymentRepository.findAllByCreatorIdAndStatus(currentUserService.getUserId(), status);
     }
 
+    public Page<Payment> getCurrentUsersPaymentsPaged(@NonNull Pageable page) {
+        return paymentRepository.getAllByCreatorId(currentUserService.getUserId(), page);
+    }
+
     public Payment createPayment(@NonNull @Valid PaymentRequestCreateModel model) {
         Payment payment = Payment.builder()
                 .carId(model.getCarId())
@@ -48,26 +52,6 @@ public class PaymentService {
 
         Payment savedPayment = paymentRepository.save(payment);
         log.info("Payment created with id {}", savedPayment.getId());
-        return savedPayment;
-    }
-
-    public Payment cancelPayment(@NonNull UUID paymentId) {
-        Payment payment = paymentRepository.findById(paymentId)
-                .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + paymentId));
-
-        if (payment.getStatus() == PaymentStatus.PAID){
-            log.warn("Received cancel request on paid payment with id {}", payment.getId());
-            throw new BadRequestException("Cannot cancel paid payment");
-        }
-        if (payment.getStatus() == PaymentStatus.CANCELED){
-            log.warn("Payment is already cancelled with id {}", payment.getId());
-            return payment;
-        }
-
-        payment.setStatus(PaymentStatus.CANCELED);
-
-        Payment savedPayment = paymentRepository.save(payment);
-        log.info("Payment cancelled with id {}", savedPayment.getId());
         return savedPayment;
     }
 
@@ -105,9 +89,5 @@ public class PaymentService {
                 .timestamp(LocalDateTime.now())
                 .build();
         paymentEventProducer.sendEvent(event);
-    }
-
-    public Page<Payment> getCurrentUsersPaymentsPaged(@NonNull Pageable page) {
-        return paymentRepository.getAllByCreatorId(currentUserService.getUserId(), page);
     }
 }

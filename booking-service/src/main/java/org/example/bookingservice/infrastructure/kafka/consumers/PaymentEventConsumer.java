@@ -45,6 +45,7 @@ public class PaymentEventConsumer {
                         .findById(event.getPaymentId())
                         .orElseThrow(() -> new EntityNotFoundException("Booking not found with id " + event.getPaymentId()));
                 booking.setStatus(BookingStatus.RENTED);
+                bookingRepository.save(booking);
             } else {
                 log.warn("Unhandled event status: {}", event.getStatus());
             }

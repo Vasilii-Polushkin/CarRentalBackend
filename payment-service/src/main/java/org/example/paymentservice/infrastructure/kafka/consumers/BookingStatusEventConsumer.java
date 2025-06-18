@@ -40,6 +40,7 @@ public class BookingStatusEventConsumer {
                         .findById(event.getPaymentId())
                         .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + event.getPaymentId()));
                 payment.setStatus(PaymentStatus.CANCELED);
+                paymentRepository.save(payment);
             }
 
         } catch (Exception e) {
