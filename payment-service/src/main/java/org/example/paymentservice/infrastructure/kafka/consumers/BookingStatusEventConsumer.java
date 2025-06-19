@@ -28,7 +28,7 @@ public class BookingStatusEventConsumer {
             groupId = "booking-service"
     )
     public void consumeBookingStatusEvent(
-            @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
+            @Header(value = CustomHeaders.CORRELATION_ID_HEADER, required = false) String correlationId,
             @Payload PaymentEvent event
     ) {
         try {

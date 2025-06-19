@@ -30,7 +30,7 @@ public class BookingStatusEventConsumer {
             topics = KafkaTopics.BOOKING_STATUS_EVENTS
     )
     public void consumeBookingStatusEvent(
-            @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
+            @Header(value = CustomHeaders.CORRELATION_ID_HEADER, required = false) String correlationId,
             @Payload BookingStatusEvent event
     ) {
         try {

@@ -57,6 +57,11 @@ public class CarService {
                 .findAll();
     }
 
+    public List<Car> getAllCarsByUserId(@NonNull UUID userId) {
+        return carRepository
+                .getAllByCreatorId(userId);
+    }
+
     public List<Car> getAllAvailableToRentalCars() {
         return carRepository
                 .findAllByStatus(CarStatus.AVAILABLE);
@@ -78,7 +83,7 @@ public class CarService {
         );
 
         if (updated == 0) {
-            throw new BadRequestException("Car is not available");
+            throw new BadRequestException("Car cannot be locked");
         }
 
         log.info("Car locked with id {}", id);
@@ -144,6 +149,7 @@ public class CarService {
             throw new BadRequestException("Car cannot be deleted currently");
         }
 
+        //todo mb activeness
         carRepository.delete(car);
         log.info("Car deleted with id {}", car.getId());
     }

@@ -53,10 +53,6 @@ public class BookingService {
         return bookingRepository.findAllByUserId(id);
     }
 
-    public List<Booking> getAllCurrentUsersBookings() {
-        return bookingRepository.findAllByUserId(currentUserService.getUserId());
-    }
-
     @Transactional
     public Booking cancelBooking(@NotNull UUID id) {
         Booking booking = bookingRepository.findById(id)
@@ -73,12 +69,8 @@ public class BookingService {
     public Booking createBooking(@NotNull @Valid BookingCreateRequestModel request) {
         CarDto car = carServiceClient.lockCarById(request.getCarId());
 
-        if (!car.getStatus().equals(CarStatus.AVAILABLE)) {
-            throw new BadRequestException("Car is not available");
-        }
-
         BigDecimal hoursOfRental = BigDecimal.valueOf(
-                (Duration.between(LocalDateTime.now(), request.getEndDate()).toMinutes() + 1) * 60
+                (Duration.between(LocalDateTime.now(), request.getEndDate()).toMinutes() + 1) / 60d
         );
         BigDecimal totalAmount = hoursOfRental.multiply(car.getUsdPerHour());
 
@@ -92,15 +84,16 @@ public class BookingService {
                 .status(BookingStatus.BOOKED)
                 .build();
 
+        Booking savedTemporalBooking = bookingRepository.save(booking);
         PaymentCreateModelDto paymentCreateModel = PaymentCreateModelDto.builder()
-                .bookingId(booking.getId())
+                .bookingId(savedTemporalBooking.getId())
                 .carId(car.getId())
                 .usdTotalAmount(totalAmount)
                 .build();
 
         PaymentDto payment = paymentServiceClient.createPayment(paymentCreateModel);
         booking.setPaymentId(payment.getId());
-        Booking savedBooking = bookingRepository.save(booking);
+        Booking savedBooking = bookingRepository.save(savedTemporalBooking);
 
         bookingStatusEventProducer.sendEvent(savedBooking);
         log.info("Booking created with id {} for car with id {}", savedBooking.getId(), savedBooking.getCarId());

@@ -26,7 +26,7 @@ public class InternalUserController {
     private String apiKey;
 
     @GetMapping("{id}")
-    public UserDto getUserById(@PathVariable("id") @Param("id") UUID id,
+    public UserDto getUserById(@PathVariable("id") UUID id,
                                @RequestHeader(CustomHeaders.API_KEY_HEADER) String apiKeyHeaderValue) {
         if (!apiKey.equals(apiKeyHeaderValue)) {
             throw new AuthException("Invalid API key");

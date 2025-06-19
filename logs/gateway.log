@@ -118,3 +118,91 @@ Using generated security password: ace8d133-76b7-4ec4-a088-86c00042bafc
 2025-06-19 19:29:10.989 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 7.079 seconds (process running for 7.587)
 2025-06-19 19:29:17.085 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
 2025-06-19 19:29:17.087 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-06-19 20:09:35.607 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 7220 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-06-19 20:09:35.610 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-19 20:09:36.180 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=b34b1338-2d96-3bde-aac9-0d7107bc7796
+2025-06-19 20:09:37.596 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 20:09:37.643 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-19 20:09:37.841 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-19 20:09:37.841 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-19 20:09:37.841 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-19 20:09:37.841 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-19 20:09:37.841 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-19 20:09:37.842 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-19 20:09:37.972 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: c94c051c-ab28-45ef-9692-33634cdb0d06
+
+2025-06-19 20:09:39.007 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 20:09:39.182 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-06-19 20:09:40.188 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 20:09:41.197 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 20:09:41.236 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 7.12 seconds (process running for 7.775)
+2025-06-19 21:14:39.423 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-19 21:14:39.425 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-06-19 21:14:47.240 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 19148 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-06-19 21:14:47.242 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-19 21:14:47.844 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=b34b1338-2d96-3bde-aac9-0d7107bc7796
+2025-06-19 21:14:49.102 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:14:49.152 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-19 21:14:49.328 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-19 21:14:49.329 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-19 21:14:49.329 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-19 21:14:49.329 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-19 21:14:49.435 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: 12f9b519-f80c-40e0-8d83-69ddfc862ffc
+
+2025-06-19 21:14:50.471 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:14:50.627 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-06-19 21:14:51.640 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:14:52.645 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:14:52.683 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 6.896 seconds (process running for 7.373)
+2025-06-19 21:47:49.013 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Commencing graceful shutdown. Waiting for active requests to complete
+2025-06-19 21:47:49.016 [netty-shutdown] INFO  o.s.b.w.e.netty.GracefulShutdown [, , ] - Graceful shutdown complete
+2025-06-19 21:47:55.185 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Starting ApiGatewayApplication using Java 21 with PID 14352 (C:\Users\Василий\IdeaProjects\CarRental\api-gateway\target\classes started by Vasya in C:\Users\Василий\IdeaProjects\CarRental)
+2025-06-19 21:47:55.188 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - No active profile set, falling back to 1 default profile: "default"
+2025-06-19 21:47:55.755 [main] INFO  o.s.cloud.context.scope.GenericScope [, , ] - BeanFactory id=b34b1338-2d96-3bde-aac9-0d7107bc7796
+2025-06-19 21:47:57.124 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:47:57.248 [main] WARN  jakarta.persistence.spi [, , ] - jakarta.persistence.spi::No valid providers found.
+2025-06-19 21:47:57.537 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [After]
+2025-06-19 21:47:57.538 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Before]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Between]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Cookie]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Header]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Host]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Method]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Path]
+2025-06-19 21:47:57.539 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Query]
+2025-06-19 21:47:57.540 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [ReadBody]
+2025-06-19 21:47:57.540 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [RemoteAddr]
+2025-06-19 21:47:57.540 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [XForwardedRemoteAddr]
+2025-06-19 21:47:57.540 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [Weight]
+2025-06-19 21:47:57.540 [main] INFO  o.s.c.g.r.RouteDefinitionRouteLocator [, , ] - Loaded RoutePredicateFactory [CloudFoundryRouteService]
+2025-06-19 21:47:57.771 [main] INFO  o.s.b.a.s.r.ReactiveUserDetailsServiceAutoConfiguration [, , ] - 
+
+Using generated security password: 68bd6dd0-5cac-4809-88c9-cc96171f06c2
+
+2025-06-19 21:47:58.822 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:47:59.086 [main] INFO  o.s.b.w.e.netty.NettyWebServer [, , ] - Netty started on port 8080 (http)
+2025-06-19 21:48:00.095 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:48:01.106 [main] INFO  o.s.cloud.commons.util.InetUtils [, , ] - Cannot determine local hostname
+2025-06-19 21:48:01.149 [main] INFO  o.e.apigateway.ApiGatewayApplication [, , ] - Started ApiGatewayApplication in 7.507 seconds (process running for 8.368)

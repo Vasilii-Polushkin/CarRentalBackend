@@ -11,6 +11,7 @@ public class CarMapper {
                 .id(model.getId())
                 .creatorId(model.getCreatorId())
                 .creatorName(model.getCreatorName())
+                .usdPerHour(model.getUsdPerHour())
                 .status(model.getStatus())
                 .model(model.getModel())
                 .build();

@@ -33,7 +33,7 @@ public class PaymentEventConsumer {
             groupId = "booking-service"
     )
     public void consumePaymentEvent(
-            @Header(CustomHeaders.CORRELATION_ID_HEADER) String correlationId,
+            @Header(value = CustomHeaders.CORRELATION_ID_HEADER, required = false) String correlationId,
             @Payload PaymentEvent event
     ) {
         try {

@@ -22,4 +22,6 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
             "WHERE c.id = :id AND c.status = 'AVAILABLE' AND c.lockedUntil IS NULL")
     int tryLockCar(@Param("id") UUID id,
                    @Param("lockedUntil") LocalDateTime lockedUntil);
+
+    List<Car> getAllByCreatorId(@NotNull UUID creatorId);
 }

@@ -13,6 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
         url = "http://localhost:8003/api/payment-service"
 )
 public interface PaymentServiceClient {
-    @PostMapping("")
+    @PostMapping("payments")
     PaymentDto createPayment(@RequestBody PaymentCreateModelDto createModel);
 }

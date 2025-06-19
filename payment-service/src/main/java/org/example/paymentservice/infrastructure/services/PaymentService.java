@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,12 +34,21 @@ public class PaymentService {
     private final PaymentEventProducer paymentEventProducer;
     private final CurrentUserService currentUserService;
 
-    public List<Payment> findCurrentUsersPaymentsByStatus(PaymentStatus status) {
-        return paymentRepository.findAllByCreatorIdAndStatus(currentUserService.getUserId(), status);
+    public Payment findPaymentById(UUID id) {
+        return paymentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + id));
     }
 
-    public Page<Payment> getCurrentUsersPaymentsPaged(@NonNull Pageable page) {
-        return paymentRepository.getAllByCreatorId(currentUserService.getUserId(), page);
+    public Page<Payment> getPaymentsPagedByUserId(@NonNull UUID id, @NonNull Pageable pageable) {
+        return paymentRepository.getAllByCreatorId(id, pageable);
+    }
+
+    public List<Payment> findUserPaymentsByStatusAndCreatorId(PaymentStatus status, @NonNull UUID id) {
+        return paymentRepository.findAllByCreatorIdAndStatus(id, status);
+    }
+
+    public Page<Payment> getAllPaymentsPaged(Pageable pageable) {
+        return paymentRepository.findAll(pageable);
     }
 
     public Payment createPayment(@NonNull @Valid PaymentRequestCreateModel model) {

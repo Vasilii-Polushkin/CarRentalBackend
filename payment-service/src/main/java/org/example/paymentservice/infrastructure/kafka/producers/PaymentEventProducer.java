@@ -2,8 +2,11 @@ package org.example.paymentservice.infrastructure.kafka.producers;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.common.correlation.CorrelationConstants;
 import org.example.common.events.PaymentEvent;
+import org.example.common.headers.CustomHeaders;
 import org.example.common.topics.KafkaTopics;
+import org.slf4j.MDC;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
@@ -23,6 +26,7 @@ public class PaymentEventProducer {
                     .withPayload(event)
                     .setHeader(KafkaHeaders.TOPIC, KafkaTopics.PAYMENT_EVENTS)
                     .setHeader(KafkaHeaders.KEY, event.getPaymentId().toString())
+                    .setHeader(CustomHeaders.CORRELATION_ID_HEADER, MDC.get(CorrelationConstants.CORRELATION_ID_MDC))
                     .build();
 
             kafkaTemplate.send(message)
