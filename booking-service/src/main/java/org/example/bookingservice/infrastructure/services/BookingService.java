@@ -37,6 +37,8 @@ public class BookingService {
     private final CurrentUserService currentUserService;
     private final BookingStatusEventProducer bookingStatusEventProducer;
     private final PaymentServiceClient paymentServiceClient;
+    private final BookingCancellationService bookingCancellationService;
+    private final BookingCompletionService bookingCompletionService;
 
     public Booking getBookingById(@NotNull UUID id) {
         return bookingRepository.findById(id)
@@ -62,7 +64,7 @@ public class BookingService {
 
         booking.setStatus(BookingStatus.CANCELLED);
         Booking savedBooking = bookingRepository.save(booking);
-        sendBookingStatusEvent(savedBooking);
+        bookingStatusEventProducer.sendEvent(savedBooking);
         log.info("Booking cancelled with id {}", id);
         return savedBooking;
     }
@@ -100,32 +102,25 @@ public class BookingService {
         booking.setPaymentId(payment.getId());
         Booking savedBooking = bookingRepository.save(booking);
 
-        sendBookingStatusEvent(savedBooking);
+        bookingStatusEventProducer.sendEvent(savedBooking);
         log.info("Booking created with id {} for car with id {}", savedBooking.getId(), savedBooking.getCarId());
         return savedBooking;
     }
 
     @Scheduled(fixedRate = 60 * 1000)
-    private void cancelExpiredBookings() {
+    protected void cancelExpiredBookings() {
         log.info("Cancelling expired bookings...");
         List<Booking> pending = bookingRepository
                 .findByStatusAndCreatedAtBefore(
                         BookingStatus.BOOKED,
                         LocalDateTime.now().minusMinutes(30));
 
-        pending.forEach(this::cancelExpiredBooking);
+        pending.forEach(bookingCancellationService::cancelExpiredBooking);
         log.info("All expired bookings are cancelled and events has been send");
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void cancelExpiredBooking(@NotNull @Valid Booking booking) {
-        booking.setStatus(BookingStatus.CANCELLED);
-        sendBookingStatusEvent(bookingRepository.save(booking));
-        log.debug("Cancelled expired booking with id {}", booking.getId());
-    }
-
     @Scheduled(fixedRate = 60 * 1000)
-    private void completeEndedRentals() {
+    protected void completeEndedRentals() {
         log.info("Completing ended rentals...");
         List<Booking> bookings = bookingRepository
                 .findByStatusAndEndDateBefore(
@@ -133,26 +128,7 @@ public class BookingService {
                         LocalDateTime.now()
                 );
 
-        bookings.forEach(this::completeEndedRental);
+        bookings.forEach(bookingCompletionService::completeEndedRental);
         log.info("Bookings that should've been completed changed statuses and events has been send");
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void completeEndedRental(@NotNull @Valid Booking booking) {
-        booking.setStatus(BookingStatus.COMPLETED);
-        sendBookingStatusEvent(bookingRepository.save(booking));
-        log.debug("Completed booking with id {}", booking.getId());
-    }
-
-    private void sendBookingStatusEvent(@Valid Booking booking) {
-        BookingStatusEvent event = BookingStatusEvent.builder()
-                .bookingId(booking.getId())
-                .carId(booking.getCarId())
-                .userId(booking.getUserId())
-                .usdTotalAmount(booking.getUsdTotalAmount())
-                .status(booking.getStatus())
-                .timestamp(LocalDateTime.now())
-                .build();
-        bookingStatusEventProducer.sendEvent(event);
     }
 }

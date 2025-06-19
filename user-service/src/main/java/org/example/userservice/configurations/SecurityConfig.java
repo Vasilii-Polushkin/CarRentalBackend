@@ -40,7 +40,6 @@ import java.util.List;
 @EnableMethodSecurity(jsr250Enabled=true)
 @RequiredArgsConstructor
 public class SecurityConfig {
-
     private final JwtFilter jwtFilter;
     private final AuthService authService;
     private final OAuth2UserService oidcUserService;
@@ -137,10 +136,5 @@ public class SecurityConfig {
     private static void WriteObjectToHttpResponse(HttpServletResponse response, Object object) throws IOException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
         response.getWriter().write(new ObjectMapper().writeValueAsString(object));
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
     }
 }

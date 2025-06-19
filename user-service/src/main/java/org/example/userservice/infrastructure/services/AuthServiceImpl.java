@@ -45,10 +45,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtModel login(@Valid @NonNull LoginRequestModel authRequest) {
-        User user = userRepository.findByEmail(authRequest.getEmail())
+        User user = userRepository.findByEmailAndIsActiveIsTrue(authRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User with email " + authRequest.getEmail() + " not found"));
 
-        if (passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
+        if (passwordEncoder.encode(authRequest.getPassword()).equals(user.getPassword())) {
             log.info("Unsuccessful login for user with email {}", authRequest.getEmail());
             throw new AuthException("Wrong password");
         }
@@ -96,6 +96,9 @@ public class AuthServiceImpl implements AuthService {
                 .orElseThrow(() -> new EntityNotFoundException("Refresh token not found with value: " + refreshTokenValue));
 
         final User user = savedRefreshToken.getUser();
+        if (!user.isActive()){
+            throw new AuthException("User is deleted");
+        }
 
         String newAccessTokenValue = accessTokenUtil.generateToken(user);
         String newRefreshTokenValue = refreshTokenUtil.generateToken(user);

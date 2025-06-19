@@ -27,7 +27,7 @@ public class SetSecurityContextFromHeadersFilter extends OncePerRequestFilter {
         String rolesHeader = request.getHeader(CustomHeaders.USER_ROLES_HEADER);
         String idHeader = request.getHeader(CustomHeaders.USER_ID_HEADER);
 
-        if (rolesHeader != null) {
+        if (idHeader != null) {
             List<GrantedAuthority> authorities = Arrays.stream(rolesHeader.split(","))
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toList());

@@ -1,7 +1,9 @@
 package org.example.bookingservice.infrastructure.kafka.producers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.common.correlation.CorrelationConstants;
 import org.example.common.events.BookingStatusEvent;
 import org.example.common.headers.CustomHeaders;
@@ -12,6 +14,8 @@ import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Slf4j
 @Component
@@ -40,5 +44,17 @@ public class BookingStatusEventProducer {
         } catch (Exception e) {
             log.error("Error sending booking status event: {}", event, e);
         }
+    }
+
+    public void sendEvent(Booking booking) {
+        BookingStatusEvent event = BookingStatusEvent.builder()
+                .bookingId(booking.getId())
+                .carId(booking.getCarId())
+                .userId(booking.getUserId())
+                .usdTotalAmount(booking.getUsdTotalAmount())
+                .status(booking.getStatus())
+                .timestamp(LocalDateTime.now())
+                .build();
+        sendEvent(event);
     }
 }

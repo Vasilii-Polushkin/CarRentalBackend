@@ -2,6 +2,7 @@ package org.example.common.feign.clients;
 
 import org.example.common.dtos.UserDto;
 import org.example.common.headers.CustomHeaders;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.DeleteMapping;

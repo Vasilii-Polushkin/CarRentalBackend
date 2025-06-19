@@ -2,6 +2,7 @@ package org.example.userservice.api.controllers;
 
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,8 +41,16 @@ public class AuthController {
     public void initiateOAuth2Login(
             @Parameter(description = "OAuth2 provider ID (google, github, etc.)", example = "google")
             @PathVariable("providerId") String providerId,
-            HttpServletResponse response) throws IOException {
-        response.sendRedirect("/oauth2/authorization/" + providerId);
+            HttpServletResponse response,
+            HttpServletRequest request) throws IOException {
+        String redirectUrl = "/oauth2/authorization/" + providerId;
+
+        String contextPath = request.getContextPath();
+        if (!contextPath.isEmpty()) {
+            redirectUrl = contextPath + redirectUrl;
+        }
+
+        response.sendRedirect(redirectUrl);
     }
 
     @PostMapping("revoke")
