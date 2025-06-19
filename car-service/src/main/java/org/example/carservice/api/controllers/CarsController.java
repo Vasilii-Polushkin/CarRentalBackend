@@ -41,6 +41,11 @@ public class CarsController {
         return carService.isCarAvailable(id);
     }
 
+    @PutMapping("{id}/lock")
+    public CarDto lockCarById(@PathVariable("id") UUID id) {
+        return carMapper.toDto(carService.lockCarById(id));
+    }
+
     @GetMapping("")
     public List<CarDto> getAllCars() {
         return carService.getAllCars()

@@ -5,4 +5,5 @@ public enum CarStatus {
     BOOKED,
     RENTED,
     UNDER_REPAIR,
+    LOCKED,
 }

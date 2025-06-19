@@ -22,6 +22,9 @@ public interface CarServiceClient {
     @GetMapping("/cars/{id}")
     CarDto getCarById(@PathVariable("id") UUID id);
 
+    @PutMapping("/cars/{id}/lock")
+    CarDto lockCarById(@PathVariable("id") UUID id);
+
     @GetMapping("/cars/available/{id}")
     boolean isCarAvailable(@PathVariable("id") UUID id);
 

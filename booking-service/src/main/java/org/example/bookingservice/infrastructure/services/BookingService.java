@@ -18,16 +18,13 @@ import org.example.bookingservice.domain.models.entities.Booking;
 import org.example.bookingservice.domain.models.requests.BookingCreateRequestModel;
 import org.example.bookingservice.infrastructure.repositories.BookingRepository;
 import org.example.common.feign.clients.PaymentServiceClient;
-import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.validation.annotation.*;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.*;
-import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Slf4j
@@ -72,7 +69,7 @@ public class BookingService {
 
     @Transactional
     public Booking createBooking(@NotNull @Valid BookingCreateRequestModel request) {
-        CarDto car = carServiceClient.getCarById(request.getCarId());
+        CarDto car = carServiceClient.lockCarById(request.getCarId());
 
         if (!car.getStatus().equals(CarStatus.AVAILABLE)) {
             throw new BadRequestException("Car is not available");

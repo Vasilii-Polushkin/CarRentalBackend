@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.example.common.enums.BookingStatus;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class BookingDto {
     @NotNull
     private BookingStatus status;
 
-    private Double totalPrice;
+    private BigDecimal totalPrice;
 
     private UUID paymentId;
 

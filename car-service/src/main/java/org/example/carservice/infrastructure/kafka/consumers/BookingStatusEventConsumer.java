@@ -41,6 +41,8 @@ public class BookingStatusEventConsumer {
                     .findById(event.getCarId())
                     .orElseThrow(() ->new EntityNotFoundException("Car not found with id " + event.getCarId()));
 
+            car.setLockedUntil(null);
+
             switch (event.getStatus()){
                 case BOOKED -> car.setStatus(CarStatus.BOOKED);
                 case RENTED -> car.setStatus(CarStatus.RENTED);

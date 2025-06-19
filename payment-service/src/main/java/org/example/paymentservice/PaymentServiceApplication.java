@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
                 "org.example.paymentservice",
                 "org.example.common"
         })
-@EnableFeignClients(basePackages = "org.example.common.feign")//todo
+@EnableFeignClients(basePackages = "org.example.common.feign")
 public class PaymentServiceApplication {
 
     public static void main(String[] args) {

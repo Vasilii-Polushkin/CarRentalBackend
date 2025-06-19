@@ -13,6 +13,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
 @Configuration
 public class KafkaConfig {
     @Bean
@@ -28,4 +29,4 @@ public class KafkaConfig {
     public KafkaTemplate<String, BookingStatusEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
-}
+}*/

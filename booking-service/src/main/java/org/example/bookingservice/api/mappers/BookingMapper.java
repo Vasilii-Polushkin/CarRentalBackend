@@ -14,7 +14,7 @@ public class BookingMapper {
                 .startDate(booking.getStartDate())
                 .endDate(booking.getEndDate())
                 .status(booking.getStatus())
-                .totalPrice(booking.getTotalPrice())
+                .totalPrice(booking.getUsdTotalAmount())
                 .paymentId(booking.getPaymentId())
                 .createdAt(booking.getCreatedAt())
                 .build();
