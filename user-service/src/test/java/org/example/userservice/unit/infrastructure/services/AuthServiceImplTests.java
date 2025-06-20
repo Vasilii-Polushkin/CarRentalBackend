@@ -85,7 +85,7 @@ public class AuthServiceImplTests {
 
     @Test
     void login_ShouldReturnTokens() {
-        when(passwordEncoder.encode("password")).thenReturn("password");
+        when(passwordEncoder.matches("password", "password")).thenReturn(true);
         when(userRepository.findByEmailAndIsActiveIsTrue("test@example.com")).thenReturn(Optional.of(testUser));
         when(accessTokenUtil.generateToken(any(User.class))).thenReturn("access");
         when(refreshTokenUtil.generateToken(any(User.class))).thenReturn("refresh");
@@ -99,7 +99,7 @@ public class AuthServiceImplTests {
 
     @Test
     void login_WithWrongPassword_ShouldThrowException() {
-        when(passwordEncoder.encode("123")).thenReturn("123");
+        when(passwordEncoder.matches("123", "password")).thenReturn(false);
         when(userRepository.findByEmailAndIsActiveIsTrue("test@example.com")).thenReturn(Optional.of(testUser));
 
         assertThatThrownBy(() -> authService.login(new LoginRequestModel("test@example.com", "123")))

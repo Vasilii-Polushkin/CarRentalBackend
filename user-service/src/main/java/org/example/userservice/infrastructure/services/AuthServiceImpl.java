@@ -48,7 +48,7 @@ public class AuthServiceImpl implements AuthService {
         User user = userRepository.findByEmailAndIsActiveIsTrue(authRequest.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException("User with email " + authRequest.getEmail() + " not found"));
 
-        if (!passwordEncoder.encode(authRequest.getPassword()).equals(user.getPassword())) {
+        if (!passwordEncoder.matches(authRequest.getPassword(), user.getPassword())) {
             log.info("Unsuccessful login for user with email {}", authRequest.getEmail());
             throw new AuthException("Wrong password");
         }
