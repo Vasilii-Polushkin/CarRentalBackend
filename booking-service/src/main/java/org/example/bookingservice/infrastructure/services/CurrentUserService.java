@@ -12,7 +12,6 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class CurrentUserService {
-    private final UserServiceClient userServiceClient;
 
     public UUID getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

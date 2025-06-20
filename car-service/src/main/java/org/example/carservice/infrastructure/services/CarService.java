@@ -149,7 +149,6 @@ public class CarService {
             throw new BadRequestException("Car cannot be deleted currently");
         }
 
-        //todo mb activeness
         carRepository.delete(car);
         log.info("Car deleted with id {}", car.getId());
     }

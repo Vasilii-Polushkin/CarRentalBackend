@@ -30,7 +30,7 @@ public class NotificationConsumer {
     public void handleBookingStatusEvent(BookingStatusEvent event) {
         log.info("Received booking status event: {}", event);
 
-        String message = "Booking " + event.getBookingId() + event.getStatus().toString().toLowerCase();
+        String message = "Booking " + event.getBookingId() + " " + event.getStatus().toString().toLowerCase();
 
         notificationService.sendNotification(event.getUserId(), message);
     }

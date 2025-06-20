@@ -19,6 +19,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 import java.util.Set;
@@ -42,6 +43,9 @@ public class AuthServiceImplTests {
 
     @Mock
     private RefreshTokenRepository refreshTokenRepository;
+
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private AuthServiceImpl authService;
@@ -81,7 +85,8 @@ public class AuthServiceImplTests {
 
     @Test
     void login_ShouldReturnTokens() {
-        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(testUser));
+        when(passwordEncoder.encode("password")).thenReturn("password");
+        when(userRepository.findByEmailAndIsActiveIsTrue("test@example.com")).thenReturn(Optional.of(testUser));
         when(accessTokenUtil.generateToken(any(User.class))).thenReturn("access");
         when(refreshTokenUtil.generateToken(any(User.class))).thenReturn("refresh");
 
@@ -94,7 +99,8 @@ public class AuthServiceImplTests {
 
     @Test
     void login_WithWrongPassword_ShouldThrowException() {
-        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.of(testUser));
+        when(passwordEncoder.encode("123")).thenReturn("123");
+        when(userRepository.findByEmailAndIsActiveIsTrue("test@example.com")).thenReturn(Optional.of(testUser));
 
         assertThatThrownBy(() -> authService.login(new LoginRequestModel("test@example.com", "123")))
                 .isInstanceOf(AuthException.class);
@@ -102,7 +108,7 @@ public class AuthServiceImplTests {
 
     @Test
     void login_WithNonExistingEmail_ShouldThrowException() {
-        when(userRepository.findByEmail("test@example.com")).thenReturn(Optional.empty());
+        when(userRepository.findByEmailAndIsActiveIsTrue("test@example.com")).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> authService.login(new LoginRequestModel("test@example.com", "123")))
                 .isInstanceOf(EntityNotFoundException.class);
@@ -119,6 +125,7 @@ public class AuthServiceImplTests {
 
     @Test
     void register_ShouldReturnTokens() {
+        when(passwordEncoder.encode("123")).thenReturn("123");
         when(userRepository.existsByEmail("test@example.com")).thenReturn(false);
         when(accessTokenUtil.generateToken(any(User.class))).thenReturn("access");
         when(refreshTokenUtil.generateToken(any(User.class))).thenReturn("refresh");

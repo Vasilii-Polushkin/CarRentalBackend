@@ -1,5 +1,6 @@
 package org.example.userservice.infrastructure.security.oauth;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.userservice.api.mappers.RolesMapper;
@@ -30,6 +31,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     private final RolesMapper rolesMapper;
     private final OAuth2ProviderRepository oAuth2ProviderRepository;
 
+    @Transactional
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oauth2User = super.loadUser(userRequest);

@@ -1,8 +1,10 @@
 package org.example.notificationservice.infrastructure.services;
 
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.example.common.feign.clients.UserServiceClient;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,4 +37,5 @@ public class EmailService {
         mailSender.send(message);
         log.info("Email sent to {}: {}", email, subject);
     }
+
 }
