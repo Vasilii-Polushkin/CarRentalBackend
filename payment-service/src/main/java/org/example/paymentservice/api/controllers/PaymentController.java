@@ -28,7 +28,7 @@ public class PaymentController {
     private final PaymentRequestMapper paymentRequestMapper;
     private final PaymentsPagedModelMapper paymentsPagedModelMapper;
 
-    @PostMapping
+    @PostMapping("payments")
     public PaymentDto createPayment(@RequestBody @Valid PaymentCreateModelDto paymentRequestDto) {
         return paymentMapper.toDto(
                 paymentService.createPayment(paymentRequestMapper.toDomain(paymentRequestDto))
@@ -42,8 +42,8 @@ public class PaymentController {
         );
     }
 
-    @GetMapping("payments/pending")
-    public List<PaymentDto> getUserPendingPaymentsByUserId(@NonNull UUID id) {
+    @GetMapping("user/{id}/payments/pending")
+    public List<PaymentDto> getUserPendingPaymentsByUserId(@PathVariable("id") UUID id) {
         return paymentService.findUserPaymentsByStatusAndCreatorId(PaymentStatus.PENDING, id)
                 .stream().map(paymentMapper::toDto).toList();
     }

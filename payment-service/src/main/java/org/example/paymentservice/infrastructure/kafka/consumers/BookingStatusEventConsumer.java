@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.common.correlation.CorrelationConstants;
 import org.example.common.enums.BookingStatus;
 import org.example.common.enums.PaymentStatus;
+import org.example.common.events.BookingStatusEvent;
 import org.example.common.events.PaymentEvent;
 import org.example.common.headers.CustomHeaders;
 import org.example.common.topics.KafkaTopics;
@@ -24,18 +25,18 @@ public class BookingStatusEventConsumer {
     private final PaymentRepository paymentRepository;
 
     @KafkaListener(
-            topics = KafkaTopics.PAYMENT_EVENTS,
+            topics = KafkaTopics.BOOKING_STATUS_EVENTS,
             groupId = "booking-service"
     )
     public void consumeBookingStatusEvent(
             @Header(value = CustomHeaders.CORRELATION_ID_HEADER, required = false) String correlationId,
-            @Payload PaymentEvent event
+            @Payload BookingStatusEvent event
     ) {
         try {
             MDC.put(CorrelationConstants.CORRELATION_ID_MDC, correlationId);
             log.info("Received booking status event: {}", event);
 
-            if (event.getStatus() == PaymentStatus.CANCELED) {
+            if (event.getStatus() == BookingStatus.CANCELLED) {
                 Payment payment = paymentRepository
                         .findById(event.getPaymentId())
                         .orElseThrow(() -> new EntityNotFoundException("Payment not found with id " + event.getPaymentId()));

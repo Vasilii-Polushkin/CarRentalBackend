@@ -23,14 +23,14 @@ public class BookingController {
     private final BookingMapper bookingMapper;
     private final BookingCreateModelMapper bookingCreateModelMapper;
 
-    @PostMapping
+    @PostMapping("bookings")
     public BookingDto createBooking(@RequestBody @Valid BookingCreateModelDto request) {
         return bookingMapper.toDto(
                 bookingService.createBooking(bookingCreateModelMapper.toDomain(request))
         );
     }
 
-    @PutMapping("/{id}/cancel")
+    @PutMapping("bookings/{id}/cancel")
     @PreAuthorize("hasRole('ADMIN') OR @bookingAccessManager.isOwner(#id)")
     public BookingDto cancelBooking(@PathVariable("id") @Param("id") UUID id) {
         return bookingMapper.toDto(

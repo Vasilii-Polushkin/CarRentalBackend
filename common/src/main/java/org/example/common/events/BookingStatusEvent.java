@@ -20,6 +20,8 @@ public class BookingStatusEvent {
     @NotNull
     private UUID bookingId;
 
+    private UUID paymentId;
+
     @NotNull
     private UUID carId;
 

@@ -1,6 +1,8 @@
 package org.example.paymentservice.infrastructure.kafka.consumers;
 
+import org.example.common.enums.BookingStatus;
 import org.example.common.enums.PaymentStatus;
+import org.example.common.events.BookingStatusEvent;
 import org.example.common.events.PaymentEvent;
 import org.example.common.topics.KafkaTopics;
 import org.example.paymentservice.domain.models.entities.Payment;
@@ -35,9 +37,9 @@ class BookingStatusEventConsumerTest {
 
     @Test
     void consumeBookingStatusEvent_shouldUpdatePaymentStatusWhenCanceled() {
-        PaymentEvent event = PaymentEvent.builder()
+        BookingStatusEvent event = BookingStatusEvent.builder()
                 .paymentId(TEST_PAYMENT_ID)
-                .status(PaymentStatus.CANCELED)
+                .status(BookingStatus.CANCELLED)
                 .build();
 
         Payment payment = new Payment();
@@ -51,9 +53,9 @@ class BookingStatusEventConsumerTest {
 
     @Test
     void consumeBookingStatusEvent_shouldNotUpdatePaymentForNonCanceledStatus() {
-        PaymentEvent event = PaymentEvent.builder()
+        BookingStatusEvent event = BookingStatusEvent.builder()
                 .paymentId(TEST_PAYMENT_ID)
-                .status(PaymentStatus.PAID)
+                .status(BookingStatus.PAID)
                 .build();
 
         bookingStatusEventConsumer.consumeBookingStatusEvent(TEST_CORRELATION_ID, event);
@@ -64,9 +66,9 @@ class BookingStatusEventConsumerTest {
 
     @Test
     void consumeBookingStatusEvent_shouldHandlePaymentNotFound() {
-        PaymentEvent event = PaymentEvent.builder()
+        BookingStatusEvent event = BookingStatusEvent.builder()
                 .paymentId(TEST_PAYMENT_ID)
-                .status(PaymentStatus.CANCELED)
+                .status(BookingStatus.CANCELLED)
                 .build();
 
         when(paymentRepository.findById(TEST_PAYMENT_ID)).thenReturn(Optional.empty());

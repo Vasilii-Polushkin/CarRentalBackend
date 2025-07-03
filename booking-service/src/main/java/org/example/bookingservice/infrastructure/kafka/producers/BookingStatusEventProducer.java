@@ -49,6 +49,7 @@ public class BookingStatusEventProducer {
     public void sendEvent(Booking booking) {
         BookingStatusEvent event = BookingStatusEvent.builder()
                 .bookingId(booking.getId())
+                .paymentId(booking.getPaymentId())
                 .carId(booking.getCarId())
                 .userId(booking.getUserId())
                 .usdTotalAmount(booking.getUsdTotalAmount())
